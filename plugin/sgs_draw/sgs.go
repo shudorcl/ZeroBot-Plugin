@@ -6,6 +6,7 @@ import (
 	"math/rand"
 	"strconv"
 
+	ctrl "github.com/FloatTech/zbpctrl"
 	"github.com/FloatTech/zbputils/control"
 	"github.com/FloatTech/zbputils/ctxext"
 	"github.com/FloatTech/zbputils/file"
@@ -21,11 +22,11 @@ type cardInfo struct {
 }
 type cardSet = map[string]cardInfo
 
-var cardMap = make(cardSet, 30)
+var cardMap = make(cardSet, 50)
 var datapath string
 
 func init() {
-	engine := control.Register("sgs", &control.Options{
+	engine := control.Register("sgs", &ctrl.Options[*zero.Ctx]{
 		DisableOnDefault: false,
 		Help: "三国杀\n" +
 			"- 抽武将",
@@ -49,7 +50,7 @@ func init() {
 		},
 	)).SetBlock(true).
 		Handle(func(ctx *zero.Ctx) {
-			i := ctxext.RandSenderPerDayN(ctx, len(cardMap))
+			i := ctxext.RandSenderPerDayN(ctx.Event.UserID, len(cardMap))
 			card := cardMap[(strconv.Itoa(i))]
 
 			ctx.SendChain(
