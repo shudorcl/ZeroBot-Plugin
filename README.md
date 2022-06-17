@@ -36,7 +36,7 @@
 ## 命令行参数
 > `[]`代表是可选参数
 ```bash
-zerobot [-c config.json] [-h] [-s config.json] [-t token] [-u url] [-n nickname] [-p prefix] [-d|w] [-g 监听地址:端口] [qq1 qq2 qq3 ...] [&]
+zerobot [-c config.json] [-h] [-s config.json] [-t token] [-u url] [-n nickname] [-p prefix] [-d|w] [qq1 qq2 qq3 ...] [&]
 ```
 - **-c config.json**: 从`config.json`加载`bot`配置
 - **-h**: 显示帮助
@@ -46,7 +46,6 @@ zerobot [-c config.json] [-h] [-s config.json] [-t token] [-u url] [-n nickname]
 - **-n nickname**: 设置默认昵称，默认为`椛椛`
 - **-p prefix**: 设置命令前缀，默认为`/`
 - **-d|w**: 开启 debug | warning 级别及以上日志输出
-- **-g 监听地址:端口**: 在 http://监听地址:端口 上开启 [webgui](https://github.com/FloatTech/bot-manager)
 - **qqs**: superusers 的 qq 号
 - **&**: 驻留在后台，必须放在最后，仅`Linux`下有效
 
@@ -93,6 +92,8 @@ zerobot [-c config.json] [-h] [-s config.json] [-t token] [-u url] [-n nickname]
 
   - 注：当全局未配置或与默认相同时，状态取决于单独配置，后备为默认配置；当全局与默认不同时，状态取决于全局配置，单独配置失效。
 
+  - [x] /改变默认启用状态 xxx
+
   - [x] /禁止 service qq1 qq2... (禁止 qqs 使用服务 service)
 
   - [x] /允许 service qq1 qq2... (重新允许 qqs 使用服务 service)
@@ -120,16 +121,6 @@ zerobot [-c config.json] [-h] [-s config.json] [-t token] [-u url] [-n nickname]
 </details>
 
 ### *高优先级*
-<details>
-  <summary>web管理</summary>
-
-  `import _ "github.com/FloatTech/zbputils/control/web"`
-
-  - 开启后可执行文件大约增加 5M ，默认注释不开启。如需开启请自行编辑`main.go`取消注释
-
-  - 需要配合 [webgui](https://github.com/FloatTech/bot-manager) 使用
-
-</details>
 <details>
   <summary>聊天</summary>
 
@@ -338,11 +329,7 @@ print("run[CQ:image,file="+j["img"]+"]")
 
   - [x] 查询计算机当前活跃度: [检查身体 | 自检 | 启动自检 | 系统状态]
 
-  - [x] 清理缓存 (仅适用于 gocq 且需要 bot 的运行目录和 gocq 相同)
-
-  - [ ] 简易语音
-
-  - [ ] 爬图合成 [@xxx]
+  - [x] 设置默认限速为每 m [分钟 | 秒] n 次触发
 
 </details>
 <details>
@@ -498,7 +485,9 @@ print("run[CQ:image,file="+j["img"]+"]")
 
   - [x] 娶群友
 
-  - [x] 娶[ 老婆QQ号 | @老婆QQ ]
+  - [x] (娶|嫁)[@对方QQ]
+  
+  - [x] 当[对方Q号|@对方QQ]的小三
 
   - [x] 群老婆列表
 
@@ -533,7 +522,7 @@ print("run[CQ:image,file="+j["img"]+"]")
 
   - [x] 运势 | 抽签
 
-  - [x] 设置底图[车万 DC4 爱因斯坦 星空列车 樱云之恋 富婆妹 李清歌 公主连结 原神 明日方舟 碧蓝航线 碧蓝幻想 战双 阴阳师 赛马娘 东方归言录 奇异恩典 夏日口袋]
+  - [x] 设置底图[车万 DC4 爱因斯坦 星空列车 樱云之恋 富婆妹 李清歌 公主连结 原神 明日方舟 碧蓝航线 碧蓝幻想 战双 阴阳师 赛马娘 东方归言录 奇异恩典 夏日口袋 ASoul]
 
 </details>
 <details>
@@ -648,6 +637,28 @@ print("run[CQ:image,file="+j["img"]+"]")
 记录在"@every 1h"触发的指令
 来份萝莉
 ```
+
+</details>
+<details>
+  <summary>简易midi音乐制作</summary>
+
+  `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/midicreate"`
+
+  - [x] midi制作 CCGGAAGR FFEEDDCR GGFFEEDR GGFFEEDR CCGGAAGR FFEEDDCR
+
+  - [x] 个人听音练习
+  
+  - [x] 团队听音练习
+  
+  - [x] *.mid (midi 转 txt)
+  
+  - [x] midi制作*.txt (txt 转 midi)
+  
+  - [x] 设置音色40 (0~127)
+
+  - [x] 注: 该插件需要安装timidity,linux安装脚本可参考 https://gitcode.net/anto_july/midi/-/raw/master/timidity.sh , windows安装脚本可参考 https://gitcode.net/anto_july/midi/-/raw/master/timidity.bat , windows需要管理员模式运行
+  
+  - [x] 符号说明: C5是中央C,后面不写数字,默认接5,Cb6<1,b代表降调,#代表升调,6比5高八度,<1代表音长×2,<3代表音长×8,<-1代表音长×0.5,<-3代表音长×0.125,R是休止符
 
 </details>
 <details>
@@ -851,6 +862,7 @@ print("run[CQ:image,file="+j["img"]+"]")
   - [x] 抽塔罗牌
   - [x] 抽n张塔罗牌
   - [x] 解塔罗牌[牌名]
+  - [x] 塔罗牌阵[圣三角|时间之流|四要素|五牌阵|吉普赛十字|马蹄|六芒星]"
 
 </details>
 <details>
@@ -999,10 +1011,6 @@ print("run[CQ:image,file="+j["img"]+"]")
   - [x] @Bot 任意文本(任意一句话回复)
 
   - [x] 设置回复模式[青云客 | 小爱]
-
-</details>
-<details>
-  <summary>TODO...</summary>
 
 </details>
 
