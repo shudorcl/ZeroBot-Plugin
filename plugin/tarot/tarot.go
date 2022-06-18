@@ -9,8 +9,10 @@ import (
 	"strings"
 
 	ctrl "github.com/FloatTech/zbpctrl"
+	"github.com/FloatTech/zbputils/binary"
 	"github.com/FloatTech/zbputils/control"
 	"github.com/FloatTech/zbputils/ctxext"
+	"github.com/FloatTech/zbputils/img/text"
 	"github.com/sirupsen/logrus"
 	zero "github.com/wdvxdr1123/ZeroBot"
 	"github.com/wdvxdr1123/ZeroBot/message"
@@ -39,7 +41,8 @@ var cardMap = make(cardSet, 30)
 var infoMap = make(map[string]cardInfo, 30)
 var formationMap = make(map[string]formation, 10)
 
-// var cardName = make([]string, 22)
+// var cardName = make([]string, 30)
+// var formationName = make([]string, 10)
 
 func init() {
 	engine := control.Register("tarot", &ctrl.Options[*zero.Ctx]{
@@ -52,25 +55,38 @@ func init() {
 		PublicDataFolder: "Tarot",
 	}).ApplySingle(ctxext.DefaultSingle)
 
-	engine.OnRegex(`^抽(\d{1,2}张)?塔罗牌$`, ctxext.DoOnceOnSuccess(
-		func(ctx *zero.Ctx) bool {
-			if len(cardMap) > 0 {
-				return true
-			}
-			data, err := engine.GetLazyData("tarots.json", true)
-			if err != nil {
-				ctx.SendChain(message.Text("ERROR:", err))
-				return false
-			}
-			err = json.Unmarshal(data, &cardMap)
-			if err != nil {
-				ctx.SendChain(message.Text("ERROR:", err))
-				return false
-			}
-			logrus.Infof("[tarot]读取%d张大阿尔卡纳塔罗牌", len(cardMap))
-			return true
-		},
-	)).SetBlock(true).Limit(ctxext.LimitByGroup).Handle(func(ctx *zero.Ctx) {
+	getTarot := ctxext.DoOnceOnSuccess(func(ctx *zero.Ctx) bool {
+		data, err := engine.GetLazyData("tarots.json", true)
+		if err != nil {
+			ctx.SendChain(message.Text("ERROR:", err))
+			return false
+		}
+		err = json.Unmarshal(data, &cardMap)
+		if err != nil {
+			ctx.SendChain(message.Text("ERROR:", err))
+			return false
+		}
+		for _, card := range cardMap {
+			infoMapKey := strings.Split(card.Name, "(")[0]
+			infoMap[infoMapKey] = card.cardInfo
+			// 可以拿来显示大阿尔卡纳列表
+			// cardName = append(cardName, infoMapKey)
+		}
+		logrus.Infof("[tarot]读取%d张大阿尔卡纳塔罗牌", len(cardMap))
+		formation, err := engine.GetLazyData("formation.json", true)
+		if err != nil {
+			ctx.SendChain(message.Text("ERROR:", err))
+			return false
+		}
+		err = json.Unmarshal(formation, &formationMap)
+		if err != nil {
+			ctx.SendChain(message.Text("ERROR:", err))
+			return false
+		}
+		logrus.Infof("[tarot]读取%d组塔罗牌阵", len(formationMap))
+		return true
+	})
+	engine.OnRegex(`^抽(\d{1,2}张)?塔罗牌$`, getTarot).SetBlock(true).Limit(ctxext.LimitByGroup).Handle(func(ctx *zero.Ctx) {
 		match := ctx.State["regex_matched"].([]string)[1]
 		n := 1
 		reasons := [...]string{"您抽到的是~\n", "锵锵锵，塔罗牌的预言是~\n", "诶，让我看看您抽到了~\n"}
@@ -129,38 +145,7 @@ func init() {
 		ctx.SendGroupForwardMessage(ctx.Event.GroupID, msg)
 	})
 
-	engine.OnRegex(`^解塔罗牌\s?(.*)`, ctxext.DoOnceOnSuccess(
-		func(ctx *zero.Ctx) bool {
-			if len(cardMap) > 0 {
-				for _, card := range cardMap {
-					infoMapKey := strings.Split(card.Name, "(")[0]
-					infoMap[infoMapKey] = card.cardInfo
-					// 可以拿来显示大阿尔卡纳列表
-					// cardName = append(cardName, infoMapKey)
-				}
-				return true
-			}
-			tempMap := make(cardSet, 30)
-			data, err := engine.GetLazyData("tarots.json", true)
-			if err != nil {
-				ctx.SendChain(message.Text("ERROR:", err))
-				return false
-			}
-			err = json.Unmarshal(data, &tempMap)
-			if err != nil {
-				ctx.SendChain(message.Text("ERROR:", err))
-				return false
-			}
-
-			for _, card := range tempMap {
-				infoMapKey := strings.Split(card.Name, "(")[0]
-				infoMap[infoMapKey] = card.cardInfo
-				// 可以拿来显示大阿尔卡纳列表
-				// cardName = append(cardName, infoMapKey)
-			}
-			return true
-		},
-	)).SetBlock(true).Limit(ctxext.LimitByGroup).Handle(func(ctx *zero.Ctx) {
+	engine.OnRegex(`^解塔罗牌\s?(.*)`, getTarot).SetBlock(true).Limit(ctxext.LimitByGroup).Handle(func(ctx *zero.Ctx) {
 		match := ctx.State["regex_matched"].([]string)[1]
 		info, ok := infoMap[match]
 		if ok {
@@ -173,39 +158,15 @@ func init() {
 			ctx.SendChain(message.Text("没有找到", match, "噢~"))
 		}
 	})
-	engine.OnRegex(`^塔罗牌阵\s?(.*)`, ctxext.DoOnceOnSuccess(
-		func(ctx *zero.Ctx) bool {
-			if len(cardMap) == 0 {
-				data, err := engine.GetLazyData("tarots.json", true)
-				if err != nil {
-					ctx.SendChain(message.Text("ERROR:", err))
-					return false
-				}
-				err = json.Unmarshal(data, &cardMap)
-				if err != nil {
-					ctx.SendChain(message.Text("ERROR:", err))
-					return false
-				}
-				logrus.Infof("[tarot]读取%d张大阿尔卡纳塔罗牌", len(cardMap))
-			}
-			data, err := engine.GetLazyData("formation.json", true)
-			if err != nil {
-				ctx.SendChain(message.Text("ERROR:", err))
-				return false
-			}
-			err = json.Unmarshal(data, &formationMap)
-			if err != nil {
-				ctx.SendChain(message.Text("ERROR:", err))
-				return false
-			}
-			logrus.Infof("[tarot]读取%d组塔罗牌阵", len(formationMap))
-			return true
-		})).SetBlock(true).Limit(ctxext.LimitByGroup).Handle(func(ctx *zero.Ctx) {
+	engine.OnRegex(`^塔罗牌阵\s?(.*)`, getTarot).SetBlock(true).Limit(ctxext.LimitByGroup).Handle(func(ctx *zero.Ctx) {
 		match := ctx.State["regex_matched"].([]string)[1]
 		info, ok := formationMap[match]
 		position := [...]string{"正位", "逆位"}
 		reverse := [...]string{"", "Reverse"}
 		if ok {
+			var build strings.Builder
+			build.WriteString(ctx.CardOrNickName(ctx.Event.UserID))
+			build.WriteString("\n")
 			msg := make([]message.MessageSegment, info.CardsNum)
 			randomIntMap := make(map[int]int, 30)
 			for i := range msg {
@@ -219,11 +180,23 @@ func init() {
 				p := rand.Intn(2)
 				card := cardMap[(strconv.Itoa(j))]
 				name := card.Name
-				tarotMsg := []message.MessageSegment{
-					message.Text(info.Represent[0][i], ":", position[p], " 的 ", name, "\n"),
-					message.Image(fmt.Sprintf(bed+"MajorArcana%s/%d.png", reverse[p], j))}
+				tarotMsg := []message.MessageSegment{message.Image(fmt.Sprintf(bed+"MajorArcana%s/%d.png", reverse[p], j))}
+				build.WriteString(info.Represent[0][i])
+				build.WriteString(": ")
+				build.WriteString(position[p])
+				build.WriteString(" 的 ")
+				build.WriteString(name)
+				build.WriteString("\n")
 				msg[i] = ctxext.FakeSenderForwardNode(ctx, tarotMsg...)
 			}
+			txt := build.String()
+			formation, err := text.RenderToBase64(txt, text.FontFile, 400, 20)
+			if err != nil {
+				ctx.SendChain(message.Text("ERROR:", err))
+				return
+			}
+			// TODO 视gocq变化将牌阵信息加入转发列表中
+			ctx.SendChain(message.Image("base64://" + binary.BytesToString(formation)))
 			ctx.SendGroupForwardMessage(ctx.Event.GroupID, msg)
 		} else {
 			ctx.SendChain(message.Text("没有找到", match, "噢~"))
