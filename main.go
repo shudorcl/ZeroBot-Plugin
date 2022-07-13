@@ -112,9 +112,10 @@ import (
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/translation"   // 翻译
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/vtb_quotation" // vtb语录
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/wangyiyun"     // 网易云音乐热评
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/word_count"    // 聊天热词
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/wordle"        // 猜单词
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/ymgal"         // 月幕galgame
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/wife"
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/word_count" // 聊天热词
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/wordle"     // 猜单词
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/ymgal"      // 月幕galgame
 
 	// _ "github.com/FloatTech/ZeroBot-Plugin/plugin/wtf"            // 鬼东西
 

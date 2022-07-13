@@ -1,9 +1,8 @@
 // Package tarot 塔罗牌
-package sgs
+package wife
 
 import (
 	"encoding/json"
-	"math/rand"
 	"strconv"
 
 	ctrl "github.com/FloatTech/zbpctrl"
@@ -26,15 +25,15 @@ var cardMap = make(cardSet, 50)
 var datapath string
 
 func init() {
-	engine := control.Register("sgs", &ctrl.Options[*zero.Ctx]{
+	engine := control.Register("wife", &ctrl.Options[*zero.Ctx]{
 		DisableOnDefault: false,
-		Help: "三国杀\n" +
-			"- 抽武将",
-		PublicDataFolder: "Sgs",
+		Help: "抽老婆\n" +
+			"- 抽老婆",
+		PublicDataFolder: "Wife",
 	}).ApplySingle(ctxext.DefaultSingle)
 	engine.OnFullMatchGroup([]string{"抽武将"}, ctxext.DoOnceOnSuccess(
 		func(ctx *zero.Ctx) bool {
-			data, err := engine.GetLazyData("sgs.json", true)
+			data, err := engine.GetLazyData("wife.json", true)
 			if err != nil {
 				ctx.SendChain(message.Text("ERROR:", err))
 				return false
@@ -45,7 +44,7 @@ func init() {
 				return false
 			}
 			datapath = file.BOTPATH + "/" + engine.DataFolder()
-			logrus.Infof("[sgs]读取%d张三国杀武将", len(cardMap))
+			logrus.Infof("[wife]读取%d个老婆", len(cardMap))
 			return true
 		},
 	)).SetBlock(true).
@@ -55,9 +54,9 @@ func init() {
 
 			ctx.SendChain(
 				message.At(ctx.Event.UserID),
-				message.Text("今天的守护武将是~【", card.Name, "】哒"),
+				message.Text("今天的二次元老婆是~【", card.Name, "】哒"),
 				message.Image("file:///"+datapath+card.URL),
-				message.Text("\n【", card.Lines[rand.Intn(len(card.Lines))], "】"),
+				// message.Text("\n【", card.Lines[rand.Intn(len(card.Lines))], "】"),
 			)
 		})
 }
