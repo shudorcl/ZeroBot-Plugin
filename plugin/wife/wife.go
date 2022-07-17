@@ -31,7 +31,7 @@ func init() {
 			"- 抽老婆",
 		PublicDataFolder: "Wife",
 	}).ApplySingle(ctxext.DefaultSingle)
-	engine.OnFullMatchGroup([]string{"抽武将"}, ctxext.DoOnceOnSuccess(
+	engine.OnFullMatchGroup([]string{"抽老婆"}, ctxext.DoOnceOnSuccess(
 		func(ctx *zero.Ctx) bool {
 			data, err := engine.GetLazyData("wife.json", true)
 			if err != nil {
