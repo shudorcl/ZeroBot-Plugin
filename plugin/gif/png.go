@@ -13,6 +13,7 @@ import (
 	"github.com/FloatTech/zbputils/img/text"
 	"github.com/FloatTech/zbputils/img/writer"
 	"github.com/fogleman/gg"
+	"github.com/sirupsen/logrus"
 )
 
 // pa 爬
@@ -1054,4 +1055,37 @@ func throw(cc *context, args ...string) (string, error) {
 	}
 	imgnrgba := imgs[0].InsertUpC(img.Rotate(face, float64(rand.Intn(360)), 143, 143).Im, 0, 0, 86, 249).Im
 	return "file:///" + name, writer.SavePNG2Path(name, imgnrgba)
+}
+
+// always 一直
+func alwaysDo(cc *context, args ...string) (string, error) {
+	var wg sync.WaitGroup
+	var err error
+	wg.Wait()
+	name := cc.usrdir + "AlwaysDo.png"
+	logrus.Infof("[GIF]TEST:", cc.headimgsdir[0])
+	face, err := img.LoadFirstFrame(cc.headimgsdir[0], 500, 500)
+	if err != nil {
+		return "", err
+	}
+	canvas := gg.NewContext(500, 600)
+	canvas.DrawImage(face.Im, 0, 0)
+	canvas.SetColor(color.Black)
+	_, err = file.GetLazyData(text.BoldFontFile, true)
+	if err != nil {
+		return "", err
+	}
+	if err = canvas.LoadFontFace(text.BoldFontFile, 40); err != nil {
+		return "", err
+	}
+	arg := "要我一直"
+	l, _ := canvas.MeasureString(arg)
+	if l > 500 {
+		return "", errors.New("文字消息太长了")
+	}
+	canvas.DrawString(arg, 260-l, 550)
+	canvas.DrawImage(img.Size(face.Im, 50, 50).Im, 260, 510)
+	canvas.DrawString("吗", 310, 550)
+
+	return "file:///" + name, canvas.SavePNG(name)
 }

@@ -92,6 +92,8 @@ var (
 		"紧贴":     tightly,
 		"紧紧贴着":   tightly,
 		"转":      turn,
+		// "一直":     alwaysDo,
+		"一直": alwaysDoGif,
 	}
 )
 

@@ -1,13 +1,17 @@
 package gif
 
 import (
+	"errors"
 	"image"
 	"image/color"
 	"sync"
 
+	"github.com/FloatTech/zbputils/file"
 	"github.com/FloatTech/zbputils/img"
+	"github.com/FloatTech/zbputils/img/text"
 	"github.com/FloatTech/zbputils/img/writer"
 	"github.com/fogleman/gg"
+	"github.com/sirupsen/logrus"
 )
 
 // mo 摸
@@ -865,4 +869,50 @@ func turn(cc *context, value ...string) (string, error) {
 		turn[i] = img.Size(canvas.Image(), 0, 0).InsertUpC(img.Rotate(face, float64(10*i), 250, 250).Im, 0, 0, 125, 125).Im
 	}
 	return "file:///" + name, writer.SaveGIF2Path(name, img.MergeGif(7, turn))
+}
+
+// always 一直
+func alwaysDoGif(cc *context, args ...string) (string, error) {
+	var wg sync.WaitGroup
+	var err error
+	var face []*image.NRGBA
+	wg.Wait()
+	name := cc.usrdir + "AlwaysDo.gif"
+	face, err = img.LoadAllFrames(cc.headimgsdir[0], 500, 500)
+	if err != nil {
+		//载入失败尝试载入第一帧
+		logrus.Infof("[GIF]AlwaysGif load failed")
+		face = make([]*image.NRGBA, 0)
+		first, _ := img.LoadFirstFrame(cc.headimgsdir[0], 500, 500)
+		face = append(face, first.Im)
+	}
+	canvas := gg.NewContext(500, 600)
+	canvas.SetColor(color.Black)
+	_, err = file.GetLazyData(text.BoldFontFile, true)
+	if err != nil {
+		return "", err
+	}
+	if err = canvas.LoadFontFace(text.BoldFontFile, 40); err != nil {
+		return "", err
+	}
+	arg := "要我一直"
+	l, _ := canvas.MeasureString(arg)
+	if l > 500 {
+		return "", errors.New("文字消息太长了")
+	}
+	turn := make([]*image.NRGBA, len(face))
+	for i, f := range face {
+		canvas := gg.NewContext(500, 600)
+		canvas.DrawImage(f, 0, 0)
+		canvas.SetColor(color.Black)
+		canvas.LoadFontFace(text.BoldFontFile, 40)
+		canvas.DrawString(arg, 280-l, 560)
+		canvas.DrawImage(img.Size(f, 90, 90).Im, 280, 505)
+		canvas.DrawString("吗", 370, 560)
+		turn[i] = img.Size(canvas.Image(), 0, 0).Im
+		if i > 60 {
+			break
+		}
+	}
+	return "file:///" + name, writer.SaveGIF2Path(name, img.MergeGif(12, turn))
 }
