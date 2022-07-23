@@ -16,6 +16,7 @@ import (
 
 // mo 摸
 func mo(cc *context, value ...string) (string, error) {
+	_ = value
 	var wg sync.WaitGroup
 	var err error
 	var m sync.Mutex
@@ -52,6 +53,7 @@ func mo(cc *context, value ...string) (string, error) {
 
 // cuo 搓
 func cuo(cc *context, value ...string) (string, error) {
+	_ = value
 	var wg sync.WaitGroup
 	var err error
 	var m sync.Mutex
@@ -92,6 +94,7 @@ func cuo(cc *context, value ...string) (string, error) {
 
 // qiao 敲
 func qiao(cc *context, value ...string) (string, error) {
+	_ = value
 	var wg sync.WaitGroup
 	var err error
 	var m sync.Mutex
@@ -125,6 +128,7 @@ func qiao(cc *context, value ...string) (string, error) {
 
 // chi 吃
 func chi(cc *context, value ...string) (string, error) {
+	_ = value
 	var wg sync.WaitGroup
 	var err error
 	var m sync.Mutex
@@ -159,6 +163,7 @@ func chi(cc *context, value ...string) (string, error) {
 
 // ceng 蹭
 func ceng(cc *context, value ...string) (string, error) {
+	_ = value
 	var wg sync.WaitGroup
 	var err error
 	var m sync.Mutex
@@ -200,6 +205,7 @@ func ceng(cc *context, value ...string) (string, error) {
 
 // ken 啃
 func ken(cc *context, value ...string) (string, error) {
+	_ = value
 	var wg sync.WaitGroup
 	var err error
 	var m sync.Mutex
@@ -247,6 +253,7 @@ func ken(cc *context, value ...string) (string, error) {
 
 // pai 拍
 func pai(cc *context, value ...string) (string, error) {
+	_ = value
 	var wg sync.WaitGroup
 	var err error
 	var m sync.Mutex
@@ -280,6 +287,7 @@ func pai(cc *context, value ...string) (string, error) {
 
 // xqe 冲
 func xqe(cc *context, value ...string) (string, error) {
+	_ = value
 	var wg sync.WaitGroup
 	var err error
 	var m sync.Mutex
@@ -313,6 +321,7 @@ func xqe(cc *context, value ...string) (string, error) {
 
 // diu 丢
 func diu(cc *context, value ...string) (string, error) {
+	_ = value
 	var wg sync.WaitGroup
 	var err error
 	var m sync.Mutex
@@ -352,6 +361,7 @@ func diu(cc *context, value ...string) (string, error) {
 
 // kiss 亲
 func kiss(cc *context, value ...string) (string, error) {
+	_ = value
 	var wg sync.WaitGroup
 	var err error
 	var m sync.Mutex
@@ -390,6 +400,7 @@ func kiss(cc *context, value ...string) (string, error) {
 
 // garbage 垃圾 垃圾桶
 func garbage(cc *context, value ...string) (string, error) {
+	_ = value
 	var wg sync.WaitGroup
 	var err error
 	var m sync.Mutex
@@ -422,6 +433,7 @@ func garbage(cc *context, value ...string) (string, error) {
 
 // thump 捶
 func thump(cc *context, value ...string) (string, error) {
+	_ = value
 	var wg sync.WaitGroup
 	var err error
 	var m sync.Mutex
@@ -454,6 +466,7 @@ func thump(cc *context, value ...string) (string, error) {
 
 // jiujiu 啾啾
 func jiujiu(cc *context, value ...string) (string, error) {
+	_ = value
 	var wg sync.WaitGroup
 	var err error
 	var m sync.Mutex
@@ -485,6 +498,7 @@ func jiujiu(cc *context, value ...string) (string, error) {
 
 // knock 2敲
 func knock(cc *context, value ...string) (string, error) {
+	_ = value
 	var wg sync.WaitGroup
 	var err error
 	var m sync.Mutex
@@ -517,6 +531,7 @@ func knock(cc *context, value ...string) (string, error) {
 
 // 听音乐 listenMusic
 func listenMusic(cc *context, value ...string) (string, error) {
+	_ = value
 	var wg sync.WaitGroup
 	var err error
 	var m sync.Mutex
@@ -548,6 +563,7 @@ func listenMusic(cc *context, value ...string) (string, error) {
 
 // loveYou 永远爱你
 func loveYou(cc *context, value ...string) (string, error) {
+	_ = value
 	var wg sync.WaitGroup
 	var err error
 	var m sync.Mutex
@@ -580,6 +596,7 @@ func loveYou(cc *context, value ...string) (string, error) {
 
 // pat 2拍
 func pat(cc *context, value ...string) (string, error) {
+	_ = value
 	var wg sync.WaitGroup
 	var err error
 	var m sync.Mutex
@@ -621,6 +638,7 @@ func pat(cc *context, value ...string) (string, error) {
 
 // jackUp 顶
 func jackUp(cc *context, value ...string) (string, error) {
+	_ = value
 	var wg sync.WaitGroup
 	var err error
 	var m sync.Mutex
@@ -663,6 +681,7 @@ func jackUp(cc *context, value ...string) (string, error) {
 
 // pound 捣
 func pound(cc *context, value ...string) (string, error) {
+	_ = value
 	var wg sync.WaitGroup
 	var err error
 	var m sync.Mutex
@@ -695,6 +714,7 @@ func pound(cc *context, value ...string) (string, error) {
 
 // punch 打拳
 func punch(cc *context, value ...string) (string, error) {
+	_ = value
 	var wg sync.WaitGroup
 	var err error
 	var m sync.Mutex
@@ -727,6 +747,7 @@ func punch(cc *context, value ...string) (string, error) {
 
 // roll 滚
 func roll(cc *context, value ...string) (string, error) {
+	_ = value
 	var wg sync.WaitGroup
 	var err error
 	var m sync.Mutex
@@ -759,6 +780,7 @@ func roll(cc *context, value ...string) (string, error) {
 
 // suck 吸 嗦
 func suck(cc *context, value ...string) (string, error) {
+	_ = value
 	var wg sync.WaitGroup
 	var err error
 	var m sync.Mutex
@@ -791,6 +813,7 @@ func suck(cc *context, value ...string) (string, error) {
 
 // hammer 锤
 func hammer(cc *context, value ...string) (string, error) {
+	_ = value
 	var wg sync.WaitGroup
 	var err error
 	var m sync.Mutex
@@ -823,6 +846,7 @@ func hammer(cc *context, value ...string) (string, error) {
 
 // tightly 紧贴 紧紧贴着
 func tightly(cc *context, value ...string) (string, error) {
+	_ = value
 	var wg sync.WaitGroup
 	var err error
 	var m sync.Mutex
@@ -855,6 +879,7 @@ func tightly(cc *context, value ...string) (string, error) {
 
 // turn 转
 func turn(cc *context, value ...string) (string, error) {
+	_ = value
 	name := cc.usrdir + "Turn.gif"
 	face, err := cc.getLogo(0, 0)
 	if err != nil {
