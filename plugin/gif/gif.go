@@ -908,7 +908,10 @@ func alwaysDoGif(cc *context, args ...string) (string, error) {
 		//载入失败尝试载入第一帧
 		logrus.Infof("[GIF]AlwaysGif load failed")
 		face = make([]*image.NRGBA, 0)
-		first, _ := img.LoadFirstFrame(cc.headimgsdir[0], 500, 500)
+		first, err := img.LoadFirstFrame(cc.headimgsdir[0], 500, 500)
+		if err != nil {
+			return "", err
+		}
 		face = append(face, first.Im)
 	}
 	canvas := gg.NewContext(500, 600)
