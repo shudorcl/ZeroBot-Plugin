@@ -98,7 +98,7 @@ func init() { // 插件主体
 				ctx.SendChain(message.Reply(ctx.Event.MessageID), randText(
 					"早个啥？哼唧！我都准备洗洗睡了！",
 					"不是...你看看几点了，哼！",
-					"晚上好哇",
+					"晚上好哇！",
 				))
 			}
 		})
