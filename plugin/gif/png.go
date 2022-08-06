@@ -1096,6 +1096,7 @@ func throw(cc *context, args ...string) (string, error) {
 }
 
 // always 一直
+// always 一直
 func alwaysDo(cc *context, args ...string) (string, error) {
 	var wg sync.WaitGroup
 	var err error
@@ -1108,6 +1109,24 @@ func alwaysDo(cc *context, args ...string) (string, error) {
 	}
 	canvas := gg.NewContext(500, 600)
 	canvas.DrawImage(face.Im, 0, 0)
+	canvas.SetColor(color.Black)
+	_, err = file.GetLazyData(text.BoldFontFile, true)
+	if err != nil {
+		return "", err
+	}
+	if err = canvas.LoadFontFace(text.BoldFontFile, 40); err != nil {
+		return "", err
+	}
+	arg := "要我一直"
+	l, _ := canvas.MeasureString(arg)
+	if l > 500 {
+		return "", errors.New("文字消息太长了")
+	}
+	canvas.DrawString(arg, 260-l, 550)
+	canvas.DrawImage(img.Size(face.Im, 50, 50).Im, 260, 510)
+	canvas.DrawString("吗", 310, 550)
+
+	return "file:///" + name, canvas.SavePNG(name)
 }
 
 // 远离
