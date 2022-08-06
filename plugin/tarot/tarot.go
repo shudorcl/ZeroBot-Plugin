@@ -41,8 +41,8 @@ var cardMap = make(cardSet, 80)
 var infoMap = make(map[string]cardInfo, 80)
 var formationMap = make(map[string]formation, 10)
 
-// var cardName = make([]string, 30)
-var formationName = make([]string, 10)
+var majorArcanaName = make([]string, 0, 80)
+var formationName = make([]string, 0, 10)
 
 func init() {
 	engine := control.Register("tarot", &ctrl.Options[*zero.Ctx]{
@@ -68,8 +68,10 @@ func init() {
 		}
 		for _, card := range cardMap {
 			infoMap[card.Name] = card.cardInfo
-			// 可以拿来显示塔罗牌列表
-			// cardName = append(cardName, card.Name)
+		}
+		for i := 0; i < 22; i++ {
+			// 噢天哪，我应该把json里面序号设成int
+			majorArcanaName = append(majorArcanaName, cardMap[strconv.Itoa(i)].Name)
 		}
 		logrus.Infof("[tarot]读取%d张塔罗牌", len(cardMap))
 		formation, err := engine.GetLazyData("formation.json", true)
@@ -124,7 +126,7 @@ func init() {
 		if n == 1 {
 			i := rand.Intn(length) + start
 			p := rand.Intn(2)
-			card := cardMap[(strconv.Itoa(i))]
+			card := cardMap[strconv.Itoa(i)]
 			name := card.Name
 			if id := ctx.SendChain(
 				message.Text(reasons[rand.Intn(len(reasons))], position[p], "』的『", name, "』\n"),
@@ -144,7 +146,7 @@ func init() {
 			}
 			randomIntMap[j] = 0
 			p := rand.Intn(2)
-			card := cardMap[(strconv.Itoa(j + start))]
+			card := cardMap[strconv.Itoa(j+start)]
 			name := card.Name
 			tarotMsg := []message.MessageSegment{
 				message.Text(reasons[rand.Intn(len(reasons))], position[p], "』的『", name, "』\n"),
@@ -164,16 +166,21 @@ func init() {
 				message.Text("\n正位:", info.Description),
 				message.Text("\n逆位:", info.ReverseDescription))
 		} else {
-			ctx.SendChain(message.Text("没有找到", match, "噢~"))
-			// TODO 显示塔罗牌列表，下方使用图片发出，但是图片过大
-			// var build strings.Builder
-			// build.WriteString("现有塔罗牌列表\n")
-			// build.WriteString(strings.Join(formationName, " "))
-			// txt := build.String()
-			// formation, err := text.RenderToBase64(txt, text.FontFile, 400, 20)
-			// if err != nil {
-			// 	ctx.SendChain(message.Image("base64://" + binary.BytesToString(formation)))
-			// }
+			var build strings.Builder
+			build.WriteString("塔罗牌列表\n大阿尔卡纳:\n")
+			build.WriteString(strings.Join(majorArcanaName[:7], " "))
+			build.WriteString("\n")
+			build.WriteString(strings.Join(majorArcanaName[7:14], " "))
+			build.WriteString("\n")
+			build.WriteString(strings.Join(majorArcanaName[14:22], " "))
+			build.WriteString("\n小阿尔卡纳:\n[圣杯|星币|宝剑|权杖] [0-10|侍从|骑士|王后|国王]")
+			txt := build.String()
+			cardList, err := text.RenderToBase64(txt, text.FontFile, 420, 20)
+			if err != nil {
+				ctx.SendChain(message.Text("没有找到", match, "噢~"))
+				ctx.SendChain(message.Text("ERROR:", err))
+			}
+			ctx.SendChain(message.Text("没有找到", match, "噢~"), message.Image("base64://"+binary.BytesToString(cardList)))
 		}
 	})
 	engine.OnRegex(`^((塔罗|大阿(尔)?卡纳)|小阿(尔)?卡纳|混合)牌阵\s?(.*)`, getTarot).SetBlock(true).Limit(ctxext.LimitByGroup).Handle(func(ctx *zero.Ctx) {
@@ -208,7 +215,7 @@ func init() {
 				}
 				randomIntMap[j] = 0
 				p := rand.Intn(2)
-				card := cardMap[(strconv.Itoa(j + start))]
+				card := cardMap[strconv.Itoa(j+start)]
 				name := card.Name
 				description := card.Description
 				if p == 1 {
@@ -234,7 +241,7 @@ func init() {
 			msg[info.CardsNum] = ctxext.FakeSenderForwardNode(ctx, []message.MessageSegment{message.Image("base64://" + binary.BytesToString(formation))}...)
 			ctx.SendGroupForwardMessage(ctx.Event.GroupID, msg)
 		} else {
-			ctx.SendChain(message.Text("没有找到", match, "噢~\n现有牌阵列表: ", strings.Join(formationName, " ")))
+			ctx.SendChain(message.Text("没有找到", match, "噢~\n现有牌阵列表: \n", strings.Join(formationName, "\n")))
 		}
 	})
 }

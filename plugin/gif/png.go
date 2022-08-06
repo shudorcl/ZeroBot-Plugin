@@ -163,6 +163,7 @@ func convolve3x3(cc *context, args ...string) (string, error) {
 
 // rotate 旋转,带参数暂时不用
 func rotate(cc *context, args ...string) (string, error) {
+	_ = args
 	name := cc.usrdir + "Rotate.png"
 	// 加载图片
 	im, err := img.LoadFirstFrame(cc.headimgsdir[0], 0, 0)
@@ -176,6 +177,7 @@ func rotate(cc *context, args ...string) (string, error) {
 
 // deformation 变形,带参数暂时不用
 func deformation(cc *context, args ...string) (string, error) {
+	_ = args
 	name := cc.usrdir + "Deformation.png"
 	// 加载图片
 	im, err := img.LoadFirstFrame(cc.headimgsdir[0], 0, 0)
@@ -252,6 +254,7 @@ func marriage(cc *context, args ...string) (string, error) {
 
 // anyasuki 阿尼亚喜欢
 func anyasuki(cc *context, args ...string) (string, error) {
+	_ = args
 	var wg sync.WaitGroup
 	var m sync.Mutex
 	var err error
@@ -297,6 +300,7 @@ func anyasuki(cc *context, args ...string) (string, error) {
 
 // alwaysLike 我永远喜欢
 func alwaysLike(cc *context, args ...string) (string, error) {
+	_ = args
 	var wg sync.WaitGroup
 	var m sync.Mutex
 	var err error
@@ -320,7 +324,7 @@ func alwaysLike(cc *context, args ...string) (string, error) {
 	}
 	canvas := gg.NewContext(830, 599)
 	canvas.DrawImage(back, 0, 0)
-	canvas.DrawImage(img.Size(face, 341, 341).Im, 44, 74)
+	canvas.DrawImage(img.Size(face, 380, 380).Im, 44, 74)
 	canvas.SetColor(color.Black)
 	_, err = file.GetLazyData(text.BoldFontFile, true)
 	if err != nil {
@@ -427,6 +431,7 @@ func dontTouch(cc *context, args ...string) (string, error) {
 
 // universal 万能表情 空白表情
 func universal(cc *context, args ...string) (string, error) {
+	_ = args
 	name := cc.usrdir + "Universal.png"
 	face, err := gg.LoadImage(cc.headimgsdir[0])
 	if err != nil {
@@ -455,6 +460,7 @@ func universal(cc *context, args ...string) (string, error) {
 
 // interview 采访
 func interview(cc *context, args ...string) (string, error) {
+	_ = args
 	var wg sync.WaitGroup
 	var m sync.Mutex
 	var err error
@@ -617,6 +623,7 @@ func perfect(cc *context, args ...string) (string, error) {
 
 // playGame 玩游戏
 func playGame(cc *context, args ...string) (string, error) {
+	_ = args
 	var wg sync.WaitGroup
 	var m sync.Mutex
 	var err error
@@ -746,6 +753,7 @@ func prpr(cc *context, args ...string) (string, error) {
 
 // safeSense 安全感
 func safeSense(cc *context, args ...string) (string, error) {
+	_ = args
 	var wg sync.WaitGroup
 	var m sync.Mutex
 	var err error
@@ -905,6 +913,7 @@ func whyatme(cc *context, args ...string) (string, error) {
 
 // makeFriend 交个朋友
 func makeFriend(cc *context, args ...string) (string, error) {
+	_ = args
 	var wg sync.WaitGroup
 	var m sync.Mutex
 	var err error
@@ -981,6 +990,7 @@ func backToWork(cc *context, args ...string) (string, error) {
 
 // coupon 兑换券
 func coupon(cc *context, args ...string) (string, error) {
+	_ = args
 	var wg sync.WaitGroup
 	var m sync.Mutex
 	var err error
@@ -1098,22 +1108,299 @@ func alwaysDo(cc *context, args ...string) (string, error) {
 	}
 	canvas := gg.NewContext(500, 600)
 	canvas.DrawImage(face.Im, 0, 0)
+}
+
+// 远离
+func yuanli(cc *context, args ...string) (string, error) {
+	_ = args
+	var wg sync.WaitGroup
+	var m sync.Mutex
+	var err error
+	c := dlrange("yuanli", 1, &wg, func(e error) {
+		m.Lock()
+		err = e
+		m.Unlock()
+	})
+	if err != nil {
+		return "", err
+	}
+	wg.Wait()
+	imgs, err := loadFirstFrames(c, 1)
+	if err != nil {
+		return "", err
+	}
+	name := cc.usrdir + "yuanli.png"
+	im, err := img.LoadFirstFrame(cc.headimgsdir[0], 534, 493)
+	if err != nil {
+		return "", err
+	}
+	imgnrgba := imgs[0].InsertBottom(im.Im, 420, 420, 45, 90).Im
+	return "file:///" + name, writer.SavePNG2Path(name, imgnrgba)
+}
+
+// 不是你老婆
+func nowife(cc *context, args ...string) (string, error) {
+	_ = args
+	var wg sync.WaitGroup
+	var m sync.Mutex
+	var err error
+	c := dlrange("nowife", 1, &wg, func(e error) {
+		m.Lock()
+		err = e
+		m.Unlock()
+	})
+	if err != nil {
+		return "", err
+	}
+	wg.Wait()
+	imgs, err := loadFirstFrames(c, 1)
+	if err != nil {
+		return "", err
+	}
+	name := cc.usrdir + "nowife.png"
+	im, err := img.LoadFirstFrame(cc.headimgsdir[0], 534, 493)
+	if err != nil {
+		return "", err
+	}
+	imgnrgba := imgs[0].InsertBottom(im.Im, 400, 400, 112, 81).Im
+	return "file:///" + name, writer.SavePNG2Path(name, imgnrgba)
+}
+
+// youer 你老婆
+func youer(cc *context, args ...string) (string, error) {
+	_ = args
+	var wg sync.WaitGroup
+	var m sync.Mutex
+	var err error
+	c := dlrange("youer", 1, &wg, func(e error) {
+		m.Lock()
+		err = e
+		m.Unlock()
+	})
+	if err != nil {
+		return "", err
+	}
+	wg.Wait()
+	name := cc.usrdir + "youer.png"
+	back, err := gg.LoadImage(c[0])
+	if err != nil {
+		return "", err
+	}
+	tou, err := cc.getLogo(120, 120)
+	if err != nil {
+		return "", err
+	}
+	wg.Wait()
+	if err != nil {
+		return "", err
+	}
+	canvas := gg.NewContext(690, 690)
+	canvas.DrawImage(back, 0, 0)
+	canvas.DrawImage(img.Size(tou, 350, 350).Im, 55, 165)
 	canvas.SetColor(color.Black)
 	_, err = file.GetLazyData(text.BoldFontFile, true)
 	if err != nil {
 		return "", err
 	}
-	if err = canvas.LoadFontFace(text.BoldFontFile, 40); err != nil {
+	if err = canvas.LoadFontFace(text.BoldFontFile, 56); err != nil {
 		return "", err
 	}
-	arg := "要我一直"
-	l, _ := canvas.MeasureString(arg)
-	if l > 500 {
+	if args[0] == "" {
+		args[0] = "老婆真棒"
+	}
+	args[0] = "你的" + args[0]
+	l, _ := canvas.MeasureString(args[0])
+	if l > 830 {
 		return "", errors.New("文字消息太长了")
 	}
-	canvas.DrawString(arg, 260-l, 550)
-	canvas.DrawImage(img.Size(face.Im, 50, 50).Im, 260, 510)
-	canvas.DrawString("吗", 310, 550)
-
+	canvas.DrawString(args[0], (830-l)/3.0, 630)
 	return "file:///" + name, canvas.SavePNG(name)
+}
+
+// xiaotiamshi 小天使
+func xiaotianshi(cc *context, args ...string) (string, error) {
+	_ = args
+	var wg sync.WaitGroup
+	var m sync.Mutex
+	var err error
+	c := dlrange("xiaotianshi", 1, &wg, func(e error) {
+		m.Lock()
+		err = e
+		m.Unlock()
+	})
+	if err != nil {
+		return "", err
+	}
+	wg.Wait()
+	name := cc.usrdir + "xiaotianshi.png"
+	back, err := gg.LoadImage(c[0])
+	if err != nil {
+		return "", err
+	}
+	face, err := gg.LoadImage(cc.headimgsdir[0])
+	if err != nil {
+		return "", err
+	}
+	wg.Wait()
+	if err != nil {
+		return "", err
+	}
+	canvas := gg.NewContext(522, 665)
+	canvas.DrawImage(back, 0, 0)
+	canvas.DrawImage(img.Size(face, 480, 480).Im, 20, 80)
+	canvas.SetColor(color.Black)
+	_, err = file.GetLazyData(text.BoldFontFile, true)
+	if err != nil {
+		return "", err
+	}
+	if err = canvas.LoadFontFace(text.BoldFontFile, 35); err != nil {
+		return "", err
+	}
+	if args[0] == "" {
+		args[0] = "我老婆"
+	}
+	args[0] = "请问你们看到" + args[0] + "了吗？"
+	l, _ := canvas.MeasureString(args[0])
+	if l > 830 {
+		return "", errors.New("文字消息太长了")
+	}
+	canvas.DrawString(args[0], (830-l)/10, 50)
+	return "file:///" + name, canvas.SavePNG(name)
+}
+
+// 不要再看这些了
+func neko(cc *context, args ...string) (string, error) {
+	_ = args
+	_ = args
+	var wg sync.WaitGroup
+	var m sync.Mutex
+	var err error
+	c := dlrange("neko", 1, &wg, func(e error) {
+		m.Lock()
+		err = e
+		m.Unlock()
+	})
+	if err != nil {
+		return "", err
+	}
+	wg.Wait()
+	imgs, err := loadFirstFrames(c, 1)
+	if err != nil {
+		return "", err
+	}
+	name := cc.usrdir + "neko.png"
+	im, err := img.LoadFirstFrame(cc.headimgsdir[0], 712, 949)
+	if err != nil {
+		return "", err
+	}
+	imgnrgba := imgs[0].InsertBottom(img.Rotate(im.Im, 0, 0, 0).Im, 450, 450, 0, 170).Im
+	return "file:///" + name, writer.SavePNG2Path(name, imgnrgba)
+}
+
+// 给我变
+func bian(cc *context, args ...string) (string, error) {
+	_ = args
+	_ = args
+	var wg sync.WaitGroup
+	var m sync.Mutex
+	var err error
+	c := dlrange("bian", 1, &wg, func(e error) {
+		m.Lock()
+		err = e
+		m.Unlock()
+	})
+	if err != nil {
+		return "", err
+	}
+	wg.Wait()
+	imgs, err := loadFirstFrames(c, 1)
+	if err != nil {
+		return "", err
+	}
+	name := cc.usrdir + "bian.png"
+	im, err := img.LoadFirstFrame(cc.headimgsdir[0], 640, 550)
+	if err != nil {
+		return "", err
+	}
+	imgnrgba := imgs[0].InsertBottom(img.Rotate(im.Im, 0, 0, 0).Im, 380, 380, 225, -20).Im
+	return "file:///" + name, writer.SavePNG2Path(name, imgnrgba)
+}
+
+// van 玩一下
+func van(cc *context, args ...string) (string, error) {
+	_ = args
+	var wg sync.WaitGroup
+	var m sync.Mutex
+	var err error
+	c := dlrange("van", 1, &wg, func(e error) {
+		m.Lock()
+		err = e
+		m.Unlock()
+	})
+	if err != nil {
+		return "", err
+	}
+	wg.Wait()
+	name := cc.usrdir + "van.png"
+	back, err := gg.LoadImage(c[0])
+	if err != nil {
+		return "", err
+	}
+	face, err := gg.LoadImage(cc.headimgsdir[0])
+	if err != nil {
+		return "", err
+	}
+	wg.Wait()
+	if err != nil {
+		return "", err
+	}
+	canvas := gg.NewContext(522, 665)
+	canvas.DrawImage(back, 0, 0)
+	canvas.DrawImage(img.Size(face, 480, 480).Im, 20, 80)
+	canvas.SetColor(color.Black)
+	_, err = file.GetLazyData(text.BoldFontFile, true)
+	if err != nil {
+		return "", err
+	}
+	if err = canvas.LoadFontFace(text.BoldFontFile, 35); err != nil {
+		return "", err
+	}
+	if args[0] == "" {
+		args[0] = "RBQ"
+	}
+	args[0] = "请问你们看到" + args[0] + "了吗？"
+	l, _ := canvas.MeasureString(args[0])
+	if l > 830 {
+		return "", errors.New("文字消息太长了")
+	}
+	canvas.DrawString(args[0], (830-l)/10, 50)
+	return "file:///" + name, canvas.SavePNG(name)
+}
+
+// eihei 诶嘿
+func eihei(cc *context, args ...string) (string, error) {
+	_ = args
+	var wg sync.WaitGroup
+	var m sync.Mutex
+	var err error
+	c := dlrange("eihei", 1, &wg, func(e error) {
+		m.Lock()
+		err = e
+		m.Unlock()
+	})
+	if err != nil {
+		return "", err
+	}
+	wg.Wait()
+	imgs, err := loadFirstFrames(c, 1)
+	if err != nil {
+		return "", err
+	}
+	name := cc.usrdir + "eihei.png"
+	im, err := img.LoadFirstFrame(cc.headimgsdir[0], 690, 690)
+	if err != nil {
+		return "", err
+	}
+	imgnrgba := imgs[0].InsertBottom(im.Im, 450, 450, 121, 162).Im
+	return "file:///" + name, writer.SavePNG2Path(name, imgnrgba)
 }
