@@ -948,7 +948,6 @@ func alwaysDoGif(cc *context, args ...string) (string, error) {
 // taiguan 抬棺
 func taiguan(cc *context, value ...string) (string, error) {
 	_ = value
-	_ = value
 	var wg sync.WaitGroup
 	var err error
 	var m sync.Mutex
@@ -1097,7 +1096,6 @@ func ci(cc *context, value ...string) (string, error) {
 
 // worship 膜拜
 func worship(cc *context, value ...string) (string, error) {
-	_ = value
 	_ = value
 	var wg sync.WaitGroup
 	var err error

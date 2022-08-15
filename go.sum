@@ -8,23 +8,8 @@ dmitri.shuralyov.com/service/change v0.0.0-20181023043359-a85b471d5412/go.mod h1
 dmitri.shuralyov.com/state v0.0.0-20180228185332-28bcc343414c/go.mod h1:0PRwlb0D6DFvNNtx+9ybjezNCa8XF0xaYcETyp6rHWU=
 git.apache.org/thrift.git v0.0.0-20180902110319-2566ecd5d999/go.mod h1:fPE2ZNJGynbRyZ4dJvy6G277gSllfV2HJqblrnkyeyg=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
-<<<<<<< HEAD
-<<<<<<< HEAD
-github.com/FloatTech/AnimeAPI v1.4.1-0.20220613042537-0adf8c5616ec h1:Hl/BxaQoQFEJUIGmdhR0NyBvZChb7qkfCrF916bNxnI=
-github.com/FloatTech/AnimeAPI v1.4.1-0.20220613042537-0adf8c5616ec/go.mod h1:MrCZ7P6WvF0JWHMeedAx6fVm5BP1s6/RUy0r0Jvqrds=
-github.com/FloatTech/sqlite v0.3.2 h1:iTg2ZKnzjjZAdlSN3hXmpCBn15odc4Ud484OoM3yXGA=
-github.com/FloatTech/sqlite v0.3.2/go.mod h1:VFtLofV5qxw5eBneZRbWwD451SLSm50o9J3J43iB1iw=
-github.com/FloatTech/zbpctrl v1.4.1-0.20220708120020-996c0e071fca h1:uLeGuRiNI7ikVBi8FqKvYVgpDOwrE3XVNKDENERkN64=
-github.com/FloatTech/zbpctrl v1.4.1-0.20220708120020-996c0e071fca/go.mod h1:5FDkrlVaQCxUfeqH7XJPTfej0q+y9fzImhvZI4ofu9Y=
-github.com/FloatTech/zbputils v1.4.1-0.20220708133204-3fa802132b81 h1:SaSp9E3zX4cKp2H1/G3qPvLAMTELmtP5fnm/tW3YeI8=
-github.com/FloatTech/zbputils v1.4.1-0.20220708133204-3fa802132b81/go.mod h1:sae5x2kfCC6bcJy8hb0mgcJzB/27YALgsDlrrB2ifso=
-=======
-github.com/FloatTech/AnimeAPI v1.4.1-0.20220715043235-1158db91e898 h1:RCJXy/Ati+R4+CwMrXIUSaoiS9FW16i8483X6SNpnM8=
-github.com/FloatTech/AnimeAPI v1.4.1-0.20220715043235-1158db91e898/go.mod h1:DE4hXqmTv6BljRhOdDCpF9I7tFbJHeAIA65yDAakJeE=
-=======
 github.com/FloatTech/AnimeAPI v1.5.0 h1:/c/VyZc+YmOD6ZkWV30eXaoKyT+Nu2Sklz8W4J+sSQM=
 github.com/FloatTech/AnimeAPI v1.5.0/go.mod h1:zkT7ibEafp9Cg6UP1CeYFyetZ1g3eqgroMLaqKqLSgs=
->>>>>>> origin/master
 github.com/FloatTech/sqlite v0.3.3 h1:cSlpv+DcIehqaUG2YyjW0Twh396FoGsybpEpFZnX3Jg=
 github.com/FloatTech/sqlite v0.3.3/go.mod h1:i33d92OtR8jcp5fBUvQtospf27+MkfUxnGwnZ95E/dA=
 github.com/FloatTech/ttl v0.0.0-20220715042055-15612be72f5b h1:tvciXWq2nuvTbFeJGLDNIdRX3BI546D3O7k7vrVueZw=
@@ -43,7 +28,8 @@ github.com/FloatTech/zbputils v1.4.1-0.20220728052431-6a61e3826960/go.mod h1:tR0
 =======
 github.com/FloatTech/zbputils v1.5.0 h1:mfKZ+Ye+t8eArmgR4PzhhmdwvZM5VPjLfdikyhKffSE=
 github.com/FloatTech/zbputils v1.5.0/go.mod h1:Qet1L7sDLCkYectR0cwtTA9yDcW1n4/U1JvnAq2X18A=
->>>>>>> origin/master
+github.com/FloatTech/zbputils v1.5.1-0.20220811111557-511c3fc0b485 h1:XqojCzFK7J8rK50D5stcZkBPRco6y5eUIN0y7XUAM4g=
+github.com/FloatTech/zbputils v1.5.1-0.20220811111557-511c3fc0b485/go.mod h1:Qet1L7sDLCkYectR0cwtTA9yDcW1n4/U1JvnAq2X18A=
 github.com/PuerkitoBio/goquery v1.5.1/go.mod h1:GsLWisAFVj4WgDibEWF4pvYnkVQBpKBKeU+7zCJoLcc=
 github.com/RomiChan/syncx v0.0.0-20220404072119-d7ea0ae15a4c h1:cNPOdTNiVwxLpROLjXCgbIPvdkE+BwvxDvgmdYmWx6Q=
 github.com/RomiChan/syncx v0.0.0-20220404072119-d7ea0ae15a4c/go.mod h1:KqZzu7slNKROh3TSYEH/IUMG6f4M+1qubZ5e52QypsE=
