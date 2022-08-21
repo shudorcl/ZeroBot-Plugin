@@ -6,10 +6,11 @@ import (
 	"math/rand"
 	"strconv"
 
+	fcext "github.com/FloatTech/floatbox/ctxext"
+	"github.com/FloatTech/floatbox/file"
 	ctrl "github.com/FloatTech/zbpctrl"
 	"github.com/FloatTech/zbputils/control"
 	"github.com/FloatTech/zbputils/ctxext"
-	"github.com/FloatTech/zbputils/file"
 	"github.com/sirupsen/logrus"
 	zero "github.com/wdvxdr1123/ZeroBot"
 	"github.com/wdvxdr1123/ZeroBot/message"
@@ -32,7 +33,7 @@ func init() {
 			"- 抽武将",
 		PublicDataFolder: "Sgs",
 	}).ApplySingle(ctxext.DefaultSingle)
-	engine.OnFullMatchGroup([]string{"抽武将"}, ctxext.DoOnceOnSuccess(
+	engine.OnFullMatchGroup([]string{"抽武将"}, fcext.DoOnceOnSuccess(
 		func(ctx *zero.Ctx) bool {
 			data, err := engine.GetLazyData("sgs.json", true)
 			if err != nil {
@@ -50,7 +51,7 @@ func init() {
 		},
 	)).SetBlock(true).
 		Handle(func(ctx *zero.Ctx) {
-			i := ctxext.RandSenderPerDayN(ctx.Event.UserID, len(cardMap))
+			i := fcext.RandSenderPerDayN(ctx.Event.UserID, len(cardMap))
 			card := cardMap[(strconv.Itoa(i))]
 
 			ctx.SendChain(

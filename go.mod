@@ -11,6 +11,7 @@ require (
 	github.com/FloatTech/zbputils v1.5.1-0.20220816052531-0efa59cfb7b5
 	github.com/antchfx/htmlquery v1.2.5
 	github.com/corona10/goimagehash v1.0.3
+	github.com/fogleman/gg v1.3.0
 	github.com/fumiama/cron v1.3.0
 	github.com/fumiama/go-base16384 v1.5.4
 	github.com/fumiama/go-registry v0.1.6

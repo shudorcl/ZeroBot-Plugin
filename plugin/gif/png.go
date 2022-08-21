@@ -8,12 +8,10 @@ import (
 	"strconv"
 	"sync"
 
-	"github.com/Coloured-glaze/gg"
 	"github.com/FloatTech/floatbox/file"
 	"github.com/FloatTech/floatbox/img/writer"
 	"github.com/FloatTech/zbputils/img"
 	"github.com/FloatTech/zbputils/img/text"
-	"github.com/FloatTech/zbputils/img/writer"
 	"github.com/fogleman/gg"
 	"github.com/sirupsen/logrus"
 )

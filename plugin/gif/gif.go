@@ -6,12 +6,10 @@ import (
 	"image/color"
 	"sync"
 
-	"github.com/Coloured-glaze/gg"
+	"github.com/FloatTech/floatbox/file"
 	"github.com/FloatTech/floatbox/img/writer"
-	"github.com/FloatTech/zbputils/file"
 	"github.com/FloatTech/zbputils/img"
 	"github.com/FloatTech/zbputils/img/text"
-	"github.com/FloatTech/zbputils/img/writer"
 	"github.com/fogleman/gg"
 	"github.com/sirupsen/logrus"
 )
@@ -944,7 +942,7 @@ func alwaysDoGif(cc *context, args ...string) (string, error) {
 			break
 		}
 	}
-	return "file:///" + name, writer.SaveGIF2Path(name, img.MergeGif(12, turn))
+	return "file:///" + name, writer.SaveGIF2Path(name, img.MergeGif(8, turn))
 }
 
 // taiguan 抬棺
