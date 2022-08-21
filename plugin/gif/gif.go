@@ -923,12 +923,16 @@ func alwaysDoGif(cc *context, args ...string) (string, error) {
 	if err = canvas.LoadFontFace(text.BoldFontFile, 40); err != nil {
 		return "", err
 	}
+	length := len(face)
+	if length > 50 {
+		length = 50
+	}
 	arg := "要我一直"
 	l, _ := canvas.MeasureString(arg)
 	if l > 500 {
 		return "", errors.New("文字消息太长了")
 	}
-	turn := make([]*image.NRGBA, len(face))
+	turn := make([]*image.NRGBA, length)
 	for i, f := range face {
 		canvas := gg.NewContext(500, 600)
 		canvas.DrawImage(f, 0, 0)
@@ -938,9 +942,6 @@ func alwaysDoGif(cc *context, args ...string) (string, error) {
 		canvas.DrawImage(img.Size(f, 90, 90).Im, 280, 505)
 		canvas.DrawString("吗", 370, 560)
 		turn[i] = img.Size(canvas.Image(), 0, 0).Im
-		if i > 60 {
-			break
-		}
 	}
 	return "file:///" + name, writer.SaveGIF2Path(name, img.MergeGif(8, turn))
 }
