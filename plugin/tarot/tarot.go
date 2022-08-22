@@ -3,7 +3,6 @@ package tarot
 
 import (
 	"encoding/json"
-	"fmt"
 	"math/rand"
 	"strconv"
 	"strings"
@@ -71,7 +70,6 @@ func init() {
 			infoMap[card.Name] = card.cardInfo
 		}
 		for i := 0; i < 22; i++ {
-			// 噢天哪，我应该把json里面序号设成int
 			majorArcanaName = append(majorArcanaName, cardMap[strconv.Itoa(i)].Name)
 		}
 		logrus.Infof("[tarot]读取%d张塔罗牌", len(cardMap))
@@ -129,9 +127,14 @@ func init() {
 			p := rand.Intn(2)
 			card := cardMap[strconv.Itoa(i)]
 			name := card.Name
+			description := card.Description
+			if p == 1 {
+				description = card.ReverseDescription
+			}
 			if id := ctx.SendChain(
 				message.Text(reasons[rand.Intn(len(reasons))], position[p], "』的『", name, "』\n"),
-				message.Image(fmt.Sprintf("%s/%s/%s", bed, reverse[p], card.ImgURL))); id.ID() == 0 {
+				message.Image(bed+reverse[p]+card.ImgURL),
+				message.Text("\n其释义为: ", description)); id.ID() == 0 {
 				ctx.SendChain(message.Text("ERROR: 可能被风控了"))
 			}
 			return
@@ -149,9 +152,14 @@ func init() {
 			p := rand.Intn(2)
 			card := cardMap[strconv.Itoa(j+start)]
 			name := card.Name
+			description := card.Description
+			if p == 1 {
+				description = card.ReverseDescription
+			}
 			tarotMsg := []message.MessageSegment{
-				message.Text(reasons[rand.Intn(len(reasons))], position[p], "』的『", name, "』\n"),
-				message.Image(fmt.Sprintf("%s/%s/%s", bed, reverse[p], card.ImgURL))}
+				message.Text(position[p], "』的『", name, "』\n"),
+				message.Image(bed + reverse[p] + card.ImgURL),
+				message.Text("\n其释义为: ", description)}
 			msg[i] = ctxext.FakeSenderForwardNode(ctx, tarotMsg...)
 		}
 		ctx.SendGroupForwardMessage(ctx.Event.GroupID, msg)
@@ -222,7 +230,7 @@ func init() {
 				if p == 1 {
 					description = card.ReverseDescription
 				}
-				tarotMsg := []message.MessageSegment{message.Image(fmt.Sprintf("%s/%s/%s", bed, reverse[p], card.ImgURL))}
+				tarotMsg := []message.MessageSegment{message.Image(bed + reverse[p] + card.ImgURL)}
 				build.WriteString(info.Represent[0][i])
 				build.WriteString(":『")
 				build.WriteString(position[p])
