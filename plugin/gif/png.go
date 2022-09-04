@@ -205,10 +205,10 @@ func alike(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	imgs, err := loadFirstFrames(c, 1)
 	if err != nil {
 		return "", err
@@ -233,10 +233,10 @@ func marriage(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	imgs, err := loadFirstFrames(c, 2)
 	if err != nil {
 		return "", err
@@ -261,10 +261,10 @@ func anyasuki(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	name := cc.usrdir + "Anyasuki.png"
 	back, err := gg.LoadImage(c[0])
 	if err != nil {
@@ -307,10 +307,10 @@ func alwaysLike(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	name := cc.usrdir + "AlwaysLike.png"
 	back, err := gg.LoadImage(c[0])
 	if err != nil {
@@ -354,10 +354,10 @@ func decentKiss(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	imgs, err := loadFirstFrames(c, 1)
 	if err != nil {
 		return "", err
@@ -382,10 +382,10 @@ func chinaFlag(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	imgs, err := loadFirstFrames(c, 1)
 	if err != nil {
 		return "", err
@@ -410,10 +410,10 @@ func dontTouch(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	imgs, err := loadFirstFrames(c, 1)
 	if err != nil {
 		return "", err
@@ -467,10 +467,10 @@ func interview(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	name := cc.usrdir + "Interview.png"
 	huaji, err := gg.LoadImage(c[0])
 	if err != nil {
@@ -518,10 +518,10 @@ func need(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	imgs, err := loadFirstFrames(c, 1)
 	if err != nil {
 		return "", err
@@ -546,10 +546,10 @@ func paint(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	imgs, err := loadFirstFrames(c, 1)
 	if err != nil {
 		return "", err
@@ -574,10 +574,10 @@ func painter(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	imgs, err := loadFirstFrames(c, 1)
 	if err != nil {
 		return "", err
@@ -602,10 +602,10 @@ func perfect(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	imgs, err := loadFirstFrames(c, 1)
 	if err != nil {
 		return "", err
@@ -630,10 +630,10 @@ func playGame(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	name := cc.usrdir + "PlayGame.png"
 	back, err := gg.LoadImage(c[0])
 	if err != nil {
@@ -676,10 +676,10 @@ func police(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	imgs, err := loadFirstFrames(c, 2)
 	if err != nil {
 		return "", err
@@ -704,10 +704,10 @@ func police1(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	imgs, err := loadFirstFrames(c, 2)
 	if err != nil {
 		return "", err
@@ -732,10 +732,10 @@ func prpr(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	imgs, err := loadFirstFrames(c, 1)
 	if err != nil {
 		return "", err
@@ -760,10 +760,10 @@ func safeSense(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	name := cc.usrdir + "SafeSense.png"
 	back, err := gg.LoadImage(c[0])
 	if err != nil {
@@ -808,10 +808,10 @@ func support(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	imgs, err := loadFirstFrames(c, 1)
 	if err != nil {
 		return "", err
@@ -836,10 +836,10 @@ func thinkwhat(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	imgs, err := loadFirstFrames(c, 1)
 	if err != nil {
 		return "", err
@@ -864,10 +864,10 @@ func wallpaper(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	imgs, err := loadFirstFrames(c, 1)
 	if err != nil {
 		return "", err
@@ -892,10 +892,10 @@ func whyatme(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	imgs, err := loadFirstFrames(c, 1)
 	if err != nil {
 		return "", err
@@ -920,10 +920,10 @@ func makeFriend(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	name := cc.usrdir + "MakeFriend.png"
 	back, err := gg.LoadImage(c[0])
 	if err != nil {
@@ -969,10 +969,10 @@ func backToWork(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	imgs, err := loadFirstFrames(c, 1)
 	if err != nil {
 		return "", err
@@ -997,10 +997,10 @@ func coupon(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	name := cc.usrdir + "Coupon.png"
 	if args[0] == "" {
 		args[0] = "群主陪睡券"
@@ -1048,10 +1048,10 @@ func distracted(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	imgs, err := loadFirstFrames(c, 2)
 	if err != nil {
 		return "", err
@@ -1076,10 +1076,10 @@ func throw(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	imgs, err := loadFirstFrames(c, 1)
 	if err != nil {
 		return "", err
@@ -1138,10 +1138,10 @@ func yuanli(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	imgs, err := loadFirstFrames(c, 1)
 	if err != nil {
 		return "", err
@@ -1166,10 +1166,10 @@ func nowife(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	imgs, err := loadFirstFrames(c, 1)
 	if err != nil {
 		return "", err
@@ -1194,20 +1194,16 @@ func youer(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	name := cc.usrdir + "youer.png"
 	back, err := gg.LoadImage(c[0])
 	if err != nil {
 		return "", err
 	}
 	tou, err := cc.getLogo(120, 120)
-	if err != nil {
-		return "", err
-	}
-	wg.Wait()
 	if err != nil {
 		return "", err
 	}
@@ -1245,20 +1241,16 @@ func xiaotianshi(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	name := cc.usrdir + "xiaotianshi.png"
 	back, err := gg.LoadImage(c[0])
 	if err != nil {
 		return "", err
 	}
 	face, err := gg.LoadImage(cc.headimgsdir[0])
-	if err != nil {
-		return "", err
-	}
-	wg.Wait()
 	if err != nil {
 		return "", err
 	}
@@ -1296,10 +1288,10 @@ func neko(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	imgs, err := loadFirstFrames(c, 1)
 	if err != nil {
 		return "", err
@@ -1325,10 +1317,10 @@ func bian(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	imgs, err := loadFirstFrames(c, 1)
 	if err != nil {
 		return "", err
@@ -1353,20 +1345,16 @@ func van(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	name := cc.usrdir + "van.png"
 	back, err := gg.LoadImage(c[0])
 	if err != nil {
 		return "", err
 	}
 	face, err := gg.LoadImage(cc.headimgsdir[0])
-	if err != nil {
-		return "", err
-	}
-	wg.Wait()
 	if err != nil {
 		return "", err
 	}
@@ -1404,10 +1392,10 @@ func eihei(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	imgs, err := loadFirstFrames(c, 1)
 	if err != nil {
 		return "", err
@@ -1432,10 +1420,10 @@ func fanfa(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	imgs, err := loadFirstFrames(c, 1)
 	if err != nil {
 		return "", err
@@ -1461,10 +1449,10 @@ func huai(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	imgs, err := loadFirstFrames(c, 1)
 	if err != nil {
 		return "", err
@@ -1489,10 +1477,10 @@ func haowan(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	imgs, err := loadFirstFrames(c, 1)
 	if err != nil {
 		return "", err
@@ -1517,20 +1505,16 @@ func mengbi(cc *context, args ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	name := cc.usrdir + "mengbi.png"
 	back, err := gg.LoadImage(c[0])
 	if err != nil {
 		return "", err
 	}
 	face, err := cc.getLogo(0, 0)
-	if err != nil {
-		return "", err
-	}
-	wg.Wait()
 	if err != nil {
 		return "", err
 	}

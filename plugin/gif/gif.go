@@ -17,24 +17,21 @@ import (
 func mo(cc *context, value ...string) (string, error) {
 	_ = value
 	var wg sync.WaitGroup
-	var err error
+	var errwg error
 	var m sync.Mutex
 	name := cc.usrdir + "摸.gif"
 	c := dlrange("mo", 5, &wg, func(e error) {
 		m.Lock()
-		err = e
+		errwg = e
 		m.Unlock()
 	})
-	if err != nil {
-		return "", err
-	}
 	tou, err := cc.getLogo(0, 0)
 	if err != nil {
 		return "", err
 	}
 	wg.Wait()
-	if err != nil {
-		return "", err
+	if errwg != nil {
+		return "", errwg
 	}
 	imgs, err := loadFirstFrames(c, 5)
 	if err != nil {
@@ -54,17 +51,14 @@ func mo(cc *context, value ...string) (string, error) {
 func cuo(cc *context, value ...string) (string, error) {
 	_ = value
 	var wg sync.WaitGroup
-	var err error
+	var errwg error
 	var m sync.Mutex
 	name := cc.usrdir + "搓.gif"
 	c := dlrange("cuo", 5, &wg, func(e error) {
 		m.Lock()
-		err = e
+		errwg = e
 		m.Unlock()
 	})
-	if err != nil {
-		return "", err
-	}
 	tou, err := cc.getLogo(110, 110)
 	if err != nil {
 		return "", err
@@ -74,8 +68,8 @@ func cuo(cc *context, value ...string) (string, error) {
 	m3 := img.Rotate(tou, 216, 0, 0)
 	m4 := img.Rotate(tou, 288, 0, 0)
 	wg.Wait()
-	if err != nil {
-		return "", err
+	if errwg != nil {
+		return "", errwg
 	}
 	imgs, err := loadFirstFrames(c, 5)
 	if err != nil {
@@ -95,24 +89,21 @@ func cuo(cc *context, value ...string) (string, error) {
 func qiao(cc *context, value ...string) (string, error) {
 	_ = value
 	var wg sync.WaitGroup
-	var err error
+	var errwg error
 	var m sync.Mutex
 	name := cc.usrdir + "敲.gif"
 	c := dlrange("qiao", 2, &wg, func(e error) {
 		m.Lock()
-		err = e
+		errwg = e
 		m.Unlock()
 	})
-	if err != nil {
-		return "", err
-	}
 	tou, err := cc.getLogo(40, 40)
 	if err != nil {
 		return "", err
 	}
 	wg.Wait()
-	if err != nil {
-		return "", err
+	if errwg != nil {
+		return "", errwg
 	}
 	imgs, err := loadFirstFrames(c, 2)
 	if err != nil {
@@ -129,24 +120,21 @@ func qiao(cc *context, value ...string) (string, error) {
 func chi(cc *context, value ...string) (string, error) {
 	_ = value
 	var wg sync.WaitGroup
-	var err error
+	var errwg error
 	var m sync.Mutex
 	name := cc.usrdir + "吃.gif"
 	c := dlrange("chi", 3, &wg, func(e error) {
 		m.Lock()
-		err = e
+		errwg = e
 		m.Unlock()
 	})
-	if err != nil {
-		return "", err
-	}
 	tou, err := cc.getLogo(32, 32)
 	if err != nil {
 		return "", err
 	}
 	wg.Wait()
-	if err != nil {
-		return "", err
+	if errwg != nil {
+		return "", errwg
 	}
 	imgs, err := loadFirstFrames(c, 3)
 	if err != nil {
@@ -164,17 +152,14 @@ func chi(cc *context, value ...string) (string, error) {
 func ceng(cc *context, value ...string) (string, error) {
 	_ = value
 	var wg sync.WaitGroup
-	var err error
+	var errwg error
 	var m sync.Mutex
 	name := cc.usrdir + "蹭.gif"
 	c := dlrange("ceng", 6, &wg, func(e error) {
 		m.Lock()
-		err = e
+		errwg = e
 		m.Unlock()
 	})
-	if err != nil {
-		return "", err
-	}
 	tou, err := cc.getLogo(100, 100)
 	if err != nil {
 		return "", err
@@ -184,8 +169,8 @@ func ceng(cc *context, value ...string) (string, error) {
 		return "", err
 	}
 	wg.Wait()
-	if err != nil {
-		return "", err
+	if errwg != nil {
+		return "", errwg
 	}
 	imgs, err := loadFirstFrames(c, 6)
 	if err != nil {
@@ -206,24 +191,21 @@ func ceng(cc *context, value ...string) (string, error) {
 func ken(cc *context, value ...string) (string, error) {
 	_ = value
 	var wg sync.WaitGroup
-	var err error
+	var errwg error
 	var m sync.Mutex
 	name := cc.usrdir + "啃.gif"
 	c := dlrange("ken", 16, &wg, func(e error) {
 		m.Lock()
-		err = e
+		errwg = e
 		m.Unlock()
 	})
-	if err != nil {
-		return "", err
-	}
 	tou, err := cc.getLogo(100, 100)
 	if err != nil {
 		return "", err
 	}
 	wg.Wait()
-	if err != nil {
-		return "", err
+	if errwg != nil {
+		return "", errwg
 	}
 	imgs, err := loadFirstFrames(c, 16)
 	if err != nil {
@@ -254,24 +236,21 @@ func ken(cc *context, value ...string) (string, error) {
 func pai(cc *context, value ...string) (string, error) {
 	_ = value
 	var wg sync.WaitGroup
-	var err error
+	var errwg error
 	var m sync.Mutex
 	name := cc.usrdir + "拍.gif"
 	c := dlrange("pai", 2, &wg, func(e error) {
 		m.Lock()
-		err = e
+		errwg = e
 		m.Unlock()
 	})
-	if err != nil {
-		return "", err
-	}
 	tou, err := cc.getLogo(30, 30)
 	if err != nil {
 		return "", err
 	}
 	wg.Wait()
-	if err != nil {
-		return "", err
+	if errwg != nil {
+		return "", errwg
 	}
 	imgs, err := loadFirstFrames(c, 2)
 	if err != nil {
@@ -288,24 +267,21 @@ func pai(cc *context, value ...string) (string, error) {
 func xqe(cc *context, value ...string) (string, error) {
 	_ = value
 	var wg sync.WaitGroup
-	var err error
+	var errwg error
 	var m sync.Mutex
 	name := cc.usrdir + "冲.gif"
 	c := dlrange("xqe", 2, &wg, func(e error) {
 		m.Lock()
-		err = e
+		errwg = e
 		m.Unlock()
 	})
-	if err != nil {
-		return "", err
-	}
 	tou, err := cc.getLogo(0, 0)
 	if err != nil {
 		return "", err
 	}
 	wg.Wait()
-	if err != nil {
-		return "", err
+	if errwg != nil {
+		return "", errwg
 	}
 	imgs, err := loadFirstFrames(c, 2)
 	if err != nil {
@@ -322,24 +298,21 @@ func xqe(cc *context, value ...string) (string, error) {
 func diu(cc *context, value ...string) (string, error) {
 	_ = value
 	var wg sync.WaitGroup
-	var err error
+	var errwg error
 	var m sync.Mutex
 	name := cc.usrdir + "丢.gif"
 	c := dlrange("diu", 8, &wg, func(e error) {
 		m.Lock()
-		err = e
+		errwg = e
 		m.Unlock()
 	})
-	if err != nil {
-		return "", err
-	}
 	tou, err := cc.getLogo(0, 0)
 	if err != nil {
 		return "", err
 	}
 	wg.Wait()
-	if err != nil {
-		return "", err
+	if errwg != nil {
+		return "", errwg
 	}
 	imgs, err := loadFirstFrames(c, 8)
 	if err != nil {
@@ -371,10 +344,10 @@ func kiss(cc *context, value ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	tou, err := cc.getLogo(0, 0)
 	if err != nil {
 		return "", err
@@ -410,10 +383,10 @@ func garbage(cc *context, value ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	im, err := img.LoadFirstFrame(cc.headimgsdir[0], 79, 79)
 	if err != nil {
 		return "", err
@@ -443,10 +416,10 @@ func thump(cc *context, value ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	im, err := img.LoadFirstFrame(cc.headimgsdir[0], 0, 0)
 	if err != nil {
 		return "", err
@@ -476,10 +449,10 @@ func jiujiu(cc *context, value ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	im, err := img.LoadFirstFrame(cc.headimgsdir[0], 75, 51)
 	if err != nil {
 		return "", err
@@ -508,10 +481,10 @@ func knock(cc *context, value ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	im, err := img.LoadFirstFrame(cc.headimgsdir[0], 0, 0)
 	if err != nil {
 		return "", err
@@ -541,10 +514,10 @@ func listenMusic(cc *context, value ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	face, err := cc.getLogo(0, 0)
 	if err != nil {
 		return "", err
@@ -573,10 +546,10 @@ func loveYou(cc *context, value ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	im, err := img.LoadFirstFrame(cc.headimgsdir[0], 0, 0)
 	if err != nil {
 		return "", err
@@ -606,10 +579,10 @@ func pat(cc *context, value ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	im, err := img.LoadFirstFrame(cc.headimgsdir[0], 0, 0)
 	if err != nil {
 		return "", err
@@ -648,10 +621,10 @@ func jackUp(cc *context, value ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	im, err := img.LoadFirstFrame(cc.headimgsdir[0], 0, 0)
 	if err != nil {
 		return "", err
@@ -691,10 +664,10 @@ func pound(cc *context, value ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	im, err := img.LoadFirstFrame(cc.headimgsdir[0], 0, 0)
 	if err != nil {
 		return "", err
@@ -724,10 +697,10 @@ func punch(cc *context, value ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	im, err := img.LoadFirstFrame(cc.headimgsdir[0], 260, 260)
 	if err != nil {
 		return "", err
@@ -757,10 +730,10 @@ func roll(cc *context, value ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	im, err := img.LoadFirstFrame(cc.headimgsdir[0], 210, 210)
 	if err != nil {
 		return "", err
@@ -790,10 +763,10 @@ func suck(cc *context, value ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	im, err := img.LoadFirstFrame(cc.headimgsdir[0], 0, 0)
 	if err != nil {
 		return "", err
@@ -823,10 +796,10 @@ func hammer(cc *context, value ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	im, err := img.LoadFirstFrame(cc.headimgsdir[0], 0, 0)
 	if err != nil {
 		return "", err
@@ -856,10 +829,10 @@ func tightly(cc *context, value ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	im, err := img.LoadFirstFrame(cc.headimgsdir[0], 0, 0)
 	if err != nil {
 		return "", err
@@ -899,24 +872,21 @@ func turn(cc *context, value ...string) (string, error) {
 func taiguan(cc *context, value ...string) (string, error) {
 	_ = value
 	var wg sync.WaitGroup
-	var err error
+	var errwg error
 	var m sync.Mutex
 	name := cc.usrdir + "taiguan.gif"
 	c := dlrange("taiguan", 20, &wg, func(e error) {
 		m.Lock()
-		err = e
+		errwg = e
 		m.Unlock()
 	})
-	if err != nil {
-		return "", err
-	}
 	tou, err := cc.getLogo(0, 0)
 	if err != nil {
 		return "", err
 	}
 	wg.Wait()
-	if err != nil {
-		return "", err
+	if errwg != nil {
+		return "", errwg
 	}
 	imgs, err := loadFirstFrames(c, 20)
 	if err != nil {
@@ -951,17 +921,14 @@ func taiguan(cc *context, value ...string) (string, error) {
 func zou(cc *context, value ...string) (string, error) {
 	_ = value
 	var wg sync.WaitGroup
-	var err error
+	var errwg error
 	var m sync.Mutex
 	name := cc.usrdir + "zou.gif"
 	c := dlrange("zou", 3, &wg, func(e error) {
 		m.Lock()
-		err = e
+		errwg = e
 		m.Unlock()
 	})
-	if err != nil {
-		return "", err
-	}
 	tou, err := cc.getLogo(100, 100)
 	if err != nil {
 		return "", err
@@ -971,8 +938,8 @@ func zou(cc *context, value ...string) (string, error) {
 		return "", err
 	}
 	wg.Wait()
-	if err != nil {
-		return "", err
+	if errwg != nil {
+		return "", errwg
 	}
 	imgs, err := loadFirstFrames(c, 3)
 	if err != nil {
@@ -990,24 +957,21 @@ func zou(cc *context, value ...string) (string, error) {
 func ci(cc *context, value ...string) (string, error) {
 	_ = value
 	var wg sync.WaitGroup
-	var err error
+	var errwg error
 	var m sync.Mutex
 	name := cc.usrdir + "ci.gif"
 	c := dlrange("ci", 26, &wg, func(e error) {
 		m.Lock()
-		err = e
+		errwg = e
 		m.Unlock()
 	})
-	if err != nil {
-		return "", err
-	}
 	tou, err := cc.getLogo(100, 100)
 	if err != nil {
 		return "", err
 	}
 	wg.Wait()
-	if err != nil {
-		return "", err
+	if errwg != nil {
+		return "", errwg
 	}
 	imgs, err := loadFirstFrames(c, 26)
 	if err != nil {
@@ -1056,14 +1020,11 @@ func worship(cc *context, value ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
 	face, err := gg.LoadImage(cc.headimgsdir[0])
-	if err != nil {
-		return "", err
-	}
-	wg.Wait()
 	if err != nil {
 		return "", err
 	}
@@ -1089,24 +1050,21 @@ func worship(cc *context, value ...string) (string, error) {
 func ceng2(cc *context, value ...string) (string, error) {
 	_ = value
 	var wg sync.WaitGroup
-	var err error
+	var errwg error
 	var m sync.Mutex
 	name := cc.usrdir + "ceng2.gif"
 	c := dlrange("ceng2", 4, &wg, func(e error) {
 		m.Lock()
-		err = e
+		errwg = e
 		m.Unlock()
 	})
-	if err != nil {
-		return "", err
-	}
 	tou, err := cc.getLogo(100, 100)
 	if err != nil {
 		return "", err
 	}
 	wg.Wait()
-	if err != nil {
-		return "", err
+	if errwg != nil {
+		return "", errwg
 	}
 	imgs, err := loadFirstFrames(c, 4)
 	if err != nil {
@@ -1125,24 +1083,21 @@ func ceng2(cc *context, value ...string) (string, error) {
 func dun(cc *context, value ...string) (string, error) {
 	_ = value
 	var wg sync.WaitGroup
-	var err error
+	var errwg error
 	var m sync.Mutex
 	name := cc.usrdir + "dun.gif"
 	c := dlrange("dun", 5, &wg, func(e error) {
 		m.Lock()
-		err = e
+		errwg = e
 		m.Unlock()
 	})
-	if err != nil {
-		return "", err
-	}
 	tou, err := cc.getLogo(100, 100)
 	if err != nil {
 		return "", err
 	}
 	wg.Wait()
-	if err != nil {
-		return "", err
+	if errwg != nil {
+		return "", errwg
 	}
 	imgs, err := loadFirstFrames(c, 5)
 	if err != nil {
@@ -1171,10 +1126,10 @@ func push(cc *context, value ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	tou, err := cc.getLogo(0, 0)
 	if err != nil {
 		return "", err
@@ -1194,17 +1149,14 @@ func push(cc *context, value ...string) (string, error) {
 func peng(cc *context, value ...string) (string, error) {
 	_ = value
 	var wg sync.WaitGroup
-	var err error
+	var errwg error
 	var m sync.Mutex
 	name := cc.usrdir + "peng.gif"
 	c := dlrange("peng", 25, &wg, func(e error) {
 		m.Lock()
-		err = e
+		errwg = e
 		m.Unlock()
 	})
-	if err != nil {
-		return "", err
-	}
 	tou, err := cc.getLogo(100, 100)
 	if err != nil {
 		return "", err
@@ -1213,10 +1165,9 @@ func peng(cc *context, value ...string) (string, error) {
 	m2 := img.Rotate(tou, 30, 80, 80)
 	m3 := img.Rotate(tou, 45, 85, 85)
 	m4 := img.Rotate(tou, 90, 80, 80)
-
 	wg.Wait()
-	if err != nil {
-		return "", err
+	if errwg != nil {
+		return "", errwg
 	}
 	imgs, err := loadFirstFrames(c, 25)
 	if err != nil {
@@ -1265,10 +1216,10 @@ func klee(cc *context, value ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	im, err := img.LoadFirstFrame(cc.headimgsdir[0], 82, 83)
 	if err != nil {
 		return "", err
@@ -1289,24 +1240,21 @@ func klee(cc *context, value ...string) (string, error) {
 func hutaoken(cc *context, value ...string) (string, error) {
 	_ = value
 	var wg sync.WaitGroup
-	var err error
+	var errwg error
 	var m sync.Mutex
 	name := cc.usrdir + "hutaoken.gif"
 	c := dlrange("hutaoken", 2, &wg, func(e error) {
 		m.Lock()
-		err = e
+		errwg = e
 		m.Unlock()
 	})
-	if err != nil {
-		return "", err
-	}
 	tou, err := cc.getLogo(55, 55)
 	if err != nil {
 		return "", err
 	}
 	wg.Wait()
-	if err != nil {
-		return "", err
+	if errwg != nil {
+		return "", errwg
 	}
 	imgs, err := loadFirstFrames(c, 2)
 	if err != nil {
@@ -1323,20 +1271,21 @@ func hutaoken(cc *context, value ...string) (string, error) {
 func lick(cc *context, value ...string) (string, error) {
 	_ = value
 	var wg sync.WaitGroup
-	var err error
+	var errwg error
 	var m sync.Mutex
 	name := cc.usrdir + "lick.gif"
 	c := dlrange("lick", 2, &wg, func(e error) {
 		m.Lock()
-		err = e
+		errwg = e
 		m.Unlock()
 	})
-	if err != nil {
-		return "", err
-	}
 	tou, err := cc.getLogo(100, 100)
 	if err != nil {
 		return "", err
+	}
+	wg.Wait()
+	if errwg != nil {
+		return "", errwg
 	}
 	imgs, err := loadFirstFrames(c, 2)
 	if err != nil {
@@ -1362,10 +1311,10 @@ func tiqiu(cc *context, value ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	tou, err := cc.getLogo(78, 78)
 	if err != nil {
 		return "", err
@@ -1386,24 +1335,21 @@ func tiqiu(cc *context, value ...string) (string, error) {
 func cai(cc *context, value ...string) (string, error) {
 	_ = value
 	var wg sync.WaitGroup
-	var err error
+	var errwg error
 	var m sync.Mutex
 	name := cc.usrdir + "cai.gif"
 	c := dlrange("cai", 5, &wg, func(e error) {
 		m.Lock()
-		err = e
+		errwg = e
 		m.Unlock()
 	})
-	if err != nil {
-		return "", err
-	}
 	tou, err := cc.getLogo(0, 0)
 	if err != nil {
 		return "", err
 	}
 	wg.Wait()
-	if err != nil {
-		return "", err
+	if errwg != nil {
+		return "", errwg
 	}
 	imgs, err := loadFirstFrames(c, 5)
 	if err != nil {
@@ -1433,10 +1379,10 @@ func whirl(cc *context, value ...string) (string, error) {
 		err = e
 		m.Unlock()
 	})
+	wg.Wait()
 	if err != nil {
 		return "", err
 	}
-	wg.Wait()
 	tou, err := cc.getLogo(0, 0)
 	if err != nil {
 		return "", err
@@ -1492,7 +1438,7 @@ func alwaysDoGif(cc *context, value ...string) (string, error) {
 		canvas := gg.NewContext(500, 600)
 		canvas.DrawImage(f, 0, 0)
 		canvas.SetColor(color.Black)
-		canvas.LoadFontFace(text.BoldFontFile, 40)
+		_ = canvas.LoadFontFace(text.BoldFontFile, 40)
 		canvas.DrawString(arg, 280-l, 560)
 		canvas.DrawImage(img.Size(f, 90, 90).Im, 280, 505)
 		canvas.DrawString("吗", 370, 560)
