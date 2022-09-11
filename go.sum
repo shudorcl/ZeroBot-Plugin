@@ -143,6 +143,8 @@ github.com/googleapis/gax-go/v2 v2.0.3/go.mod h1:LLvjysVCY1JZeum8Z6l8qUty8fiNwE0
 github.com/gopherjs/gopherjs v0.0.0-20181017120253-0766667cb4d1/go.mod h1:wJfORRmW1u3UXTncJ5qlYoELFm8eSnnEO6hX4iZ3EWY=
 github.com/gregjones/httpcache v0.0.0-20180305231024-9cad4c3443a7/go.mod h1:FecbI9+v66THATjSRHfNgh1IVFe/9kFxbXtjV0ctIMA=
 github.com/grpc-ecosystem/grpc-gateway v1.5.0/go.mod h1:RSKVYQBd5MCa4OVpNdGskqpgL2+G+NZTnrVHpWWfpdw=
+github.com/guohuiyuan/go-fyzhq v0.0.0-20220807135412-25c16c843e5a h1:sSbq6g6ofG33GfKtQXRjC+Z7YIjJJhkJXzPT4LXwROM=
+github.com/guohuiyuan/go-fyzhq v0.0.0-20220807135412-25c16c843e5a/go.mod h1:AfOiF6dEJ10INSyuLQIFJr+l//v510xaXxaXbuq2f/k=
 github.com/hajimehoshi/go-mp3 v0.3.0/go.mod h1:qMJj/CSDxx6CGHiZeCgbiq2DSUkbK0UbtXShQcnfyMM=
 github.com/hajimehoshi/oto v0.6.1/go.mod h1:0QXGEkbuJRohbJaxr7ZQSxnju7hEhseiPx2hrh6raOI=
 github.com/hajimehoshi/oto v0.7.1 h1:I7maFPz5MBCwiutOrz++DLdbr4rTzBsbBuV2VpgU9kk=
