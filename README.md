@@ -557,6 +557,18 @@ print("run[CQ:image,file="+j["img"]+"]")
 
 </details>
 <details>
+  <summary>好友申请及群聊邀请事件处理</summary>
+
+  `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/event"`
+
+  - [x] [开启|关闭]自动同意[申请|邀请|主人]
+
+  - [x] [同意|拒绝][申请|邀请][flag]
+
+  - flag跟随事件一起发送, 默认同意主人的事件
+
+</details>
+<details>
   <summary>渲染任意文字到图片</summary>
 
   `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/font"`
@@ -695,6 +707,14 @@ print("run[CQ:image,file="+j["img"]+"]")
   - [x] 来份[屌|弔|吊]图
 
   - [x] 更新[屌|弔|吊]图
+
+</details>
+<details>
+  <summary>小鸡词典</summary>
+
+  `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/jikipedia"`
+
+  - [x] [查梗|小鸡词典][梗]
 
 </details>
 <details>
