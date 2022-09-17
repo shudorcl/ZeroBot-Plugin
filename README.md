@@ -393,6 +393,8 @@ print("run[CQ:image,file="+j["img"]+"]")
     
     获取Cookie可以使用[这个工具](https://github.com/XiaoMiku01/login_bili_go)
 
+    获取Cookie可以使用[这个工具](https://github.com/XiaoMiku01/login_bili_go)
+    
   - [x] 更新vup
 
 </details>
@@ -732,7 +734,9 @@ print("run[CQ:image,file="+j["img"]+"]")
 
   `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/lolicon"`
 
-  - [x] 来份萝莉
+  - [x] 随机图片
+
+  - [x] 随机图片 萝莉|少女
 
   - [x] 设置随机图片地址[http...]
 
