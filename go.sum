@@ -4,8 +4,8 @@ github.com/Coloured-glaze/gg v1.3.4/go.mod h1:Ih5NLNNDHOy3RJbB0EPqGTreIzq/H02TGT
 github.com/DATA-DOG/go-sqlmock v1.3.3/go.mod h1:f/Ixk793poVmq4qj/V1dPUg2JEAKC73Q5eFN3EC/SaM=
 github.com/FloatTech/AnimeAPI v1.5.2-0.20221011154111-c322b785cadb h1:K28MKPITuz+V9jEvSKVLM5/kAra9uEI89lhAM8Nh7jo=
 github.com/FloatTech/AnimeAPI v1.5.2-0.20221011154111-c322b785cadb/go.mod h1:RgcMDA1S7C81bq7HQjygMEEo+EXwAlsutvKMv7DafgY=
-github.com/FloatTech/ZeroBot-Plugin-Playground v0.0.0-20220919152819-63e299466a7b h1:dhbHi7I9cqbhEXYh0/oFAJEJ1hS/rXyXzAXaCk3Wmxw=
-github.com/FloatTech/ZeroBot-Plugin-Playground v0.0.0-20220919152819-63e299466a7b/go.mod h1:lbebG+NOVwYL0e/EJozyTaZO+j9rHMbDU+vK96gm664=
+github.com/FloatTech/ZeroBot-Plugin-Playground v0.0.0-20221013123201-a32384218919 h1:RwXZqs+z4Jxtapc7oDwKr0x1fB/UuoI987Ck0DzGGng=
+github.com/FloatTech/ZeroBot-Plugin-Playground v0.0.0-20221013123201-a32384218919/go.mod h1:KuqQlIM3nz8TrJZf7NM/DP016JBaUVN8KFeBIv1JL5k=
 github.com/FloatTech/floatbox v0.0.0-20221011153549-68005767c531 h1:Z0yn6LFhEyC12hj+TBXc2P7/kWlCd/jlwv4JFndgpnw=
 github.com/FloatTech/floatbox v0.0.0-20221011153549-68005767c531/go.mod h1:4tfIeB74L1RzhNp3nNjaTw8m3IEnc+q/k6k/MhL07ks=
 github.com/FloatTech/sqlite v0.5.0 h1:U7J5Omc534PqmH6csfu+ypCo3DS8L91l5lTsxUu3b/U=

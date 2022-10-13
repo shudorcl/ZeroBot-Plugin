@@ -57,7 +57,7 @@ import (
 	//                      vvvvvvv中优先级区vvvvvvv                      //
 	//                          vvvvvvvvvvvvvv                          //
 	//                               vvvv                               //
-
+	_ "github.com/FloatTech/ZeroBot-Plugin-Playground/aipaint"   // ai作画
 	_ "github.com/FloatTech/ZeroBot-Plugin-Playground/fadian"    // 发癫
 	_ "github.com/FloatTech/ZeroBot-Plugin-Playground/ottoshout" // 电棍鬼叫
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/ahsai"         // ahsai tts
