@@ -4,12 +4,13 @@ package deepdanbooru
 import (
 	"crypto/md5"
 	"encoding/hex"
+	"strings"
 
-	"github.com/FloatTech/AnimeAPI/danbooru"
 	"github.com/FloatTech/floatbox/file"
 	"github.com/FloatTech/floatbox/img/writer"
 	ctrl "github.com/FloatTech/zbpctrl"
 	"github.com/FloatTech/zbputils/control"
+	"github.com/FloatTech/zbputils/ctxext"
 	zero "github.com/wdvxdr1123/ZeroBot"
 	"github.com/wdvxdr1123/ZeroBot/message"
 	"github.com/wdvxdr1123/ZeroBot/utils/helper"
@@ -30,7 +31,7 @@ func init() { // 插件主体
 		Handle(func(ctx *zero.Ctx) {
 			ctx.SendChain(message.Text("少女祈祷中..."))
 			for _, url := range ctx.State["image_url"].([]string) {
-				t, err := danbooru.TagURL("", url)
+				t, st, err := tagurl("", url)
 				if err != nil {
 					ctx.SendChain(message.Text("ERROR: ", err))
 					return
@@ -40,7 +41,11 @@ func init() { // 插件主体
 				if file.IsNotExist(f) {
 					_ = writer.SavePNG2Path(f, t)
 				}
-				ctx.SendChain(message.Image("file:///" + file.BOTPATH + "/" + f))
+				m := message.Message{ctxext.FakeSenderForwardNode(ctx, message.Image("file:///"+file.BOTPATH+"/"+f))}
+				m = append(m, ctxext.FakeSenderForwardNode(ctx, message.Text("tags: ", strings.Join(st.tseq, ","))))
+				if id := ctx.Send(m).ID(); id == 0 {
+					ctx.SendChain(message.Text("ERROR: 可能被风控或下载图片用时过长，请耐心等待"))
+				}
 			}
 		})
 }

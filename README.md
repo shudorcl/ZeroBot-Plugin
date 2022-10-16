@@ -348,11 +348,37 @@ print("run[CQ:image,file="+j["img"]+"]")
 
 </details>
 <details>
+  <summary>ai绘图</summary>
+
+  `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/aipaint"`
+
+  - [x] [ ai绘图 | 生成色图 | 生成涩图 | ai画图 ] xxx
+
+  - [x] [ 以图绘图 | 以图生图 | 以图画图 ] xxx [图片]|@xxx|[qq号]
+  
+  - [ ] 设置ai绘图配置 [server] [token]
+  
+  例1: 设置ai绘图配置 http://91.216.169.75:5010 abc
+
+  例2: 设置ai绘图配置 http://91.217.139.190:5010 abc
+
+  通过 http://91.217.139.190:5010/token 获取token
+
+</details>
+<details>
   <summary>AIWife</summary>
 
   `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/aiwife"`
 
   - [x] waifu | 随机waifu(从[100000个AI生成的waifu](https://www.thiswaifudoesnotexist.net/)中随机一位)
+
+</details>
+<details>
+  <summary>支付宝到账语音</summary>
+
+  `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/alipayvoice"`
+
+  - [x] 支付宝到账 1
 
 </details>
 <details>
@@ -392,6 +418,20 @@ print("run[CQ:image,file="+j["img"]+"]")
 
 </details>
 <details>
+  <summary>base天城文加解密</summary>
+
+  `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/baseamasiro"`
+
+  - [x] 天城文加密xxx
+
+  - [x] 天城文解密xxx
+
+  - [x] 天城文用yyy加密xxx
+
+  - [x] 天城文用yyy解密xxx
+
+</details>
+<details>
   <summary>bilibili</summary>
 
   `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/bilibili"`
@@ -404,7 +444,7 @@ print("run[CQ:image,file="+j["img"]+"]")
 
   - [x] 查弹幕 [xxx] 2 (最后一个参数是页码)
 
-  - [x] 设置b站cookie SESSDATA=82da790d,1663822823,06ecf\*31 (最好把cookie设全)
+  - [x] 设置b站cookie b_ut=7;buvid3=0;i-wanna-go-back=-1;innersign=0; (最好把cookie设全)
 
     获取Cookie可以使用[这个工具](https://github.com/XiaoMiku01/login_bili_go)
     
@@ -466,14 +506,6 @@ print("run[CQ:image,file="+j["img"]+"]")
 
 </details>
 <details>
-  <summary>英文字符翻转</summary>
-
-  `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/char_reverser"`
-
-  - [x] 翻转 [英文字符串]
-
-</details>
-<details>
   <summary>选择困难症帮手</summary>
 
   `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/choose"`
@@ -487,6 +519,14 @@ print("run[CQ:image,file="+j["img"]+"]")
   `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/chouxianghua"`
 
   - [x] 抽象翻译[xxx]
+
+</details>
+<details>
+  <summary>英文字符翻转</summary>
+
+  `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/chrev"`
+
+  - [x] 翻转 I love you
 
 </details>
 <details>
@@ -663,31 +703,43 @@ print("run[CQ:image,file="+j["img"]+"]")
 
   - 猜歌插件（该插件依赖ffmpeg）
   
-  - [x] 设置猜歌缓存歌库路径 [绝对路径]
+  - 因为API不可抗因素，更改为了本地猜歌，但仍支持歌曲下载（VIP歌曲无法下载，黑胶可以）
   
-  - [x] 设置猜歌[本地/Api] [true/false]
+  - [x] 设置猜歌歌库路径 [绝对路径]
   
-  - [x] 登录网易云
+  - [x] 猜歌[开启/关闭][歌单/歌词]自动下载
   
-  - 注：不登陆也能用，API有几率返回400
+  - 现只有歌词指令有效
   
-  - [x] 添加歌单 [网易云歌单ID] [歌单名称]
+  - [ ] 添加歌单 [网易云歌单链接/ID] [歌单名称]
   
-  - 注：[歌单名称]可为空，默认原标题
+  - [x] 下载歌曲 [歌曲名称/网易云歌曲ID] [歌单名称]
   
-  - [x] 删除歌单 [网易云歌单ID/API歌单名称]
+  - [x] 删除歌单 [网易云歌单ID/歌单名称]
   
-  - [x] 获取歌单列表
+  - 注：删除网易云歌单ID仅只是解除绑定，删除歌单名称是将本地数据全部删除！
   
-  - [x] [网易云歌单ID/API歌单名称]歌单信息
+  - [x] 设置猜歌默认歌单 [歌单名称]
+  
+  - [x] 歌单列表
   
   - [x] [个人/团队]猜歌
   
-  - 注：默认歌库为网易云ACG动画榜
+  - 注：默认歌库为歌单列表第一个，如果设置了默认歌单变为指定的歌单
   
-  - 可在后面添加[-歌单名称]进行指定歌单猜歌
+  - 可在“[个人/团队]猜歌指令”后面添加[-歌单名称]进行指定歌单猜歌
   
-  - 歌单的歌曲命名规则为:歌名 - 歌手 - 其他(歌曲出处之类)
+  - 猜歌内容必须以[-]开头才会识别
+  
+  - 本地歌曲命名规则为:\n歌名 - 歌手 - 其他(歌曲出处之类)
+
+</details>
+<details>
+  <summary>黑丝</summary>
+
+  `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/heisi"`
+
+  - [x] 来点黑丝/白丝/jk/巨乳/足控/网红
 
 </details>
 <details>
@@ -744,6 +796,20 @@ print("run[CQ:image,file="+j["img"]+"]")
   `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/jikipedia"`
 
   - [x] [查梗|小鸡词典][梗]
+
+</details>
+<details>
+  <summary>日语听力学习材料</summary>
+
+  `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/jptingroom"`
+
+  - [x] 随机日语听力
+  
+  - [x] 随机日语歌曲
+  
+  - [x] 日语听力 xxx
+  
+  - [x] 日语歌曲 xxx
 
 </details>
 <details>
@@ -941,11 +1007,11 @@ print("run[CQ:image,file="+j["img"]+"]")
 
   `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/runcode"`
 
-  - [x] > runcode [language] help
+  - [x] >runcode [language] help
 
-  - [x] > runcode [language] [code block]
+  - [x] >runcode [language] [code block]
 
-  - [x] > runcoderaw [language] [code block]
+  - [x] >runcoderaw [language] [code block]
 
 </details>
 <details>
@@ -956,6 +1022,8 @@ print("run[CQ:image,file="+j["img"]+"]")
   - [x] 以图搜图 | 搜索图片 | 以图识图[图片]
 
   - [x] 搜图[P站图片ID]
+
+  - [x] 设置 saucenao api key [apikey]
 
 </details>
 <details>
@@ -1064,6 +1132,26 @@ print("run[CQ:image,file="+j["img"]+"]")
   `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/wangyiyun"`
 
   - [x] 来份网易云热评
+
+</details>
+<details>
+  <summary>百度文心AI画图</summary>
+
+  `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/wenxinAI"`
+
+  - 基于百度文心的免费AI画图插件(因为是免费的,图片质量你懂的)
+
+  - key申请链接：https://wenxin.baidu.com/moduleApi/key
+
+  - [x] 为[自己/本群/QQ号/群+群号]设置AI画图key [API Key] [Secret Key]
+
+  - 例：“为10086设置AI画图key 123 456”；“为群10010设置AI画图key 789 101”
+
+  - [x] [bot名称]画几张[图片描述]的[图片类型][图片尺寸]
+
+  - 指令示例：
+
+  - 椛椛帮我画几张金凤凰，背景绚烂，高饱和，古风，仙境，高清，4K，古风的油画方图
 
 </details>
 <details>

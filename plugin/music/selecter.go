@@ -138,7 +138,7 @@ func kugou(keyword string) message.MessageSegment {
 
 // cloud163 返回网易云音乐卡片
 func cloud163(keyword string) (msg message.MessageSegment) {
-	requestURL := "https://music.cyrilstudio.top/search?keywords=" + url.QueryEscape(keyword)
+	requestURL := "http://music.163.com/api/search/get/web?type=1&limit=1&s=" + url.QueryEscape(keyword)
 	data, err := web.GetData(requestURL)
 	if err != nil {
 		msg = message.Text("ERROR: ", err)
@@ -150,14 +150,13 @@ func cloud163(keyword string) (msg message.MessageSegment) {
 
 // qqmusic 返回QQ音乐卡片
 func qqmusic(keyword string) (msg message.MessageSegment) {
-	requestURL := "https://c.y.qq.com/soso/fcgi-bin/client_search_cp?w=" + url.QueryEscape(keyword)
+	requestURL := "https://c.y.qq.com/splcloud/fcgi-bin/smartbox_new.fcg?platform=yqq.json&key=" + url.QueryEscape(keyword)
 	data, err := web.RequestDataWith(web.NewDefaultClient(), requestURL, "GET", "", web.RandUA())
 	if err != nil {
 		msg = message.Text("ERROR: ", err)
 		return
 	}
-	info := gjson.ParseBytes(data[9 : len(data)-1]).Get("data.song.list.0")
-	msg = message.Music("qq", info.Get("songid").Int())
+	msg = message.Music("qq", gjson.ParseBytes(data).Get("data.song.itemlist.0.id").Int())
 	return
 }
 
