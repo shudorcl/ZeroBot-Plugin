@@ -356,11 +356,11 @@ print("run[CQ:image,file="+j["img"]+"]")
 
   - [x] [ 以图绘图 | 以图生图 | 以图画图 ] xxx [图片]|@xxx|[qq号]
   
-  - [ ] 设置ai绘图配置 [server] [token]
+  - [x] 设置ai绘图配置 [server] [token]
   
-  例1: 设置ai绘图配置 http://91.216.169.75:5010 abc
+  例: 设置ai绘图配置 http://91.216.169.75:5010 abc
 
-  例2: 设置ai绘图配置 http://91.217.139.190:5010 abc
+  参考服务器 http://91.217.139.190:5010, http://91.216.169.75:5010, http://185.80.202.180:5010
 
   通过 http://91.217.139.190:5010/token 获取token
 
@@ -962,6 +962,8 @@ print("run[CQ:image,file="+j["img"]+"]")
   `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/nihongo"`
 
   - [x] 日语语法 [xxx] (使用tag随机)
+  
+  - [x] 搜索日语语法 [xxx]
 
 </details>
 <details>
@@ -1135,21 +1137,45 @@ print("run[CQ:image,file="+j["img"]+"]")
 
 </details>
 <details>
-  <summary>百度文心AI画图</summary>
+  <summary>百度文心AI</summary>
 
   `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/wenxinAI"`
 
-  - 基于百度文心的免费AI画图插件(因为是免费的,图片质量你懂的)
+  基于百度文心API的一些功能
 
-  - key申请链接：https://wenxin.baidu.com/moduleApi/key
-
-  - [x] 为[自己/本群/QQ号/群+群号]设置AI画图key [API Key] [Secret Key]
-
-  - 例：“为10086设置AI画图key 123 456”；“为群10010设置AI画图key 789 101”
+  key申请链接：https://wenxin.baidu.com/moduleApi/key
+  
+  - [x] 为[自己/本群/QQ号/群+群号]设置文心key [API Key] [Secret Key]
+  
+  - [x] 为[自己/本群/QQ号/群+群号]设置画图key [API Key] [Secret Key]
+  
+  例：“为10086设置画图key 123 456”；“为群10010设置画图key 789 101”
+  
+  文心key和画图key的API key 可以是相同的，只是文心key日限为200，画图日限为50，以此作区别。
+  
+  - [x] 文心作文 (x字的)[作文题目]
+  
+  - [x] 文心提案 (x字的)[文案标题]
+  
+  - [x] 文心摘要 (x字的)[文章内容]
+  
+  - [x] 文心小说 (x字的)[小说上文]
+  
+  - [x] 文心对联 [上联]
+  
+  - [x] 文心问答 [问题]
+	
+  - [x] 文心补全 [带“_”的填空题]
+  
+  - [x] 文心自定义 [prompt]
 
   - [x] [bot名称]画几张[图片描述]的[图片类型][图片尺寸]
 
-  - 指令示例：
+  指令示例：
+
+  - 文心作文 我的椛椛机器人
+
+  - 文心作文 300字的我的椛椛机器人
 
   - 椛椛帮我画几张金凤凰，背景绚烂，高饱和，古风，仙境，高清，4K，古风的油画方图
 
