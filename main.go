@@ -65,6 +65,7 @@ import (
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/alipayvoice"   // 支付宝到账语音
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/b14"           // base16384加解密
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/baidu"         // 百度一下
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/baiduaudit"    // 百度内容审核
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/base64gua"     // base64卦加解密
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/baseamasiro"   // base天城文加解密
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/bilibili"      // b站相关
@@ -198,6 +199,9 @@ func init() {
 	prefix := flag.String("p", "/", "Set command prefix.")
 	runcfg := flag.String("c", "", "Run from config file.")
 	save := flag.String("s", "", "Save default config to file and exit.")
+	late := flag.Uint("l", 1000, "Response latency (ms).")
+	rsz := flag.Uint("r", 4096, "Receiving buffer ring size.")
+	maxpt := flag.Uint("x", 4, "Max process time (min).")
 
 	flag.Parse()
 
@@ -247,10 +251,13 @@ func init() {
 
 	config.W = []*driver.WSClient{driver.NewWebSocketClient(*url, *token)}
 	config.Z = zero.Config{
-		NickName:      append([]string{*adana}, "ATRI", "atri", "亚托莉", "アトリ"),
-		CommandPrefix: *prefix,
-		SuperUsers:    sus,
-		Driver:        []zero.Driver{config.W[0]},
+		NickName:       append([]string{*adana}, "ATRI", "atri", "亚托莉", "アトリ"),
+		CommandPrefix:  *prefix,
+		SuperUsers:     sus,
+		RingLen:        *rsz,
+		Latency:        time.Duration(*late) * time.Millisecond,
+		MaxProcessTime: time.Duration(*maxpt) * time.Minute,
+		Driver:         []zero.Driver{config.W[0]},
 	}
 
 	if *save != "" {
@@ -279,5 +286,5 @@ func main() {
 		Handle(func(ctx *zero.Ctx) {
 			ctx.SendChain(message.Text(kanban.Kanban()))
 		})
-	zero.RunAndBlock(config.Z, process.GlobalInitMutex.Unlock)
+	zero.RunAndBlock(&config.Z, process.GlobalInitMutex.Unlock)
 }
