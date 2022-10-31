@@ -25,7 +25,7 @@
   | [Mrs4s/go-cqhttp](https://github.com/Mrs4s/go-cqhttp) | [MiraiGo](https://github.com/Mrs4s/MiraiGo) | Mrs4s |
   | [yyuueexxiinngg/cqhttp-mirai](https://github.com/yyuueexxiinngg/cqhttp-mirai) | [Mirai](https://github.com/mamoe/mirai) | yyuueexxiinngg |
   | [takayama-lily/onebot](https://github.com/takayama-lily/onebot) | [OICQ](https://github.com/takayama-lily/oicq) | takayama |
-  
+
 </div>
 
 > 如果您不知道什么是 [OneBot](https://github.com/howmanybots/onebot) 或不希望运行多个程序，还可以直接前往 [gocqzbp](https://github.com/FloatTech/gocqzbp) 的 [Release](https://github.com/FloatTech/gocqzbp/releases) 页面下载单一可执行文件或前往 [Packages](https://github.com/FloatTech/gocqzbp/pkgs/container/gocqzbp) 页面使用`docker`，运行后按提示登录即可。
@@ -35,16 +35,19 @@
 ## 命令行参数
 > `[]`代表是可选参数
 ```bash
-zerobot [-c config.json] [-h] [-s config.json] [-t token] [-u url] [-n nickname] [-p prefix] [-d|w] [qq1 qq2 qq3 ...] [&]
+zerobot [-h] [-n nickname] [-t token] [-u url] [-p prefix] [-d|w] [-c|s config.json] [-l latency] [-r ringlen] [-x max process time] [qq1 qq2 qq3 ...] [&]
 ```
-- **-c config.json**: 从`config.json`加载`bot`配置
 - **-h**: 显示帮助
-- **-s config.json**: 保存现在`bot`配置到`config.json`
+- **-n nickname**: 设置默认昵称，默认为`椛椛`
 - **-t token**: 设置`AccessToken`，默认为空
 - **-u url**: 设置`Url`，默认为`ws://127.0.0.1:6700`
-- **-n nickname**: 设置默认昵称，默认为`椛椛`
 - **-p prefix**: 设置命令前缀，默认为`/`
 - **-d|w**: 开启 debug | warning 级别及以上日志输出
+- **-c config.json**: 从`config.json`加载`bot`配置
+- **-s config.json**: 保存现在`bot`配置到`config.json`
+- **-l latency**: 全局处理延时 (ms)
+- **-r ringlen**: 接收消息环缓冲区大小
+- **-x max process time**: 最大处理时间 (min)
 - **qqs**: superusers 的 qq 号
 - **&**: 驻留在后台，必须放在最后，仅`Linux`下有效f
 
@@ -60,7 +63,10 @@ zerobot [-c config.json] [-h] [-s config.json] [-t token] [-u url] [-n nickname]
             "アトリ"
         ],
         "command_prefix": "/",
-        "super_users": []
+        "super_users": [],
+        "ring_len": 4096,
+        "latency": 1000000000,
+        "max_process_time": 240000000000
     },
     "ws": [
         {
@@ -353,6 +359,8 @@ print("run[CQ:image,file="+j["img"]+"]")
 
   - [x] [ ai绘图 | 生成色图 | 生成涩图 | ai画图 ] xxx
 
+  - [x] [ ai高级绘图 | 高级生成色图 | 高级生成涩图 | ai高级画图 ] xxx
+
   - [x] [ 以图绘图 | 以图生图 | 以图画图 ] xxx [图片]|@xxx|[qq号]
   
   - [x] 设置ai绘图配置 [server] [token]
@@ -401,6 +409,51 @@ print("run[CQ:image,file="+j["img"]+"]")
 
   - [x] 百度下[xxx]
 
+</details>
+<details>
+  <summary>百度内容审核</summary>
+
+  `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/baiduaudit"`
+
+  - [x] 获取BDAkey
+
+  - [x] 配置BDAKey [API Key] [Secret Key]
+
+  - [x] 获取BDAkey
+
+  - [x] [开启|关闭]内容审核
+
+  - [x] [开启|关闭]撤回提示
+
+  - [x] [开启|关闭]详细提示
+
+  - [x] [开启|关闭]撤回禁言
+
+  - [x] [开启|关闭]禁言累加
+
+  - [x] [开启|关闭]文本检测
+
+  - [x] [开启|关闭]图像检测
+
+  - [x] 设置最大禁言时间[分钟，默认:60,最大43200]
+
+  - [x] 设置每次累加时间[分钟，默认:1]
+
+  - [x] 设置撤回禁言时间[分钟，默认:1]
+
+  - [x] 查看检测类型
+
+  - [x] 查看检测配置
+
+  - [x] 测试文本检测[文本内容]
+
+  - [x] 测试图像检测[图片]
+
+  - [x] 设置检测类型[类型编号]
+
+  - [x] 设置不检测类型[类型编号]
+
+    检测类型编号列表:[1:违禁违规|2:文本色情|3:敏感信息|4:恶意推广|5:低俗辱骂|6:恶意推广-联系方式|7:恶意推广-软文推广]
 </details>
 <details>
   <summary>base64卦加解密</summary>
@@ -571,15 +624,9 @@ print("run[CQ:image,file="+j["img"]+"]")
 
   `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/drift_bottle"`
 
-  - [x] (在群xxx)丢漂流瓶(到频道xxx) [消息]
+  - [x] @Bot pick (随机捞一个漂流瓶)
 
-  - [x] (从频道xxx)捡漂流瓶
-
-  - [x] @BOT 创建频道 xxx
-
-  - [x] 跳入(频道)海中
-
-  - [x] 注：不显式限制时，私聊发送可在所有群抽到，群聊发送仅可在本群抽到，默认频道为 global
+  - [x] @Bot throw xxx (投递内容xxx,支持图片文字,投递内容需要大于10个字符或者带有图片)
 
 </details>
 <details>
@@ -1244,7 +1291,6 @@ print("run[CQ:image,file="+j["img"]+"]")
   - [x] @Bot 任意文本(任意一句话回复)
 
   - [x] 设置回复模式[青云客 | 小爱]
-
 </details>
 
 ## 三种使用方法，推荐第一种
