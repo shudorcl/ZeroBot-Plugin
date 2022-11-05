@@ -27,6 +27,8 @@
   | [yyuueexxiinngg/cqhttp-mirai](https://github.com/yyuueexxiinngg/cqhttp-mirai) | [Mirai](https://github.com/mamoe/mirai) | yyuueexxiinngg |
   | [takayama-lily/onebot](https://github.com/takayama-lily/onebot) | [OICQ](https://github.com/takayama-lily/oicq) | takayama |
 
+  [![Star Trend](https://api.star-history.com/svg?repos=FloatTech/ZeroBot-Plugin&type=Timeline)](https://seladb.github.io/StarTrack-js/#/preload?r=FloatTech,ZeroBot-Plugin)
+
 </div>
 
 > 如果您不知道什么是 [OneBot](https://github.com/howmanybots/onebot) 或不希望运行多个程序，还可以直接前往 [gocqzbp](https://github.com/FloatTech/gocqzbp) 的 [Release](https://github.com/FloatTech/gocqzbp/releases) 页面下载单一可执行文件或前往 [Packages](https://github.com/FloatTech/gocqzbp/pkgs/container/gocqzbp) 页面使用`docker`，运行后按提示登录即可。
@@ -366,6 +368,10 @@ print("run[CQ:image,file="+j["img"]+"]")
   
   - [x] 设置ai绘图配置 [server] [token]
   
+  - [x] 设置ai绘图撤回时间90s
+  
+  - [x] 查看ai绘图配置
+  
   例: 设置ai绘图配置 http://91.216.169.75:5010 abc
 
   参考服务器 http://91.217.139.190:5010, http://91.216.169.75:5010, http://185.80.202.180:5010
@@ -631,32 +637,6 @@ print("run[CQ:image,file="+j["img"]+"]")
 
 </details>
 <details>
-  <summary>一群一天一夫一妻制群老婆</summary>
-
-  `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/qqwife"`
-
-  - 引入好感度系统，好感度越高，自由恋爱成功率越高
-  
-  - [x] 设置CD为xx小时
-
-  - [x] 允许/禁止自由恋爱
-
-  - [x] 允许/禁止牛头人
-
-  - [x] 娶群友
-
-  - [x] (娶|嫁)[@对方QQ]
-  
-  - [x] 当[对方Q号|@对方QQ]的小三
-
-  - [x] 做媒 @攻方QQ @受方QQ
-
-  - [x] 群老婆列表
-
-  - [x] 重置花名册
-
-</details>
-<details>
   <summary>合成emoji</summary>
 
   `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/emojimix"`
@@ -886,6 +866,14 @@ print("run[CQ:image,file="+j["img"]+"]")
 
 </details>
 <details>
+  <summary>MagicPrompt-Stable-Diffusion吟唱提示</summary>
+
+  `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/magicprompt"`
+
+  - [x] 吟唱提示[xxxx]
+
+</details>
+<details>
   <summary>简易midi音乐制作</summary>
 
   `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/midicreate"`
@@ -1042,6 +1030,43 @@ print("run[CQ:image,file="+j["img"]+"]")
 
 </details>
 <details>
+  <summary>一群一天一夫一妻制群老婆</summary>
+
+  `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/qqwife"`
+
+  - 引入好感度系统，好感度越高，自由恋爱成功率越高
+  
+  - [x] 设置CD为xx小时
+
+  - [x] [允许|禁止]自由恋爱
+
+  - [x] [允许|禁止]牛头人
+
+  - [x] 娶群友
+
+  - [x] [娶|嫁][@对方QQ]
+  
+  - [x] 当[对方Q号|@对方QQ]的小三
+
+  - [x] 做媒 @攻方QQ @受方QQ
+  
+  - [x] 买礼物给[对方Q号|@对方QQ]
+
+  - [x] 群老婆列表
+
+  - [x] 重置花名册
+
+
+</details>
+<details>
+  <summary>Real-CUGAN清晰术</summary>
+
+  `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/realcugan"`
+
+  - [x] 清晰术(双重吟唱|三重吟唱|四重吟唱)(强力术式|中等术式|弱术式|不变式|原式)[图片]
+
+</details>
+<details>
   <summary>投胎</summary>
 
   `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/reborn"`
@@ -1090,6 +1115,11 @@ print("run[CQ:image,file="+j["img"]+"]")
 
   - [x] 签到
   - [x] 获得签到背景[@xxx] | 获得签到背景
+  - [x] 查看等级排名
+  - 注:跨群排行
+  - [x] 查看我的钱包
+  - [x] 查看钱包排名
+  - 注:本群排行，若群人数太多不建议使用该功能!!!
 
 </details>
 <details>
@@ -1134,6 +1164,14 @@ print("run[CQ:image,file="+j["img"]+"]")
 
 </details>
 <details>
+  <summary>舔狗日记</summary>
+
+  `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/tiangou"`
+
+  - [x] 舔狗日记
+
+</details>
+<details>
   <summary>搜番</summary>
 
   `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/tracemoe"`
@@ -1142,25 +1180,19 @@ print("run[CQ:image,file="+j["img"]+"]")
 
 </details>
 <details>
-  <summary>猜单词</summary>
-
-  `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/wordle"`
-
-  - [x] 个人猜单词
-
-  - [x] 团队猜单词
-
-  - [x] 团队六阶猜单词
-
-  - [x] 团队七阶猜单词
-
-</details>
-<details>
   <summary>翻译</summary>
 
   `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/translation"`
 
   - [x] >TL 你好
+
+</details>
+<details>
+  <summary>vits猫雷</summary>
+
+  `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/vitsnyaru"`
+
+  - [x] 让猫雷说[xxxx]
 
 </details>
 <details>
@@ -1244,19 +1276,25 @@ print("run[CQ:image,file="+j["img"]+"]")
 
 </details>
 <details>
-  <summary>舔狗日记</summary>
-
-  `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/tiangou"`
-
-  - [x] 舔狗日记
-
-</details>
-<details>
   <summary>聊天热词</summary>
 
   `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/word_count"`
 
   - [x] 热词 [群号] [消息数目]|热词 123456 1000
+
+</details>
+<details>
+  <summary>猜单词</summary>
+
+  `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/wordle"`
+
+  - [x] 个人猜单词
+
+  - [x] 团队猜单词
+
+  - [x] 团队六阶猜单词
+
+  - [x] 团队七阶猜单词
 
 </details>
 <details>
