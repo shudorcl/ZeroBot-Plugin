@@ -62,7 +62,7 @@ func init() { // 插件主体
 			"参考服务器 http://91.217.139.190:5010, http://91.216.169.75:5010, http://185.80.202.180:5010\n" +
 			"通过 http://91.217.139.190:5010/token 获取token\n" +
 			"[prompt]参数如下\n" +
-			"tags:tag词条\nntags:ntag词条\nshape:[Portrait|Landscape|Square]\nscale:[6:20]\nseed:种子\n" +
+			"tags:tag词条\nntags:ntag词条\nshape:[Portrait|Landscape|Square]\nscale:[6:20]\nseed:种子\nstrength:[0:0.7]\nnoise:[0-0.15]" +
 			"参数与参数内容用:连接,每个参数之间用回车分割",
 		PrivateDataFolder: "aipaint",
 	})
@@ -182,6 +182,12 @@ func init() { // 插件主体
 			}
 			if _, ok := tags["seed"]; ok {
 				apiurl += "&seed=" + url.QueryEscape(strings.TrimSpace(tags["seed"]))
+			}
+			if _, ok := tags["strength"]; ok {
+				apiurl += "&strength=" + url.QueryEscape(strings.TrimSpace(tags["seed"]))
+			}
+			if _, ok := tags["noise"]; ok {
+				apiurl += "&noise=" + url.QueryEscape(strings.TrimSpace(tags["seed"]))
 			}
 			data, err := web.GetData(cfg.BaseURL + apiurl)
 			if err != nil {
