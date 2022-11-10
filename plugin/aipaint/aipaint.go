@@ -181,10 +181,10 @@ func init() { // 插件主体
 				apiurl += "&scale=" + url.QueryEscape(strings.TrimSpace(tags["scale"]))
 			}
 			if _, ok := tags["strength"]; ok {
-				apiurl += "&scale=" + url.QueryEscape(strings.TrimSpace(tags["strength"]))
+				apiurl += "&strength=" + url.QueryEscape(strings.TrimSpace(tags["strength"]))
 			}
 			if _, ok := tags["noise"]; ok {
-				apiurl += "&scale=" + url.QueryEscape(strings.TrimSpace(tags["noise"]))
+				apiurl += "&noise=" + url.QueryEscape(strings.TrimSpace(tags["noise"]))
 			}
 			if _, ok := tags["seed"]; ok {
 				apiurl += "&seed=" + url.QueryEscape(strings.TrimSpace(tags["seed"]))
