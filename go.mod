@@ -5,13 +5,13 @@ go 1.19
 require (
 	github.com/Baidu-AIP/golang-sdk v1.1.1
 	github.com/Coloured-glaze/gg v1.3.4
-	github.com/FloatTech/AnimeAPI v1.5.2-0.20221105044443-0c9004b2f051
+	github.com/FloatTech/AnimeAPI v1.5.2-0.20221112090201-4a200d6330d5
 	github.com/FloatTech/ZeroBot-Plugin-Playground v0.0.0-20221029041235-b062f17cd0ac
-	github.com/FloatTech/floatbox v0.0.0-20221029160423-446812ec82d9
-	github.com/FloatTech/sqlite v0.5.0
+	github.com/FloatTech/floatbox v0.0.0-20221110070748-e0d0b3af3e57
+	github.com/FloatTech/sqlite v0.5.1
 	github.com/FloatTech/ttl v0.0.0-20220715042055-15612be72f5b
-	github.com/FloatTech/zbpctrl v1.5.2
-	github.com/FloatTech/zbputils v1.5.1-0.20221101032142-05b2a4825567
+	github.com/FloatTech/zbpctrl v1.5.3-0.20221110070900-b2888434e9fc
+	github.com/FloatTech/zbputils v1.5.1-0.20221115024335-1bd5b91a870e
 	github.com/RomiChan/syncx v0.0.0-20220404072119-d7ea0ae15a4c
 	github.com/RomiChan/websocket v1.4.3-0.20220123145318-307a86b127bc
 	github.com/antchfx/htmlquery v1.2.5
@@ -20,7 +20,7 @@ require (
 	github.com/fumiama/ahsai v0.1.0
 	github.com/fumiama/cron v1.3.0
 	github.com/fumiama/go-base16384 v1.6.1
-	github.com/fumiama/go-registry v0.2.1
+	github.com/fumiama/go-registry v0.2.2
 	github.com/fumiama/gotracemoe v0.0.3
 	github.com/fumiama/sqlite3 v1.14.6
 	github.com/fumiama/unibase2n v0.0.0-20221020155353-02876e777430
@@ -42,6 +42,7 @@ require (
 )
 
 require (
+	github.com/FloatTech/rendercard v0.0.1 // indirect
 	github.com/antchfx/xpath v1.2.1 // indirect
 	github.com/disintegration/imaging v1.6.2 // indirect
 	github.com/ericpauley/go-quantize v0.0.0-20200331213906-ae555eb2afa4 // indirect
@@ -74,16 +75,17 @@ require (
 	github.com/tklauser/go-sysconf v0.3.10 // indirect
 	github.com/tklauser/numcpus v0.5.0 // indirect
 	github.com/yusufpapurcu/wmi v1.2.2 // indirect
-	golang.org/x/crypto v0.1.0 // indirect
-	golang.org/x/exp v0.0.0-20221028150844-83b7d23a625f // indirect
-	golang.org/x/exp/shiny v0.0.0-20221028150844-83b7d23a625f // indirect
-	golang.org/x/mobile v0.0.0-20221020085226-b36e6246172e // indirect
-	golang.org/x/mod v0.6.0 // indirect
-	golang.org/x/net v0.1.0 // indirect
-	golang.org/x/sys v0.1.0 // indirect
+	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519 // indirect
+	golang.org/x/exp v0.0.0-20220722155223-a9213eeb770e // indirect
+	golang.org/x/exp/shiny v0.0.0-20221004215720-b9f4876ce741 // indirect
+	golang.org/x/mobile v0.0.0-20201217150744-e6ae53a27f4f // indirect
+	golang.org/x/mod v0.6.0-dev.0.20220419223038-86c51ed26bb4 // indirect
+	golang.org/x/net v0.0.0-20220722155237-a158d28d115b // indirect
+	golang.org/x/sys v0.0.0-20220915200043-7b5979e65e41 // indirect
 	golang.org/x/text v0.4.0 // indirect
-	golang.org/x/tools v0.2.0 // indirect
-	modernc.org/libc v1.21.4 // indirect
+	golang.org/x/tools v0.1.12 // indirect
+	gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7 // indirect
+	modernc.org/libc v1.19.0 // indirect
 	modernc.org/mathutil v1.5.0 // indirect
 	modernc.org/memory v1.4.0 // indirect
 )
