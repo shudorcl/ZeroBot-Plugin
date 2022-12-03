@@ -23,7 +23,8 @@ type cardInfo struct {
 }
 type cardSet = map[string]cardInfo
 
-var cardMap = make(cardSet, 50)
+var cardMap = make(cardSet, 80)
+var infoMap = make(map[string]cardInfo, 80)
 var datapath string
 
 func init() {
@@ -33,23 +34,25 @@ func init() {
 			"- 抽武将",
 		PublicDataFolder: "Sgs",
 	}).ApplySingle(ctxext.DefaultSingle)
-	engine.OnFullMatchGroup([]string{"抽武将"}, fcext.DoOnceOnSuccess(
-		func(ctx *zero.Ctx) bool {
-			data, err := engine.GetLazyData("sgs.json", true)
-			if err != nil {
-				ctx.SendChain(message.Text("ERROR:", err))
-				return false
-			}
-			err = json.Unmarshal(data, &cardMap)
-			if err != nil {
-				ctx.SendChain(message.Text("ERROR:", err))
-				return false
-			}
-			datapath = file.BOTPATH + "/" + engine.DataFolder()
-			logrus.Infof("[sgs]读取%d张三国杀武将", len(cardMap))
-			return true
-		},
-	)).SetBlock(true).
+	getSgsCard := fcext.DoOnceOnSuccess(func(ctx *zero.Ctx) bool {
+		data, err := engine.GetLazyData("sgs.json", true)
+		if err != nil {
+			ctx.SendChain(message.Text("ERROR:", err))
+			return false
+		}
+		err = json.Unmarshal(data, &cardMap)
+		if err != nil {
+			ctx.SendChain(message.Text("ERROR:", err))
+			return false
+		}
+		for _, card := range cardMap {
+			infoMap[card.Name] = card
+		}
+		datapath = file.BOTPATH + "/" + engine.DataFolder()
+		logrus.Infof("[sgs]读取%d张三国杀武将", len(cardMap))
+		return true
+	})
+	engine.OnFullMatchGroup([]string{"抽武将"}, getSgsCard).SetBlock(true).
 		Handle(func(ctx *zero.Ctx) {
 			i := fcext.RandSenderPerDayN(ctx.Event.UserID, len(cardMap))
 			card := cardMap[(strconv.Itoa(i))]
@@ -61,4 +64,18 @@ func init() {
 				message.Text("\n【", card.Lines[rand.Intn(len(card.Lines))], "】"),
 			)
 		})
+	engine.OnRegex(`^看武将\s?(.*)`, getSgsCard).SetBlock(true).Limit(ctxext.LimitByGroup).Handle(func(ctx *zero.Ctx) {
+		match := ctx.State["regex_matched"].([]string)[1]
+		info, ok := infoMap[match]
+		if ok {
+			ctx.SendChain(
+				message.Text("【", info.Name, "】"),
+				message.Image("file:///"+datapath+info.URL),
+				message.Text("\n【", info.Lines[rand.Intn(len(info.Lines))], "】"),
+			)
+			return
+		}
+		ctx.SendChain(
+			message.Text("没有找到", match, "噢……"))
+	})
 }
