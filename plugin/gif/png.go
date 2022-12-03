@@ -10,6 +10,7 @@ import (
 
 	"github.com/FloatTech/floatbox/file"
 	"github.com/FloatTech/floatbox/img/writer"
+	"github.com/FloatTech/zbputils/control"
 	"github.com/FloatTech/zbputils/img"
 	"github.com/FloatTech/zbputils/img/text"
 	"github.com/fogleman/gg"
@@ -278,7 +279,7 @@ func anyasuki(cc *context, args ...string) (string, error) {
 	canvas.DrawImage(img.Size(face, 347, 267).Im, 82, 53)
 	canvas.DrawImage(back, 0, 0)
 	canvas.SetColor(color.Black)
-	_, err = file.GetLazyData(text.BoldFontFile, true)
+	_, err = file.GetLazyData(text.BoldFontFile, control.Md5File, true)
 	if err != nil {
 		return "", err
 	}
@@ -324,7 +325,7 @@ func alwaysLike(cc *context, args ...string) (string, error) {
 	canvas.DrawImage(back, 0, 0)
 	canvas.DrawImage(img.Size(face, 380, 380).Im, 44, 74)
 	canvas.SetColor(color.Black)
-	_, err = file.GetLazyData(text.BoldFontFile, true)
+	_, err = file.GetLazyData(text.BoldFontFile, control.Md5File, true)
 	if err != nil {
 		return "", err
 	}
@@ -438,7 +439,7 @@ func universal(cc *context, args ...string) (string, error) {
 	canvas := gg.NewContext(500, 550)
 	canvas.DrawImage(img.Size(face, 500, 500).Im, 0, 0)
 	canvas.SetColor(color.Black)
-	_, err = file.GetLazyData(text.BoldFontFile, true)
+	_, err = file.GetLazyData(text.BoldFontFile, control.Md5File, true)
 	if err != nil {
 		return "", err
 	}
@@ -489,7 +490,7 @@ func interview(cc *context, args ...string) (string, error) {
 	canvas.DrawImage(huaji, 376, 50)
 	canvas.DrawImage(microphone, 300, 50)
 	canvas.SetColor(color.Black)
-	_, err = file.GetLazyData(text.BoldFontFile, true)
+	_, err = file.GetLazyData(text.BoldFontFile, control.Md5File, true)
 	if err != nil {
 		return "", err
 	}
@@ -647,7 +648,7 @@ func playGame(cc *context, args ...string) (string, error) {
 	canvas.DrawImage(img.Rotate(face, 10, 225, 160).Im, 161, 117)
 	canvas.DrawImage(back, 0, 0)
 	canvas.SetColor(color.Black)
-	_, err = file.GetLazyData(text.BoldFontFile, true)
+	_, err = file.GetLazyData(text.BoldFontFile, control.Md5File, true)
 	if err != nil {
 		return "", err
 	}
@@ -777,7 +778,7 @@ func safeSense(cc *context, args ...string) (string, error) {
 	canvas.DrawImage(back, 0, 0)
 	canvas.DrawImage(img.Size(face, 215, 343).Im, 215, 135)
 	canvas.SetColor(color.Black)
-	_, err = file.GetLazyData(text.BoldFontFile, true)
+	_, err = file.GetLazyData(text.BoldFontFile, control.Md5File, true)
 	if err != nil {
 		return "", err
 	}
@@ -939,7 +940,7 @@ func makeFriend(cc *context, args ...string) (string, error) {
 	canvas.DrawImage(img.Rotate(face, 9, 55, 55).Im, 836, 722)
 	canvas.DrawImage(back, 0, 0)
 	canvas.SetColor(color.White)
-	_, err = file.GetLazyData(text.BoldFontFile, true)
+	_, err = file.GetLazyData(text.BoldFontFile, control.Md5File, true)
 	if err != nil {
 		return "", err
 	}
@@ -1018,7 +1019,7 @@ func coupon(cc *context, args ...string) (string, error) {
 	canvas.Rotate(gg.Radians(-22))
 	canvas.DrawImage(img.Size(face, 60, 60).Im, 100, 163)
 	canvas.SetColor(color.Black)
-	_, err = file.GetLazyData(text.BoldFontFile, true)
+	_, err = file.GetLazyData(text.BoldFontFile, control.Md5File, true)
 	if err != nil {
 		return "", err
 	}
@@ -1211,7 +1212,7 @@ func youer(cc *context, args ...string) (string, error) {
 	canvas.DrawImage(back, 0, 0)
 	canvas.DrawImage(img.Size(tou, 350, 350).Im, 55, 165)
 	canvas.SetColor(color.Black)
-	_, err = file.GetLazyData(text.BoldFontFile, true)
+	_, err = file.GetLazyData(text.BoldFontFile, control.Md5File, true)
 	if err != nil {
 		return "", err
 	}
@@ -1258,7 +1259,7 @@ func xiaotianshi(cc *context, args ...string) (string, error) {
 	canvas.DrawImage(back, 0, 0)
 	canvas.DrawImage(img.Size(face, 480, 480).Im, 20, 80)
 	canvas.SetColor(color.Black)
-	_, err = file.GetLazyData(text.BoldFontFile, true)
+	_, err = file.GetLazyData(text.BoldFontFile, control.Md5File, true)
 	if err != nil {
 		return "", err
 	}
@@ -1362,7 +1363,7 @@ func van(cc *context, args ...string) (string, error) {
 	canvas.DrawImage(back, 0, 0)
 	canvas.DrawImage(img.Size(face, 480, 480).Im, 20, 80)
 	canvas.SetColor(color.Black)
-	_, err = file.GetLazyData(text.BoldFontFile, true)
+	_, err = file.GetLazyData(text.BoldFontFile, control.Md5File, true)
 	if err != nil {
 		return "", err
 	}
@@ -1523,7 +1524,7 @@ func mengbi(cc *context, args ...string) (string, error) {
 	canvas.DrawImage(img.Size(face, 100, 100).Im, 392, 460)
 	canvas.DrawImage(img.Size(face, 100, 100).Im, 606, 443)
 	canvas.SetColor(color.Black)
-	_, err = file.GetLazyData(text.BoldFontFile, true)
+	_, err = file.GetLazyData(text.BoldFontFile, control.Md5File, true)
 	if err != nil {
 		return "", err
 	}
