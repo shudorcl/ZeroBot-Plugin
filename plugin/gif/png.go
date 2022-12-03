@@ -1109,7 +1109,7 @@ func alwaysDo(cc *context, args ...string) (string, error) {
 	canvas := gg.NewContext(500, 600)
 	canvas.DrawImage(face.Im, 0, 0)
 	canvas.SetColor(color.Black)
-	_, err = file.GetLazyData(text.BoldFontFile, true)
+	_, err = file.GetLazyData(text.BoldFontFile, control.Md5File, true)
 	if err != nil {
 		return "", err
 	}
