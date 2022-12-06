@@ -5,13 +5,13 @@ go 1.19
 require (
 	github.com/Baidu-AIP/golang-sdk v1.1.1
 	github.com/Coloured-glaze/gg v1.3.4
-	github.com/FloatTech/AnimeAPI v1.6.1-0.20221202105645-10e15611adc7
+	github.com/FloatTech/AnimeAPI v1.6.1-0.20221203040820-0dda47e61cd8
 	github.com/FloatTech/ZeroBot-Plugin-Playground v0.0.0-20221029041235-b062f17cd0ac
-	github.com/FloatTech/floatbox v0.0.0-20221202084309-ad154513ab2f
+	github.com/FloatTech/floatbox v0.0.0-20221203040505-d7352e564906
 	github.com/FloatTech/sqlite v1.5.7
 	github.com/FloatTech/ttl v0.0.0-20220715042055-15612be72f5b
-	github.com/FloatTech/zbpctrl v1.5.3-0.20221202105428-5c0a0e162361
-	github.com/FloatTech/zbputils v1.6.1-0.20221202105607-9f335675fbc4
+	github.com/FloatTech/zbpctrl v1.5.3-0.20221203040611-11f118e1d5ec
+	github.com/FloatTech/zbputils v1.6.1-0.20221203040741-3bc28d5e3cd1
 	github.com/RomiChan/syncx v0.0.0-20221202055724-5f842c53020e
 	github.com/RomiChan/websocket v1.4.3-0.20220227141055-9b2c6168c9c5
 	github.com/antchfx/htmlquery v1.2.5
@@ -22,6 +22,8 @@ require (
 	github.com/fumiama/go-base16384 v1.6.1
 	github.com/fumiama/go-registry v0.2.5-0.20221121111817-44b0846bdce6
 	github.com/fumiama/gotracemoe v0.0.3
+	github.com/fumiama/jieba v0.0.0-20221203025406-36c17a10b565
+	github.com/fumiama/unibase2n v0.0.0-20221020155353-02876e777430
 	github.com/fumiama/jieba v0.0.0-20221130083937-35ac98dc5feb
 	github.com/fumiama/unibase2n v0.0.0-20221020155353-02876e777430
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0
@@ -30,13 +32,16 @@ require (
 	github.com/jozsefsallai/gophersauce v1.0.1
 	github.com/lucas-clemente/quic-go v0.30.0
 	github.com/mroth/weightedrand v0.4.1
+	github.com/lucas-clemente/quic-go v0.31.0
+	github.com/mroth/weightedrand v1.0.0
 	github.com/pkg/errors v0.9.1
 	github.com/pkumza/numcn v1.0.0
+	github.com/shirou/gopsutil/v3 v3.22.11
 	github.com/shirou/gopsutil/v3 v3.22.9
 	github.com/sirupsen/logrus v1.9.0
 	github.com/tidwall/gjson v1.14.4
 	github.com/wcharczuk/go-chart/v2 v2.1.0
-	github.com/wdvxdr1123/ZeroBot v1.6.4
+	github.com/wdvxdr1123/ZeroBot v1.6.5
 	gitlab.com/gomidi/midi/v2 v2.0.25
 	golang.org/x/image v0.1.0
 	gopkg.in/yaml.v3 v3.0.1
@@ -56,12 +61,17 @@ require (
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/golang/mock v1.6.0 // indirect
 	github.com/google/pprof v0.0.0-20210407192527-94a9f03dee38 // indirect
+	github.com/google/pprof v0.0.0-20210407192527-94a9f03dee38 // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/hajimehoshi/oto v1.0.1 // indirect
 	github.com/jfreymuth/oggvorbis v1.0.4 // indirect
 	github.com/jfreymuth/vorbis v1.0.2 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/kr/pretty v0.3.1 // indirect
+	github.com/lufia/plan9stats v0.0.0-20211012122336-39d0f177ccd0 // indirect
+	github.com/marten-seemann/qpack v0.3.0 // indirect
+	github.com/marten-seemann/qtls-go1-18 v0.1.3 // indirect
+	github.com/marten-seemann/qtls-go1-19 v0.1.1 // indirect
 	github.com/lufia/plan9stats v0.0.0-20220913051719-115f729f3c8c // indirect
 	github.com/marten-seemann/qpack v0.3.0 // indirect
 	github.com/marten-seemann/qtls-go1-18 v0.1.3 // indirect
@@ -70,9 +80,15 @@ require (
 	github.com/mozillazg/go-pinyin v0.19.0 // indirect
 	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646 // indirect
 	github.com/onsi/ginkgo/v2 v2.2.0 // indirect
+	github.com/power-devops/perfstat v0.0.0-20210106213030-5aafc221ea8c // indirect
+	github.com/remyoudompheng/bigfft v0.0.0-20200410134404-eec4a21b6bb0 // indirect
+	github.com/onsi/ginkgo/v2 v2.2.0 // indirect
 	github.com/power-devops/perfstat v0.0.0-20220216144756-c35f1ee13d7c // indirect
 	github.com/remyoudompheng/bigfft v0.0.0-20220927061507-ef77025ab5aa // indirect
 	github.com/tidwall/match v1.1.1 // indirect
+	github.com/tidwall/pretty v1.2.0 // indirect
+	github.com/tklauser/go-sysconf v0.3.11 // indirect
+	github.com/tklauser/numcpus v0.6.0 // indirect
 	github.com/tidwall/pretty v1.2.1 // indirect
 	github.com/tklauser/go-sysconf v0.3.10 // indirect
 	github.com/tklauser/numcpus v0.5.0 // indirect
@@ -83,6 +99,7 @@ require (
 	golang.org/x/mobile v0.0.0-20201217150744-e6ae53a27f4f // indirect
 	golang.org/x/mod v0.6.0-dev.0.20220419223038-86c51ed26bb4 // indirect
 	golang.org/x/net v0.0.0-20220722155237-a158d28d115b // indirect
+	golang.org/x/sys v0.2.0 // indirect
 	golang.org/x/sys v0.0.0-20220915200043-7b5979e65e41 // indirect
 	golang.org/x/text v0.4.0 // indirect
 	golang.org/x/tools v0.1.12 // indirect
