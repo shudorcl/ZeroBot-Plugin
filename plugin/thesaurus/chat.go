@@ -86,7 +86,7 @@ func init() {
 		if err != nil {
 			panic(err)
 		}
-		smd, err := engine.GetLazyData("simai.yml", false)
+		smd, err := engine.GetLazyData("simai.yml", true)
 		if err != nil {
 			panic(err)
 		}
