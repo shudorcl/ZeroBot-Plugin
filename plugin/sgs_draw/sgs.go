@@ -67,11 +67,15 @@ func init() {
 	engine.OnRegex(`^看武将\s?(.*)`, getSgsCard).SetBlock(true).Limit(ctxext.LimitByGroup).Handle(func(ctx *zero.Ctx) {
 		match := ctx.State["regex_matched"].([]string)[1]
 		info, ok := infoMap[match]
+		line := info.Lines[rand.Intn(len(info.Lines))]
+		if line == "" {
+			line = "快提醒懒狗维护者加台词！"
+		}
 		if ok {
 			ctx.SendChain(
 				message.Text("【", info.Name, "】"),
 				message.Image("file:///"+datapath+info.URL),
-				message.Text("\n【", info.Lines[rand.Intn(len(info.Lines))], "】"),
+				message.Text("\n【", line, "】"),
 			)
 			return
 		}
