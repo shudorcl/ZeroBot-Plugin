@@ -85,7 +85,7 @@ func init() {
 		if err != nil {
 			panic(err)
 		}
-		smd, err := engine.GetLazyData("simai.yml", true)
+		smd, err := engine.GetLazyData("simai.yml", false)
 		if err != nil {
 			panic(err)
 		}
@@ -169,7 +169,7 @@ func canmatch(typ int64) zero.Rule {
 			gid = -ctx.Event.UserID
 		}
 		d := c.GetData(gid)
-		return d&3 == typ && rand.Int63n(10) <= d>>59
+		return d&3 == typ && (rand.Int63n(10) <= d>>59 || zero.OnlyToMe(ctx))
 	}
 }
 
