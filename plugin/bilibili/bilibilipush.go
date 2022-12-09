@@ -56,7 +56,7 @@ func init() {
 	dbfile := dbpath + "push.db"
 	bdb = initializePush(dbfile)
 
-	en.OnRegex(`^添加[B|b]站订阅\s?(.{1,25})$`, zero.UserOrGrpAdmin, getPara).SetBlock(true).Handle(func(ctx *zero.Ctx) {
+	en.OnRegex(`^添加[B|[B|b]]站订阅\s?(.{1,25})$`, zero.UserOrGrpAdmin, getPara).SetBlock(true).Handle(func(ctx *zero.Ctx) {
 		buid, _ := strconv.ParseInt(ctx.State["uid"].(string), 10, 64)
 		name, err := getName(buid)
 		if err != nil {
@@ -124,7 +124,7 @@ func init() {
 		}
 		ctx.SendChain(message.Text("已取消" + name + "的直播订阅"))
 	})
-	en.OnFullMatch("[B|b]站推送列表", zero.UserOrGrpAdmin).SetBlock(true).Handle(func(ctx *zero.Ctx) {
+	en.OnRegex(`^[B|[B|b]]站推送列表$`, zero.UserOrGrpAdmin).SetBlock(true).Handle(func(ctx *zero.Ctx) {
 		gid := ctx.Event.GroupID
 		if gid == 0 {
 			gid = -ctx.Event.UserID
@@ -158,7 +158,7 @@ func init() {
 			ctx.SendChain(message.Text("ERROR: 可能被风控了"))
 		}
 	})
-	en.OnFullMatch("拉取[B|b]站推送").SetBlock(true).Handle(func(ctx *zero.Ctx) {
+	en.OnRegex(`拉取[B|[B|b]]站推送$`).SetBlock(true).Handle(func(ctx *zero.Ctx) {
 		err := sendDynamic(ctx)
 		if err != nil {
 			ctx.SendPrivateMessage(ctx.Event.UserID, message.Text("Error: bilibilipush,", err))
