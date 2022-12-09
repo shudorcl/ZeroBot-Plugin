@@ -125,6 +125,7 @@ import (
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/saucenao"      // 以图搜图
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/scale"         // 叔叔的AI二次元图片放大
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/score"         // 分数
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/seer"          // 赛尔号抽精灵
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/setutime"      // 来份涩图
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/sgs_draw"      // 三国杀抽武将
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/shadiao"       // 沙雕app

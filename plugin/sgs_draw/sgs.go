@@ -56,12 +56,15 @@ func init() {
 		Handle(func(ctx *zero.Ctx) {
 			i := fcext.RandSenderPerDayN(ctx.Event.UserID, len(cardMap))
 			card := cardMap[(strconv.Itoa(i))]
-
+			line := card.Lines[rand.Intn(len(card.Lines))]
+			if line == "" {
+				line = "快提醒懒狗维护者加台词！"
+			}
 			ctx.SendChain(
 				message.At(ctx.Event.UserID),
 				message.Text("今天的守护武将是~【", card.Name, "】哒"),
 				message.Image("file:///"+datapath+card.URL),
-				message.Text("\n【", card.Lines[rand.Intn(len(card.Lines))], "】"),
+				message.Text("\n【", line, "】"),
 			)
 		})
 	engine.OnRegex(`^看武将\s?(.*)`, getSgsCard).SetBlock(true).Limit(ctxext.LimitByGroup).Handle(func(ctx *zero.Ctx) {

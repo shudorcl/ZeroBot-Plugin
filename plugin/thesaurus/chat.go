@@ -118,13 +118,15 @@ func init() {
 			chatListK = append(chatListK, k)
 		}
 		logrus.Infoln("[thesaurus]加载", len(chatListD), "条傲娇词库", len(chatListK), "条可爱词库")
-
-		engine.OnMessage(canmatch(tKIMO), match(chatList, seg)).
-			SetBlock(false).
-			Handle(randreply(kimomap))
-		engine.OnMessage(canmatch(tDERE), match(chatListD, seg)).
-			SetBlock(false).
-			Handle(randreply(sm.D))
+		engine.OnFullMatchGroup(chatList, zero.OnlyToMe).SetBlock(true).Handle(randreply(kimomap))
+		engine.OnFullMatchGroup(chatListD, zero.OnlyToMe).SetBlock(true).Handle(randreply(sm.D))
+		engine.OnFullMatchGroup(chatListK, zero.OnlyToMe).SetBlock(true).Handle(randreply(sm.K))
+		// engine.OnMessage(canmatch(tKIMO), match(chatList, seg)).
+		// 	SetBlock(false).
+		// 	Handle(randreply(kimomap))
+		// engine.OnMessage(canmatch(tDERE), match(chatListD, seg)).
+		// 	SetBlock(false).
+		// 	Handle(randreply(sm.D))
 		engine.OnMessage(canmatch(tKAWA), match(chatListK, seg)).
 			SetBlock(false).
 			Handle(randreply(sm.K))
@@ -169,7 +171,8 @@ func canmatch(typ int64) zero.Rule {
 			gid = -ctx.Event.UserID
 		}
 		d := c.GetData(gid)
-		return d&3 == typ && (rand.Int63n(10) <= d>>59 || zero.OnlyToMe(ctx))
+		// 懒得改了，直接默认false
+		return (d&3 == typ && (rand.Int63n(10) <= d>>59 || zero.OnlyToMe(ctx))) && false
 	}
 }
 
