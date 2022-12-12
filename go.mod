@@ -5,13 +5,13 @@ go 1.19
 require (
 	github.com/Baidu-AIP/golang-sdk v1.1.1
 	github.com/Coloured-glaze/gg v1.3.4
-	github.com/FloatTech/AnimeAPI v1.6.1-0.20221211044824-a4c95321af15
+	github.com/FloatTech/AnimeAPI v1.6.1-0.20221212075306-4d0d5d6a85f7
 	github.com/FloatTech/ZeroBot-Plugin-Playground v0.0.0-20221029041235-b062f17cd0ac
 	github.com/FloatTech/floatbox v0.0.0-20221210051813-4bd44af40c60
 	github.com/FloatTech/sqlite v1.5.7
 	github.com/FloatTech/ttl v0.0.0-20220715042055-15612be72f5b
 	github.com/FloatTech/zbpctrl v1.5.3-0.20221210051848-740ab7bd6ec3
-	github.com/FloatTech/zbputils v1.6.1-0.20221210052030-50f19ddfae6f
+	github.com/FloatTech/zbputils v1.6.1-0.20221212090658-d0de5338e354
 	github.com/RomiChan/syncx v0.0.0-20221202055724-5f842c53020e
 	github.com/RomiChan/websocket v1.4.3-0.20220227141055-9b2c6168c9c5
 	github.com/antchfx/htmlquery v1.2.5
@@ -28,7 +28,7 @@ require (
 	github.com/guohuiyuan/go-fyzhq v0.0.0-20220807135412-25c16c843e5a
 	github.com/jinzhu/gorm v1.9.16
 	github.com/jozsefsallai/gophersauce v1.0.1
-	github.com/lucas-clemente/quic-go v0.31.0
+	github.com/lucas-clemente/quic-go v0.31.1
 	github.com/mroth/weightedrand v1.0.0
 	github.com/pkg/errors v0.9.1
 	github.com/shirou/gopsutil/v3 v3.22.11
