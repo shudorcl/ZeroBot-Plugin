@@ -116,6 +116,7 @@ import (
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/novel"         // 铅笔小说网搜索
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/nsfw"          // nsfw图片识别
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/omikuji"       // 浅草寺求签
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/pokemon"       // 抽宝可梦
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/qqwife"        // 一群一天一夫一妻制群老婆
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/quan"          // QQ权重查询
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/qzone"         // qq空间表白墙
