@@ -56,7 +56,7 @@ func init() {
 	dbfile := dbpath + "push.db"
 	bdb = initializePush(dbfile)
 
-	en.OnRegex(`^添加[B|[B|b]]站订阅\s?(.{1,25})$`, zero.UserOrGrpAdmin, getPara).SetBlock(true).Handle(func(ctx *zero.Ctx) {
+	en.OnRegex(`^添加[B|b]]站订阅\s?(.{1,25})$`, zero.UserOrGrpAdmin, getPara).SetBlock(true).Handle(func(ctx *zero.Ctx) {
 		buid, _ := strconv.ParseInt(ctx.State["uid"].(string), 10, 64)
 		name, err := getName(buid)
 		if err != nil {
