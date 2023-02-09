@@ -16,8 +16,8 @@ require (
 	github.com/RomiChan/websocket v1.4.3-0.20220227141055-9b2c6168c9c5
 	github.com/antchfx/htmlquery v1.2.5
 	github.com/corona10/goimagehash v1.1.0
-	github.com/fogleman/gg v1.3.0
 	github.com/davidscholberg/go-durationfmt v0.0.0-20170122144659-64843a2083d3
+	github.com/fogleman/gg v1.3.0
 	github.com/fumiama/ahsai v0.1.0
 	github.com/fumiama/cron v1.3.0
 	github.com/fumiama/go-base16384 v1.6.4
