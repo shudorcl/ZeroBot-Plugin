@@ -1,4 +1,4 @@
-// mykay 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
+// Package chatgpt 简易ChatGPT api聊天
 package chatgpt
 
 import (
@@ -28,9 +28,9 @@ func init() {
 		}
 		apiKey = string(apikey)
 	}
-	engine.OnCommandGroup([]string{"/c", "/chatgpt"}).SetBlock(true).
+	engine.OnRegex(`^chatgpt\s*(.*)$`, zero.OnlyToMe).SetBlock(true).
 		Handle(func(ctx *zero.Ctx) {
-			args := ctx.State["args"].(string)
+			args := ctx.State["regex_matched"].([]string)[1]
 			ans, err := completions(args, apiKey)
 			if err != nil {
 				ctx.SendChain(message.Text("ERROR: ", err))
