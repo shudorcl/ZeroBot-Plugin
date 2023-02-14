@@ -19,7 +19,6 @@ require (
 	github.com/antchfx/htmlquery v1.2.5
 	github.com/corona10/goimagehash v1.1.0
 	github.com/davidscholberg/go-durationfmt v0.0.0-20170122144659-64843a2083d3
-	github.com/fogleman/gg v1.3.0
 	github.com/disintegration/imaging v1.6.2
 	github.com/fumiama/ahsai v0.1.0
 	github.com/fumiama/cron v1.3.0
