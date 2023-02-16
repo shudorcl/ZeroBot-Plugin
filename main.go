@@ -143,6 +143,7 @@ import (
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/wenben"               // 文本指令大全
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/wenxinAI"             // 百度文心AI画图
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/what2eat"             // 修改版抽老婆
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/what2play"            // P社开什么
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/wife"                 // 吃什么
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/word_count"           // 聊天热词
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/wordle"               // 猜单词
