@@ -4,9 +4,8 @@ go 1.20
 
 require (
 	github.com/Baidu-AIP/golang-sdk v1.1.1
-	github.com/FloatTech/AnimeAPI v1.6.1-0.20230207081411-573533b18194
-	github.com/FloatTech/ZeroBot-Plugin-Playground v0.0.0-20221029041235-b062f17cd0ac
 	github.com/FloatTech/AnimeAPI v1.6.1-0.20230225045520-b537bd7dfbfe
+	github.com/FloatTech/ZeroBot-Plugin-Playground v0.0.0-20221029041235-b062f17cd0ac
 	github.com/FloatTech/floatbox v0.0.0-20230207075003-0f70b30c320d
 	github.com/FloatTech/gg v1.1.2
 	github.com/FloatTech/imgfactory v0.2.2-0.20230215052637-9f7b05520ca9
