@@ -3,7 +3,6 @@ package chatgpt
 import (
 	"bytes"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"net/http"
 	"time"
@@ -28,13 +27,11 @@ type chatGPTResponseBody struct {
 
 // chatGPTRequestBody 请求体
 type chatGPTRequestBody struct {
-	Model            string        `json:"model"`
-	Messages         []chatMessage `json:"messages"`
-	MaxTokens        int           `json:"max_tokens"`
-	Temperature      float32       `json:"temperature"`
-	TopP             int           `json:"top_p"`
-	FrequencyPenalty int           `json:"frequency_penalty"`
-	PresencePenalty  int           `json:"presence_penalty"`
+	Model       string        `json:"model,omitempty"` // gpt3.5-turbo
+	Messages    []chatMessage `json:"messages,omitempty"`
+	Temperature float64       `json:"temperature,omitempty"`
+	N           int           `json:"n,omitempty"`
+	MaxTokens   int           `json:"max_tokens,omitempty"`
 }
 
 // chatMessage 消息
@@ -98,7 +95,7 @@ func completions(messages []chatMessage, apiKey string) (*chatGPTResponseBody, e
 
 	if res.StatusCode < http.StatusOK || res.StatusCode >= http.StatusBadRequest {
 		// TODO: introduce typed error
-		return nil, errors.New("response error")
+		return nil, fmt.Errorf("response error code: %d", res.StatusCode)
 	}
 
 	v := new(chatGPTResponseBody)
