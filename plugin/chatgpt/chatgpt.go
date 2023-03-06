@@ -10,9 +10,8 @@ import (
 
 const (
 	// baseURL  = "https://api.openai.com/v1/"
-	proxyURL          = "https://openai.geekr.cool/v1/"
-	GPT3Dot5Turbo0301 = "gpt-3.5-turbo-0301"
-	GPT3Dot5Turbo     = "gpt-3.5-turbo"
+	proxyURL      = "https://openai.geekr.cool/v1/"
+	GPT3Dot5Turbo = "gpt-3.5-turbo"
 )
 
 // chatGPTResponseBody 响应体
