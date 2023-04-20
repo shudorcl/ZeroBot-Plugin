@@ -3,16 +3,28 @@ package chatgpt
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"net/http"
+	"strconv"
 	"time"
 )
 
 const (
 	// baseURL  = "https://api.openai.com/v1/"
-	proxyURL      = "https://openai.geekr.cool/v1/"
-	GPT3Dot5Turbo = "gpt-3.5-turbo"
+	proxyURL           = "https://open.aiproxy.xyz/v1/"
+	modelGPT3Dot5Turbo = "gpt-3.5-turbo"
 )
+
+type chatkeymessage struct {
+	Code           int     `json:"code"`
+	Msg            string  `json:"msg"`
+	TotalGranted   float64 `json:"total_granted"`
+	TotalUsed      float64 `json:"total_used"`
+	TotalAvailable float64 `json:"total_available"`
+	EffectiveAt    int64   `json:"effective_at"`
+	ExpiresAt      int64   `json:"expires_at"`
+}
 
 // chatGPTResponseBody 响应体
 type chatGPTResponseBody struct {
@@ -55,7 +67,7 @@ var client = &http.Client{
 	Transport: &http.Transport{
 		Proxy: http.ProxyFromEnvironment,
 	},
-	Timeout: 5 * time.Minute,
+	Timeout: time.Minute * 5,
 }
 
 // completions gtp3.5文本模型回复
@@ -69,7 +81,7 @@ func completions(messages []chatMessage, apiKey string) (*chatGPTResponseBody, e
 	}
 	// default model
 	if com.Model == "" {
-		com.Model = GPT3Dot5Turbo
+		com.Model = modelGPT3Dot5Turbo
 	}
 
 	body, err := json.Marshal(com)
@@ -93,8 +105,7 @@ func completions(messages []chatMessage, apiKey string) (*chatGPTResponseBody, e
 	defer res.Body.Close()
 
 	if res.StatusCode < http.StatusOK || res.StatusCode >= http.StatusBadRequest {
-		// TODO: introduce typed error
-		return nil, fmt.Errorf("response error code: %d", res.StatusCode)
+		return nil, errors.New("response error" + strconv.Itoa(res.StatusCode))
 	}
 
 	v := new(chatGPTResponseBody)
