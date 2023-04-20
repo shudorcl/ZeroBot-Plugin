@@ -86,6 +86,7 @@ import (
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/cpstory"      // cp短打
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/danbooru"     // DeepDanbooru二次元图标签识别
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/diana"        // 嘉心糖发病
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/dish"         // 程序员做饭指南
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/drawlots"     // 多功能抽签
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/dress"        // 女装
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/drift_bottle" // 漂流瓶
@@ -148,6 +149,7 @@ import (
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/vtb_quotation" // vtb语录
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/wallet"        // 钱包
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/wangyiyun"     // 网易云音乐热评
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/wantquotes"    // 据意查句
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/warframeapi"   // warframeAPI插件
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/wenben"        // 文本指令大全
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/wenxinAI"      // 百度文心AI画图
@@ -267,6 +269,9 @@ func init() {
 	// sus = append(sus, 12345678)
 	// sus = append(sus, 87654321)
 
+	// 启用 webui
+	// go webctrl.RunGui(*g)
+
 	if *runcfg != "" {
 		f, err := os.Open(*runcfg)
 		if err != nil {
@@ -312,9 +317,6 @@ func init() {
 		logrus.Infoln("[main] 配置文件已保存到", *save)
 		os.Exit(0)
 	}
-
-	// 启用 webui
-	// go webctrl.RunGui(*g)
 }
 
 func main() {
