@@ -59,10 +59,9 @@ import (
 	//                      vvvvvvv中优先级区vvvvvvv                      //
 	//                          vvvvvvvvvvvvvv                          //
 	//                               vvvv                               //
-
-	_ "github.com/FloatTech/ZeroBot-Plugin-Playground/fadian"           // 发癫
-	_ "github.com/FloatTech/ZeroBot-Plugin-Playground/kfccrazythursday" // 疯狂星期四
-	_ "github.com/FloatTech/ZeroBot-Plugin-Playground/ottoshout"        // 电棍鬼叫
+	_ "github.com/FloatTech/ZeroBot-Plugin-Playground/plugin/chatgpt"   // ChatGPT
+	_ "github.com/FloatTech/ZeroBot-Plugin-Playground/plugin/fadian"    // 发癫
+	_ "github.com/FloatTech/ZeroBot-Plugin-Playground/plugin/ottoshout" // 电棍鬼叫
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/ahsai"                // ahsai tts
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/ai_false"             // 服务器监控
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/aipaint"              // ai绘图
@@ -78,7 +77,7 @@ import (
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/book_review"          // 哀伤雪刃吧推书记录
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/cangtoushi"           // 藏头诗
 
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/chatgpt"      // ChatGPT
+	// _ "github.com/FloatTech/ZeroBot-Plugin/plugin/chatgpt"      // ChatGPT
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/choose"       // 选择困难症帮手
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/chouxianghua" // 说抽象话
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/chrev"        // 英文字符翻转
