@@ -12,18 +12,21 @@ import (
 
 const (
 	// baseURL  = "https://api.openai.com/v1/"
-	proxyURL           = "https://open.aiproxy.xyz/v1/"
-	modelGPT3Dot5Turbo = "gpt-3.5-turbo"
+	proxyURL           = "https://openai-proxy-api.pages.dev/api/v1/"
+	modelGPT3Dot5Turbo = "gpt-3.5-turbo-16k-0613"
+	yunKey             = "7d06a110e9e20a684e02934549db1d3d"
+	yunURL             = "https://api.a20safe.com/api.php?api=35&key=%s&apikey=%s"
 )
 
-type chatkeymessage struct {
-	Code           int     `json:"code"`
-	Msg            string  `json:"msg"`
-	TotalGranted   float64 `json:"total_granted"`
-	TotalUsed      float64 `json:"total_used"`
-	TotalAvailable float64 `json:"total_available"`
-	EffectiveAt    int64   `json:"effective_at"`
-	ExpiresAt      int64   `json:"expires_at"`
+type yun struct {
+	Code int    `json:"code"`
+	Msg  string `json:"msg"`
+	Data []struct {
+		Return    string `json:"return"`
+		Total     string `json:"total"`
+		Available string `json:"available"`
+		Used      string `json:"used"`
+	} `json:"data"`
 }
 
 // chatGPTResponseBody 响应体
@@ -105,7 +108,7 @@ func completions(messages []chatMessage, apiKey string) (*chatGPTResponseBody, e
 	defer res.Body.Close()
 
 	if res.StatusCode < http.StatusOK || res.StatusCode >= http.StatusBadRequest {
-		return nil, errors.New("response error" + strconv.Itoa(res.StatusCode))
+		return nil, errors.New("response error: " + strconv.Itoa(res.StatusCode))
 	}
 
 	v := new(chatGPTResponseBody)
