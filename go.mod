@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/Baidu-AIP/golang-sdk v1.1.1
-	github.com/FloatTech/AnimeAPI v1.6.1-0.20230409024643-f25135dee0da
+	github.com/FloatTech/AnimeAPI v1.6.1-0.20230716130052-ec46a05ce2d6
 	github.com/FloatTech/ZeroBot-Plugin-Playground v0.0.0-20230419050853-ca63aebb1f2e
 	github.com/FloatTech/floatbox v0.0.0-20230331064925-9af336a84944
 	github.com/FloatTech/gg v1.1.3-0.20230226151425-6ea91286ba08
@@ -54,6 +54,7 @@ require (
 	github.com/faiface/beep v1.1.0 // indirect
 	github.com/fumiama/go-simple-protobuf v0.1.0 // indirect
 	github.com/fumiama/gofastTEA v0.0.10 // indirect
+	github.com/fumiama/imgsz v0.0.2 // indirect
 	github.com/fumiama/imgsz v0.0.2 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.1 // indirect
 	github.com/go-ole/go-ole v1.2.6 // indirect
