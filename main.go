@@ -34,7 +34,7 @@ import (
 
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/chat" // 基础词库
 
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/sleep_manage" // 统计睡眠时间
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/sleepmanage" // 统计睡眠时间
 
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/atri" // ATRI词库
 
@@ -241,6 +241,7 @@ func init() {
 	late := flag.Uint("l", 233, "Response latency (ms).")
 	rsz := flag.Uint("r", 4096, "Receiving buffer ring size.")
 	maxpt := flag.Uint("x", 4, "Max process time (min).")
+	markmsg := flag.Bool("m", false, "Don't mark message as read automatically")
 
 	flag.Parse()
 
@@ -287,7 +288,7 @@ func init() {
 			config.Z.Driver[i] = w
 		}
 		for i, s := range config.S {
-			config.Z.Driver[i+len(config.W)] = driver.NewWebSocketServer(16, s.Url, s.AccessToken)
+			config.Z.Driver[i+len(config.W)] = s
 		}
 		logrus.Infoln("[main] 从", *runcfg, "读取配置文件")
 		return
@@ -300,6 +301,7 @@ func init() {
 		RingLen:        *rsz,
 		Latency:        time.Duration(*late) * time.Millisecond,
 		MaxProcessTime: time.Duration(*maxpt) * time.Minute,
+		MarkMessage:    !*markmsg,
 		Driver:         []zero.Driver{config.W[0]},
 	}
 
@@ -323,7 +325,7 @@ func main() {
 		rand.Seed(time.Now().UnixNano()) //nolint: staticcheck
 	}
 	// 帮助
-	zero.OnFullMatchGroup([]string{"/help", ".help", "菜单"}, zero.OnlyToMe).SetBlock(true).
+	zero.OnFullMatchGroup([]string{"help", "/help", ".help", "菜单"}, zero.OnlyToMe).SetBlock(true).
 		Handle(func(ctx *zero.Ctx) {
 			ctx.SendChain(message.Text(banner.Banner, "\n管理发送\"/服务列表\"查看 bot 功能\n发送\"/用法name\"查看功能用法"))
 		})
