@@ -60,22 +60,22 @@ import (
 	//                          vvvvvvvvvvvvvv                          //
 	//                               vvvv                               //
 	// _ "github.com/FloatTech/ZeroBot-Plugin-Playground/plugin/chatgpt"   // ChatGPT
-	_ "github.com/FloatTech/ZeroBot-Plugin-Playground/plugin/fadian"    // 发癫
-	_ "github.com/FloatTech/ZeroBot-Plugin-Playground/plugin/ottoshout" // 电棍鬼叫
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/ahsai"                // ahsai tts
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/aifalse"              // 服务器监控
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/aipaint"              // ai绘图
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/aiwife"               // 随机老婆
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/alipayvoice"          // 支付宝到账语音
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/autowithdraw"         // 触发者撤回时也自动撤回
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/baidu"                // 百度一下
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/baiduaudit"           // 百度内容审核
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/base16384"            // base16384加解密
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/base64gua"            // base64卦加解密
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/baseamasiro"          // base天城文加解密
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/bilibili"             // b站相关
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/bookreview"           // 哀伤雪刃吧推书记录
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/cangtoushi"           // 藏头诗
+	_ "github.com/FloatTech/ZeroBot-Plugin-Playground/plugin/fadian" // 发癫
+	// _ "github.com/FloatTech/ZeroBot-Plugin-Playground/plugin/ottoshout" // 电棍鬼叫
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/ahsai"        // ahsai tts
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/aifalse"      // 服务器监控
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/aipaint"      // ai绘图
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/aiwife"       // 随机老婆
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/alipayvoice"  // 支付宝到账语音
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/autowithdraw" // 触发者撤回时也自动撤回
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/baidu"        // 百度一下
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/baiduaudit"   // 百度内容审核
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/base16384"    // base16384加解密
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/base64gua"    // base64卦加解密
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/baseamasiro"  // base天城文加解密
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/bilibili"     // b站相关
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/bookreview"   // 哀伤雪刃吧推书记录
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/cangtoushi"   // 藏头诗
 
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/chatgpt"      // ChatGPT
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/choose"       // 选择困难症帮手
@@ -128,6 +128,7 @@ import (
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/novel"        // 铅笔小说网搜索
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/nsfw"         // nsfw图片识别
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/omikuji"      // 浅草寺求签
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/ottoshout"    // 电棍鬼叫
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/pokemon"      // 抽宝可梦
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/qqwife"       // 一群一天一夫一妻制群老婆
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/quan"         // QQ权重查询
