@@ -81,6 +81,7 @@ import (
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/choose"       // 选择困难症帮手
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/chouxianghua" // 说抽象话
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/chrev"        // 英文字符翻转
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/coc"          // coc跑团
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/coser"        // 三次元小姐姐
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/cpstory"      // cp短打
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/danbooru"     // DeepDanbooru二次元图标签识别
@@ -103,11 +104,12 @@ import (
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/hs"           // 炉石
 
 	// _ "github.com/FloatTech/ZeroBot-Plugin/plugin/hyaku"        // 百人一首
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/imgfinder"   // 关键字搜图
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/inject"      // 注入指令
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/jandan"      // 煎蛋网无聊图
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/jiami"       // 兽语加密
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/jikipedia"   // 小鸡词典
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/imgfinder" // 关键字搜图
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/inject"    // 注入指令
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/jandan"    // 煎蛋网无聊图
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/jiami"     // 兽语加密
+
+	// _ "github.com/FloatTech/ZeroBot-Plugin/plugin/jikipedia"   // 小鸡词典
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/jptingroom"  // 日语听力学习材料
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/juejuezi"    // 绝绝子生成器
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/lolicon"     // lolicon 随机图片
@@ -155,8 +157,8 @@ import (
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/wenben"       // 文本指令大全
 
 	// _ "github.com/FloatTech/ZeroBot-Plugin/plugin/wenxinAI"     // 百度文心AI画图
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/what2eat"  // 吃什么
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/what2play" // P社开什么
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/what2eat" // 吃什么
+	// _ "github.com/FloatTech/ZeroBot-Plugin/plugin/what2play" // P社开什么
 
 	// _ "github.com/FloatTech/ZeroBot-Plugin/plugin/wife"          // 吃什么
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/wife"      // 抽老婆

@@ -14,7 +14,7 @@ import (
 )
 
 const (
-	websiteURL = "https://www.aolianfeiallin.top"
+	websiteURL = "https://wzq02.cf:831/"
 	makeURL    = websiteURL + "/make"
 )
 
