@@ -117,7 +117,6 @@ func init() { // 插件主体
 			// 开始搜索图片
 			pics, ok := ctx.State["image_url"].([]string)
 			showPic := false
-			showPic := false
 			if !ok {
 				ctx.SendChain(message.Text("ERROR: 未获取到图片链接"))
 				return
