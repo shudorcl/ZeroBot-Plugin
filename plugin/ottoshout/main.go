@@ -14,7 +14,7 @@ import (
 )
 
 const (
-	websiteURL = "https://wzq02.cf:831/"
+	websiteURL = "https://www.aolianfeiallin.top/"
 	makeURL    = websiteURL + "/make"
 )
 
@@ -33,6 +33,6 @@ func init() { // 插件主体
 			if err != nil {
 				ctx.SendChain(message.Text("ERROR:", err))
 			}
-			ctx.SendChain(message.Record(websiteURL + "/get/" + gjson.ParseBytes(data).Get("id").String() + ".ogg"))
+			ctx.SendChain(message.Record(websiteURL + "/get/" + gjson.ParseBytes(data).Get("id").String() + ".mp3"))
 		})
 }
