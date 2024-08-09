@@ -7,6 +7,9 @@ schema = 3
   [mod."github.com/FloatTech/AnimeAPI"]
     version = "v1.7.1-0.20240530072450-71c23d2f01f8"
     hash = "sha256-NUYNGhjVW5bdpWIeKjBhnVTsjf6OXNqCcqzrRd3c+gE="
+  [mod."github.com/FloatTech/ZeroBot-Plugin-Playground"]
+    version = "v0.0.0-20230419050853-ca63aebb1f2e"
+    hash = "sha256-yD3wdF3nU8jTDKj0kgQEmTjrEVapOYkkATBffm3/OXg="
   [mod."github.com/FloatTech/floatbox"]
     version = "v0.0.0-20240505082030-226ec6713e14"
     hash = "sha256-v296D9T1QzFmcHQJNxJvx7sMtK+Jd1TUHXWqZtIvvf4="
@@ -209,8 +212,8 @@ schema = 3
     version = "v1.1.1"
     hash = "sha256-M2klhPId3Q3T3VGkSbOkYl/2nLHnsG+yMbXkPkyrRdg="
   [mod."github.com/tidwall/pretty"]
-    version = "v1.2.0"
-    hash = "sha256-esRQGsn2Ee/CiySlwyuOICSLdqUkH4P7u8qXszos8Yc="
+    version = "v1.2.1"
+    hash = "sha256-S0uTDDGD8qr415Ut7QinyXljCp0TkL4zOIrlJ+9OMl8="
   [mod."github.com/tklauser/go-sysconf"]
     version = "v0.3.12"
     hash = "sha256-91VBZNb3L2TZkEETF1AE4wnraLoGxKeofUbC5ZiWVHk="
