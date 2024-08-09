@@ -30,6 +30,8 @@ import (
 	//                          vvvvvvvvvvvvvv                          //
 	//                               vvvv                               //
 
+	_ "github.com/FloatTech/zbputils/job" // 定时指令触发器
+
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/antiabuse" // 违禁词
 
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/chat" // 基础词库
@@ -39,8 +41,6 @@ import (
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/atri" // ATRI词库
 
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/manager" // 群管
-
-	_ "github.com/FloatTech/zbputils/job" // 定时指令触发器
 
 	//                               ^^^^                               //
 	//                          ^^^^^^^^^^^^^^                          //
@@ -125,10 +125,9 @@ import (
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/wallet"     // 钱包
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/what2eat"   // 吃什么
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/wife"       // 抽老婆
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/wife"       // 抽老婆
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/wordcount"  // 聊天热词
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/wordcount"  // 聊天热词
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/wordle"     // 猜单词
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/yujn"       // 遇见API
 
 	//                               ^^^^                               //
 	//                          ^^^^^^^^^^^^^^                          //
