@@ -1486,3 +1486,40 @@ func alwaysDoGif(cc *context, value ...string) (string, error) {
 	g := imgfactory.MergeGif(8, turn)
 	return imgfactory.GIF2Base64(g)
 }
+
+func jerk(cc *context, value ...string) (string, error) {
+	_ = value
+	var wg sync.WaitGroup
+	var err error
+	var m sync.Mutex
+	// name := cc.usrdir + "jerk.gif"
+	c := dlrange("jerk", 8, &wg, func(e error) {
+		m.Lock()
+		err = e
+		m.Unlock()
+	})
+	wg.Wait()
+	if err != nil {
+		return "", err
+	}
+	face, err := imgfactory.LoadFirstFrame(cc.headimgsdir[0], 540, 540)
+	if err != nil {
+		return "", err
+	}
+	imgs, err := loadFirstFrames(c, 8)
+	if err != nil {
+		return "", err
+	}
+	worship := []*image.NRGBA{
+		imgs[0].InsertBottom(face.Image(), 0, 0, 0, 0).Image(),
+		imgs[1].InsertBottom(face.Image(), 0, 0, 0, 0).Image(),
+		imgs[2].InsertBottom(face.Image(), 0, 0, 0, 0).Image(),
+		imgs[3].InsertBottom(face.Image(), 0, 0, 0, 0).Image(),
+		imgs[4].InsertBottom(face.Image(), 0, 0, 0, 0).Image(),
+		imgs[5].InsertBottom(face.Image(), 0, 0, 0, 0).Image(),
+		imgs[6].InsertBottom(face.Image(), 0, 0, 0, 0).Image(),
+		imgs[7].InsertBottom(face.Image(), 0, 0, 0, 0).Image(),
+	}
+	g := imgfactory.MergeGif(7, worship)
+	return imgfactory.GIF2Base64(g)
+}

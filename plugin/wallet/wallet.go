@@ -149,4 +149,15 @@ func init() {
 			wallet.SetWalletName(coinName)
 			ctx.SendChain(message.Text("记住啦~"))
 		})
+	en.OnRegex(`^发钱\s?(\[CQ:at,qq=(\d+)\]|(\d+))`, zero.OnlyToMe, zero.SuperUserPermission).SetBlock(true).
+		Handle(func(ctx *zero.Ctx) {
+			fiancee := ctx.State["regex_matched"].([]string)
+			victimID, _ := strconv.ParseInt(fiancee[2]+fiancee[3], 10, 64)
+			err := wallet.InsertWalletOf(victimID, +1000)
+			if err != nil {
+				ctx.SendChain(message.Text("[ERROR]:加钱失败\n", err))
+				return
+			}
+			ctx.SendChain(message.At(victimID), message.Text("加钱成功，钱包增加：", 1000, wallet.GetWalletName()))
+		})
 }

@@ -42,15 +42,15 @@ func init() {
 			return
 		}
 		if equipInfo == (equip{}) {
-			ok, err := dbdata.checkEquipFor(uid)
+			_, err := dbdata.checkEquipFor(uid)
 			if err != nil {
 				ctx.SendChain(message.Text("[ERROR at fish.go.2.1]:", err))
 				return
 			}
-			if !ok {
-				ctx.SendChain(message.At(uid), message.Text("请装备鱼竿后钓鱼", err))
-				return
-			}
+			// if !ok {
+			// 	ctx.SendChain(message.At(uid), message.Text("请装备鱼竿后钓鱼", err))
+			// 	return
+			// }
 			ctx.SendChain(message.Reply(ctx.Event.MessageID), message.Text("你尚未装备鱼竿,是否花费100购买鱼竿?\n回答\"是\"或\"否\""))
 			// 等待用户下一步选择
 			recv, cancel := zero.NewFutureEvent("message", 999, false, zero.RegexRule(`^(是|否)$`), zero.CheckUser(ctx.Event.UserID)).Repeat()

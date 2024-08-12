@@ -119,6 +119,7 @@ var (
 		"远离":     yuanli,
 		"抬棺":     taiguan,
 		"一直":     alwaysDoGif,
+		"打胶":     jerk,
 	}
 )
 
