@@ -1502,7 +1502,7 @@ func jerk(cc *context, value ...string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	face, err := imgfactory.LoadFirstFrame(cc.headimgsdir[0], 540, 540)
+	face, err := imgfactory.LoadFirstFrame(cc.headimgsdir[0], 520, 520)
 	if err != nil {
 		return "", err
 	}
