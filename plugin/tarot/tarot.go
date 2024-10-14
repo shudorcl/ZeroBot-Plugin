@@ -19,8 +19,6 @@ import (
 	"github.com/wdvxdr1123/ZeroBot/message"
 )
 
-const bed = "https://gitcode.net/shudorcl/zbp-tarot/-/raw/master/"
-
 type cardInfo struct {
 	Description        string `json:"description"`
 	ReverseDescription string `json:"reverseDescription"`
@@ -291,37 +289,3 @@ func init() {
 		}
 	})
 }
-
-// func poolimg(ctx *zero.Ctx, imgurl, imgname, cache string) (msg message.MessageSegment, err error) {
-// 	imgfile := cache + "/" + imgname + ".png"
-// 	aimgfile := file.BOTPATH + "/" + imgfile
-// 	m, err := pool.GetImage("pool" + imgname)
-// 	if err == nil {
-// 		msg = message.Image(m.String())
-// 		if ctxext.SendToSelf(ctx)(msg) == 0 {
-// 			msg = msg.Add("cache", "0")
-// 		}
-// 		return
-// 	}
-// 	if file.IsNotExist(aimgfile) {
-// 		var data []byte
-// 		data, err = web.RequestDataWith(web.NewTLS12Client(), imgurl, "GET", "gitcode.net", web.RandUA(), nil)
-// 		if err != nil {
-// 			return
-// 		}
-// 		var f *os.File
-// 		f, err = os.Create(imgfile)
-// 		if err != nil {
-// 			return
-// 		}
-// 		defer f.Close()
-// 		err = os.WriteFile(f.Name(), data, 0755)
-// 		if err != nil {
-// 			return
-// 		}
-// 	}
-// 	m.SetFile(aimgfile)
-// 	_, _ = m.Push(ctxext.SendToSelf(ctx), ctxext.GetMessage(ctx))
-// 	msg = message.Image("file:///" + aimgfile)
-// 	return
-// }
