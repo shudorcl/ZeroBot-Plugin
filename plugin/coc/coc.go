@@ -152,7 +152,7 @@ func init() {
 				}
 			}
 			for i, info := range cocInfo.Attribute {
-				max := info.MaxValue - info.MinValue
+				attributeMax := info.MaxValue - info.MinValue
 				negative := -1
 				if info.MinValue < 0 {
 					negative = 1
@@ -161,7 +161,7 @@ func init() {
 				for i := 0; i < 3; i++ {
 					value += rand.Intn(6) + 1
 				}
-				value = max*value*5/100 + negative*info.MinValue
+				value = attributeMax*value*5/100 + negative*info.MinValue
 				cocInfo.Attribute[i].Value = value
 			}
 			err = savePanel(cocInfo, gid, uid)
@@ -195,7 +195,7 @@ func getFileURLbyFileName(ctx *zero.Ctx, fileName string) (fileSearchName, fileU
 		for _, fileNameOflist := range files {
 			if strings.Contains(fileNameOflist.Get("file_name").String(), fileName) {
 				fileSearchName = fileNameOflist.Get("file_name").String()
-				fileURL = ctx.GetThisGroupFileUrl(fileNameOflist.Get("busid").Int(), fileNameOflist.Get("file_id").String())
+				fileURL = ctx.GetThisGroupFileURL(fileNameOflist.Get("busid").Int(), fileNameOflist.Get("file_id").String())
 				return
 			}
 		}
@@ -221,7 +221,7 @@ func getFileURLbyfolderID(ctx *zero.Ctx, fileName, folderid string) (fileSearchN
 		for _, fileNameOflist := range files {
 			if strings.Contains(fileNameOflist.Get("file_name").String(), fileName) {
 				fileSearchName = fileNameOflist.Get("file_name").String()
-				fileURL = ctx.GetThisGroupFileUrl(fileNameOflist.Get("busid").Int(), fileNameOflist.Get("file_id").String())
+				fileURL = ctx.GetThisGroupFileURL(fileNameOflist.Get("busid").Int(), fileNameOflist.Get("file_id").String())
 				return
 			}
 		}

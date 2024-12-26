@@ -78,44 +78,45 @@ import (
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/choose"            // 选择困难症帮手
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/chouxianghua"      // 说抽象话
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/chrev"             // 英文字符翻转
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/coc"               // coc跑团
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/cpstory"           // cp短打
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/drawlots"          // 多功能抽签
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/driftbottle"       // 漂流瓶
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/emojimix"          // 合成emoji
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/event"             // 好友申请群聊邀请事件处理
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/font"              // 渲染任意文字到图片
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/fortune"           // 运势
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/gif"               // 制图
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/github"            // 搜索GitHub仓库
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/inject"            // 注入指令
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/jandan"            // 煎蛋网无聊图
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/jptingroom"        // 日语听力学习材料
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/lolicon"           // lolicon 随机图片
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/lolimi"            // 桑帛云 API
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/mcfish"            // 钓鱼模拟器
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/midicreate"        // 简易midi音乐制作
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/music"             // 点歌
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/nativesetu"        // 本地涩图
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/nbnhhsh"           // 拼音首字母缩写释义工具
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/nwife"             // 本地老婆
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/omikuji"           // 浅草寺求签
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/ottoshout"         // 电棍鬼叫
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/qqwife"            // 一群一天一夫一妻制群老婆
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/reborn"            // 投胎
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/robbery"           // 打劫群友的ATRI币
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/runcode"           // 在线运行代码
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/saucenao"          // 以图搜图
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/score"             // 分数
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/setutime"          // 来份涩图
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/shindan"           // 测定
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/tarot"             // 抽塔罗牌
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/wallet"            // 钱包
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/what2eat"          // 抽老婆
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/wife"              // 吃什么
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/wife"              // 抽老婆
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/wordcount"         // 聊天热词
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/yujn"              // 遇见API
+
+	// _ "github.com/FloatTech/ZeroBot-Plugin/plugin/coc"               // coc跑团
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/cpstory"     // cp短打
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/drawlots"    // 多功能抽签
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/driftbottle" // 漂流瓶
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/emojimix"    // 合成emoji
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/event"       // 好友申请群聊邀请事件处理
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/font"        // 渲染任意文字到图片
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/fortune"     // 运势
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/gif"         // 制图
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/github"      // 搜索GitHub仓库
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/inject"      // 注入指令
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/jandan"      // 煎蛋网无聊图
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/jptingroom"  // 日语听力学习材料
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/lolicon"     // lolicon 随机图片
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/lolimi"      // 桑帛云 API
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/mcfish"      // 钓鱼模拟器
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/midicreate"  // 简易midi音乐制作
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/music"       // 点歌
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/nativesetu"  // 本地涩图
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/nbnhhsh"     // 拼音首字母缩写释义工具
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/nwife"       // 本地老婆
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/omikuji"     // 浅草寺求签
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/ottoshout"   // 电棍鬼叫
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/qqwife"      // 一群一天一夫一妻制群老婆
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/reborn"      // 投胎
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/robbery"     // 打劫群友的ATRI币
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/runcode"     // 在线运行代码
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/saucenao"    // 以图搜图
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/score"       // 分数
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/setutime"    // 来份涩图
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/shindan"     // 测定
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/tarot"       // 抽塔罗牌
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/wallet"      // 钱包
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/what2eat"    // 抽老婆
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/wife"        // 吃什么
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/wife"        // 抽老婆
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/wordcount"   // 聊天热词
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/yujn"        // 遇见API
 
 	// _ "github.com/FloatTech/ZeroBot-Plugin/plugin/wtf"           // 鬼东西
 
