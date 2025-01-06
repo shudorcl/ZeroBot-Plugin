@@ -60,19 +60,17 @@ func init() {
 	}).ApplySingle(ctxext.DefaultSingle)
 
 	for _, r := range reverse {
-		for _, t := range arcanaType {
-			if t == "MinorArcana" {
-				for _, ma := range minorArcanaType {
-					cachePath := filepath.Join(engine.DataFolder(), r, t, ma)
-					_ = os.RemoveAll(cachePath)
+		for _, at := range arcanaType {
+			if at == "MinorArcana" {
+				for _, mat := range minorArcanaType {
+					cachePath := filepath.Join(engine.DataFolder(), r, at, mat)
 					err := os.MkdirAll(cachePath, 0755)
 					if err != nil {
 						panic(err)
 					}
 				}
 			} else {
-				cachePath := filepath.Join(engine.DataFolder(), r, t)
-				_ = os.RemoveAll(cachePath)
+				cachePath := filepath.Join(engine.DataFolder(), r, at)
 				err := os.MkdirAll(cachePath, 0755)
 				if err != nil {
 					panic(err)
@@ -314,37 +312,3 @@ func init() {
 		}
 	})
 }
-
-// func poolimg(ctx *zero.Ctx, imgurl, imgname, cache string) (msg message.MessageSegment, err error) {
-// 	imgfile := cache + "/" + imgname + ".png"
-// 	aimgfile := file.BOTPATH + "/" + imgfile
-// 	m, err := pool.GetImage("pool" + imgname)
-// 	if err == nil {
-// 		msg = message.Image(m.String())
-// 		if ctxext.SendToSelf(ctx)(msg) == 0 {
-// 			msg = msg.Add("cache", "0")
-// 		}
-// 		return
-// 	}
-// 	if file.IsNotExist(aimgfile) {
-// 		var data []byte
-// 		data, err = web.RequestDataWith(web.NewTLS12Client(), imgurl, "GET", "gitcode.net", web.RandUA(), nil)
-// 		if err != nil {
-// 			return
-// 		}
-// 		var f *os.File
-// 		f, err = os.Create(imgfile)
-// 		if err != nil {
-// 			return
-// 		}
-// 		defer f.Close()
-// 		err = os.WriteFile(f.Name(), data, 0755)
-// 		if err != nil {
-// 			return
-// 		}
-// 	}
-// 	m.SetFile(aimgfile)
-// 	_, _ = m.Push(ctxext.SendToSelf(ctx), ctxext.GetMessage(ctx))
-// 	msg = message.Image("file:///" + aimgfile)
-// 	return
-// }
