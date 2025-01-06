@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"math/rand"
 	"os"
+	"path/filepath"
 	"strconv"
 	"strings"
 
@@ -43,7 +44,7 @@ var (
 	majorArcanaName = make([]string, 0, 80)
 	formationName   = make([]string, 0, 10)
 	reverse         = [...]string{"", "Reverse/"}
-	arcanaType      = [...]string{"MajorArcana/", "MinorArcana/"}
+	arcanaType      = [...]string{"MajorArcana", "MinorArcana"}
 	minorArcanaType = [...]string{"Cups", "Pentacles", "Swords", "Wands"}
 )
 
@@ -58,24 +59,20 @@ func init() {
 		PublicDataFolder: "Tarot",
 	}).ApplySingle(ctxext.DefaultSingle)
 
-	cache := engine.DataFolder() + "cache"
-	_ = os.RemoveAll(cache)
-	err := os.MkdirAll(cache, 0755)
-	if err != nil {
-		panic(err)
-	}
 	for _, r := range reverse {
 		for _, t := range arcanaType {
-			if t == "MinorArcana/" {
+			if t == "MinorArcana" {
 				for _, ma := range minorArcanaType {
-					cachePath := engine.DataFolder() + r + t + ma
+					cachePath := filepath.Join(engine.DataFolder(), r, t, ma)
+					_ = os.RemoveAll(cachePath)
 					err := os.MkdirAll(cachePath, 0755)
 					if err != nil {
 						panic(err)
 					}
 				}
 			} else {
-				cachePath := engine.DataFolder() + r + t
+				cachePath := filepath.Join(engine.DataFolder(), r, t)
+				_ = os.RemoveAll(cachePath)
 				err := os.MkdirAll(cachePath, 0755)
 				if err != nil {
 					panic(err)
