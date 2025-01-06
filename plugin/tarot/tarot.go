@@ -42,6 +42,9 @@ var (
 	formationMap    = make(map[string]formation, 10)
 	majorArcanaName = make([]string, 0, 80)
 	formationName   = make([]string, 0, 10)
+	reverse         = [...]string{"", "Reverse/"}
+	arcanaType      = [...]string{"MajorArcana/", "MinorArcana/"}
+	minorArcanaType = [...]string{"Cups", "Pentacles", "Swords", "Wands"}
 )
 
 func init() {
@@ -61,7 +64,25 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
-
+	for _, r := range reverse {
+		for _, t := range arcanaType {
+			if t == "MinorArcana/" {
+				for _, ma := range minorArcanaType {
+					cachePath := engine.DataFolder() + r + t + ma
+					err := os.MkdirAll(cachePath, 0755)
+					if err != nil {
+						panic(err)
+					}
+				}
+			} else {
+				cachePath := engine.DataFolder() + r + t
+				err := os.MkdirAll(cachePath, 0755)
+				if err != nil {
+					panic(err)
+				}
+			}
+		}
+	}
 	getTarot := fcext.DoOnceOnSuccess(func(ctx *zero.Ctx) bool {
 		data, err := engine.GetLazyData("tarots.json", true)
 		if err != nil {
@@ -102,7 +123,6 @@ func init() {
 		n := 1
 		reasons := [...]string{"您抽到的是~\n", "锵锵锵，塔罗牌的预言是~\n", "诶，让我看看您抽到了~\n"}
 		position := [...]string{"『正位』", "『逆位』"}
-		reverse := [...]string{"", "Reverse/"}
 		start := 0
 		length := 22
 		if match != "" {
