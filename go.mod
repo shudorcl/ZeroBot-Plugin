@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/Baidu-AIP/golang-sdk v1.1.1
-	github.com/FloatTech/AnimeAPI v1.7.1-0.20241106152938-2a63f2f5f8ce
+	github.com/FloatTech/AnimeAPI v1.7.1-0.20250112071824-df647215d106
 	github.com/FloatTech/ZeroBot-Plugin-Playground v0.0.0-20230419050853-ca63aebb1f2e
 	github.com/FloatTech/floatbox v0.0.0-20241106130736-5aea0a935024
 	github.com/FloatTech/gg v1.1.3
@@ -45,7 +45,7 @@ require (
 	github.com/wdvxdr1123/ZeroBot v1.8.0
 	gitlab.com/gomidi/midi/v2 v2.1.7
 	golang.org/x/image v0.21.0
-	golang.org/x/sys v0.26.0
+	golang.org/x/sys v0.29.0
 	golang.org/x/text v0.19.0
 	gopkg.in/yaml.v3 v3.0.1
 )

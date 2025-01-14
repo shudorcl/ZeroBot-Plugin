@@ -5,8 +5,8 @@ schema = 3
     version = "v1.1.1"
     hash = "sha256-hKshA0K92bKuK92mmtM0osVmqLJcSbeobeWSDpQoRCo="
   [mod."github.com/FloatTech/AnimeAPI"]
-    version = "v1.7.1-0.20241106152938-2a63f2f5f8ce"
-    hash = "sha256-gLgM4mnofQmcqE1ylHa06Eh3czMkJ10nCfsnu4Cyxas="
+    version = "v1.7.1-0.20250112071824-df647215d106"
+    hash = "sha256-z2g+JVlY+X8zEPMNuqJx3A/+Eu1FDFtbh/3jdkPPDrs="
   [mod."github.com/FloatTech/floatbox"]
     version = "v0.0.0-20241106130736-5aea0a935024"
     hash = "sha256-hSKmkzpNZwXRo0qm4G+1lXkNzWMwV9leYlYLQuzWx3M="
@@ -236,8 +236,8 @@ schema = 3
     version = "v0.27.0"
     hash = "sha256-GrlN5isYeEVrPZVAHK0MDQatttbnyfSPoWJHj0xqhjk="
   [mod."golang.org/x/sys"]
-    version = "v0.26.0"
-    hash = "sha256-YjklsWNhx4g4TaWRWfFe1TMFKujbqiaNvZ38bfI35fM="
+    version = "v0.29.0"
+    hash = "sha256-qfsodJQ1H1CBI8yQWOvsXJgY5qHmiuw566HrrIseYHI="
   [mod."golang.org/x/text"]
     version = "v0.19.0"
     hash = "sha256-C92pSYLLUQ2NKKcc60wpoSJ5UWAfnWkmd997C13fXdU="
