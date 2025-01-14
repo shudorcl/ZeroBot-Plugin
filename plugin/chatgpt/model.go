@@ -14,7 +14,7 @@ import (
 )
 
 type model struct {
-	sql *sql.Sqlite
+	sql sql.Sqlite
 	sync.RWMutex
 }
 
@@ -39,9 +39,9 @@ type gtoqq struct {
 }
 
 var (
-	db    = &model{sql: &sql.Sqlite{}}
+	db    = &model{}
 	getdb = fcext.DoOnceOnSuccess(func(ctx *zero.Ctx) bool {
-		db.sql.DBPath = engine.DataFolder() + "chatgpt.db"
+		db.sql = sql.New(engine.DataFolder() + "chatgpt.db")
 		err := db.sql.Open(time.Hour * 24)
 		if err != nil {
 			ctx.SendChain(message.Text("ERROR: ", err))
