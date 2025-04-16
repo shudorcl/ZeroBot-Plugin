@@ -46,6 +46,10 @@ var (
 	noreplyat    = false
 )
 
+const (
+	silliconApi = "https://api.siliconflow.cn/v1/chat/completions"
+)
+
 func init() {
 	mf := en.DataFolder() + "model.txt"
 	sf := en.DataFolder() + "system.txt"
@@ -110,7 +114,7 @@ func init() {
 		var x deepinfra.API
 		y := &x
 		if api == nil {
-			x = deepinfra.NewAPI(deepinfra.APIDeepInfra, key)
+			x = deepinfra.NewAPI(silliconApi, key)
 			atomic.StorePointer((*unsafe.Pointer)(unsafe.Pointer(&api)), unsafe.Pointer(&x))
 		} else {
 			y = api
