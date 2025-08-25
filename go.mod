@@ -4,6 +4,8 @@ go 1.20
 
 require (
 	github.com/Baidu-AIP/golang-sdk v1.1.1
+	github.com/FloatTech/AnimeAPI v1.7.1-0.20250717123723-d300df538b46
+	github.com/FloatTech/floatbox v0.0.0-20250513111443-adba80e84e80
 	github.com/FloatTech/AnimeAPI v1.7.1-0.20250217140215-4856397458c9
 	github.com/FloatTech/ZeroBot-Plugin-Playground v0.0.0-20230419050853-ca63aebb1f2e
 	github.com/FloatTech/floatbox v0.0.0-20241106130736-5aea0a935024
@@ -13,16 +15,17 @@ require (
 	github.com/FloatTech/sqlite v1.7.1
 	github.com/FloatTech/ttl v0.0.0-20240716161252-965925764562
 	github.com/FloatTech/zbpctrl v1.7.0
-	github.com/FloatTech/zbputils v1.7.2-0.20250218141621-395d42447fcd
+	github.com/FloatTech/zbputils v1.7.2-0.20250812085410-2741050f465f
 	github.com/RomiChan/syncx v0.0.0-20240418144900-b7402ffdebc7
 	github.com/RomiChan/websocket v1.4.3-0.20220227141055-9b2c6168c9c5
+	github.com/Tnze/go-mc v1.20.2
 	github.com/antchfx/htmlquery v1.3.4
 	github.com/corona10/goimagehash v1.1.0
 	github.com/davidscholberg/go-durationfmt v0.0.0-20170122144659-64843a2083d3
 	github.com/disintegration/imaging v1.6.2
 	github.com/fumiama/ahsai v0.1.0
 	github.com/fumiama/cron v1.3.0
-	github.com/fumiama/deepinfra v0.0.0-20250214082557-71569e85d503
+	github.com/fumiama/deepinfra v0.0.0-20250812083039-f1b27f21d8c9
 	github.com/fumiama/go-base16384 v1.7.0
 	github.com/fumiama/go-registry v0.2.7
 	github.com/fumiama/gotracemoe v0.0.3
@@ -30,7 +33,9 @@ require (
 	github.com/fumiama/slowdo v0.0.0-20241001074058-27c4fe5259a4
 	github.com/fumiama/terasu v0.0.0-20241027183601-987ab91031ce
 	github.com/fumiama/unibase2n v0.0.0-20240530074540-ec743fd5a6d6
+	github.com/go-ego/gse v0.80.3
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0
+	github.com/google/uuid v1.6.0
 	github.com/jinzhu/gorm v1.9.16
 	github.com/jozsefsallai/gophersauce v1.0.1
 	github.com/kanrichan/resvg-go v0.0.2-0.20231001163256-63db194ca9f5
@@ -43,11 +48,11 @@ require (
 	github.com/sirupsen/logrus v1.9.3
 	github.com/tidwall/gjson v1.18.0
 	github.com/wcharczuk/go-chart/v2 v2.1.2
-	github.com/wdvxdr1123/ZeroBot v1.8.0
+	github.com/wdvxdr1123/ZeroBot v1.8.2-0.20250804063440-ccc03e33ac20
 	gitlab.com/gomidi/midi/v2 v2.1.7
-	golang.org/x/image v0.21.0
-	golang.org/x/sys v0.29.0
-	golang.org/x/text v0.21.0
+	golang.org/x/image v0.24.0
+	golang.org/x/sys v0.30.0
+	golang.org/x/text v0.22.0
 	gopkg.in/yaml.v3 v3.0.1
 )
 
@@ -60,11 +65,10 @@ require (
 	github.com/faiface/beep v1.1.0 // indirect
 	github.com/fumiama/go-simple-protobuf v0.2.0 // indirect
 	github.com/fumiama/gofastTEA v0.0.10 // indirect
-	github.com/fumiama/imgsz v0.0.4 // indirect
+	github.com/fumiama/imgsz v0.0.2 // indirect
 	github.com/gabriel-vasile/mimetype v1.0.4 // indirect
 	github.com/go-ole/go-ole v1.2.6 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
-	github.com/google/uuid v1.6.0 // indirect
 	github.com/hajimehoshi/oto v0.7.1 // indirect
 	github.com/jfreymuth/oggvorbis v1.0.1 // indirect
 	github.com/jfreymuth/vorbis v1.0.0 // indirect
@@ -85,9 +89,10 @@ require (
 	github.com/tidwall/pretty v1.2.1 // indirect
 	github.com/tklauser/go-sysconf v0.3.12 // indirect
 	github.com/tklauser/numcpus v0.6.1 // indirect
+	github.com/vcaesar/cedar v0.20.2 // indirect
 	github.com/yusufpapurcu/wmi v1.2.4 // indirect
-	golang.org/x/exp v0.0.0-20190306152737-a1d7652674e8 // indirect
-	golang.org/x/mobile v0.0.0-20190415191353-3e0bab5405d6 // indirect
+	golang.org/x/exp/shiny v0.0.0-20250305212735-054e65f0b394 // indirect
+	golang.org/x/mobile v0.0.0-20231127183840-76ac6878050a // indirect
 	golang.org/x/net v0.33.0 // indirect
 	modernc.org/libc v1.61.0 // indirect
 	modernc.org/mathutil v1.6.0 // indirect

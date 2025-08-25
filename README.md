@@ -194,6 +194,18 @@ zerobot [-h] [-m] [-n nickname] [-t token] [-u url] [-g url] [-p prefix] [-d|w] 
 
 </details>
 <details>
+  <summary>违禁词检测</summary>
+
+  `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/antiabuse"
+  `
+  - [x] 添加违禁词
+  
+  - [x] 删除违禁词
+  
+  - [x] 查看违禁词
+
+</details>
+<details>
   <summary>ATRI</summary>
 
   `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/atri"
@@ -255,6 +267,8 @@ zerobot [-h] [-m] [-n nickname] [-t token] [-u url] [-g url] [-p prefix] [-d|w] 
   - [x] 翻牌
   
   - [x] 赞我
+  
+  - [x] 群签到
 
   - [x] [开启 | 关闭]入群验证
 
@@ -275,6 +289,20 @@ zerobot [-h] [-m] [-n nickname] [-t token] [-u url] [-g url] [-p prefix] [-d|w] 
   - 注：使用gist加群自动审批，请在群介绍添加以下说明，同时开启`需要回答问题并由管理员审核`：加群请在github新建一个gist，其文件名为本群群号的字符串的md5(小写)，内容为一行，是当前unix时间戳(10分钟内有效)。然后请将您的用户名和gist哈希(小写)按照username/gisthash的格式填写到回答即可。
 
   - 设置欢迎语可选添加参数说明：{at}可在发送时艾特被欢迎者 {nickname}是被欢迎者名字 {avatar}是被欢迎者头像 {uid}是被欢迎者QQ号 {gid}是当前群群号 {groupname} 是当前群群名
+
+</details>
+<details>
+  <summary>群应用：AI声聊</summary>
+
+  `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/airecord"`
+
+  - [x] 设置AI语音群号1048452984(tips：机器人任意所在群聊即可)
+
+  - [x] 设置AI语音模型
+
+  - [x] 查看AI语音配置
+
+  - [x] 发送AI语音xxx
 
 </details>
 <details>
@@ -386,6 +414,18 @@ print("run[CQ:image,file="+j["img"]+"]")
 
 </details>
 <details>
+  <summary>aiimage</summary>
+
+  `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/aiimage"`
+
+  - [x] 设置AI画图密钥xxx	
+  - [x] 设置AI画图接口地址https://api.siliconflow.cn/v1/images/generations
+  - [x] 设置AI画图模型名Kwai-Kolors/Kolors
+  - [x] 查看AI画图配置
+  - [x] AI画图 [描述]
+
+</details>
+<details>
   <summary>AIWife</summary>
 
   `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/aiwife"`
@@ -399,6 +439,18 @@ print("run[CQ:image,file="+j["img"]+"]")
   `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/alipayvoice"`
 
   - [x] 支付宝到账 1
+
+</details>
+<details>
+  <summary>AnimeTrace 动画/Galgame识别</summary>
+
+  `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/animetrace"`
+
+  基于[AnimeTrace](https://ai.animedb.cn/)API  的识图搜索插件
+  
+  - [x] Gal识图 | Gal识图 [模型名]
+
+  - [x] 动漫识图 | 动漫识图 2 | 动漫识图 [模型名]
 
 </details>
 <details>
@@ -951,6 +1003,28 @@ print("run[CQ:image,file="+j["img"]+"]")
 
 </details>
 <details>
+  <summary>Minecraft服务器监控&订阅</summary>
+
+`import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/minecraftobserver"`
+
+- [x] mc服务器状态 [服务器IP/URI]
+- [x] mc服务器添加订阅 [服务器IP/URI]
+- [x] mc服务器取消订阅 [服务器IP/URI]
+- [x] mc服务器订阅拉取 （需要插件定时任务配合使用，全局只需要设置一个）
+  - 使用job插件设置定时, 对话例子如下:：
+    - 记录在"@every 1m"触发的指令
+    - （机器人回答：您的下一条指令将被记录，在@@every 1m时触发）
+    - mc服务器订阅拉取
+</details>
+<details>
+  <summary>Movies猫眼电影查询</summary>
+
+`import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/movies"`
+
+- [x] 今日电影
+- [x] 预售电影
+</details>
+<details>
   <summary>摸鱼</summary>
 
   `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/moyu"`
@@ -992,6 +1066,10 @@ print("run[CQ:image,file="+j["img"]+"]")
   - [x] 酷我点歌[xxx]
 
   - [x] 酷狗点歌[xxx]
+  
+  - [x] qq点歌[xxx]
+  
+  - [x] 咪咕点歌[xxx]
 
 </details>
 <details>
@@ -1430,7 +1508,7 @@ print("run[CQ:image,file="+j["img"]+"]")
 
   `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/word_count"`
 
-  - [x] 热词 [群号] [消息数目]|热词 123456 1000
+  - [x] 热词 [消息数目]|热词 1000
 
 </details>
 <details>
@@ -1544,11 +1622,22 @@ print("run[CQ:image,file="+j["img"]+"]")
 
   - [x] 设置AI聊天触发概率10
   - [x] 设置AI聊天温度80
+  - [x] 设置AI聊天接口类型[OpenAI|OLLaMA|GenAI]
+  - [x] 设置AI聊天(不)支持系统提示词
+  - [x] 设置AI聊天接口地址https://api.siliconflow.cn/v1/chat/completions
   - [x] 设置AI聊天密钥xxx
-  - [x] 设置AI聊天模型名xxx
+  - [x] 设置AI聊天模型名Qwen/Qwen3-8B
+  - [x] 查看AI聊天系统提示词
+  - [x] 重置AI聊天系统提示词
   - [x] 设置AI聊天系统提示词xxx
   - [x] 设置AI聊天分隔符`</think>`(留空则清除)
   - [x] 设置AI聊天(不)响应AT
+  - [x] 设置AI聊天最大长度4096
+  - [x] 设置AI聊天TopP 0.9
+  - [x] 设置AI聊天(不)以AI语音输出
+  - [x] 查看AI聊天配置 
+  - [x] 重置AI聊天
+  - [x] 群聊总结 [消息数目]|群聊总结 1000
 
 </details>
 <details>

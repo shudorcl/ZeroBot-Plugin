@@ -50,6 +50,7 @@ const (
 		"- 列出所有提醒\n" +
 		"- 翻牌\n" +
 		"- 赞我\n" +
+		"- 群签到\n" +
 		"- 对信息回复: 回应表情 [表情]\n" +
 		"- 设置欢迎语XXX 可选添加 [{at}] [{nickname}] [{avatar}] [{uid}] [{gid}] [{groupname}]\n" +
 		"- 测试欢迎语\n" +
@@ -156,7 +157,7 @@ func init() { // 插件主体
 			ctx.SendChain(message.Text("全员自闭结束~"))
 		})
 	// 禁言
-	engine.OnMessage(zero.NewPattern().Text("^禁言").At().Text("(\\d+)\\s*(.*)").AsRule(), zero.OnlyGroup, zero.AdminPermission).SetBlock(true).
+	engine.OnMessage(zero.NewPattern(nil).Text("^禁言").At().Text("(\\d+)\\s*(.*)").AsRule(), zero.OnlyGroup, zero.AdminPermission).SetBlock(true).
 		Handle(func(ctx *zero.Ctx) {
 			parsed := ctx.State[zero.KeyPattern].([]zero.PatternParsed)
 			duration := math.Str2Int64(parsed[2].Text()[1])
@@ -405,6 +406,12 @@ func init() { // 插件主体
 			ctx.SendLike(ctx.Event.UserID, 10)
 			ctx.SendChain(message.Reply(ctx.Event.MessageID), message.Text("给你赞了10下哦，记得回我~"))
 		})
+	// 群签到
+	engine.OnFullMatch("群签到", zero.OnlyGroup).SetBlock(true).Limit(ctxext.LimitByUser).
+		Handle(func(ctx *zero.Ctx) {
+			ctx.SetGroupSign(ctx.Event.GroupID)
+			ctx.SendChain(message.Text("群签到成功，可在手机端输入框中的打卡查看"))
+		})
 	facere := regexp.MustCompile(`\[CQ:face,id=(\d+)\]`)
 	// 给消息回应表情
 	engine.OnRegex(`^\[CQ:reply,id=(-?\d+)\].*回应表情\s*(.+)\s*$`, zero.AdminPermission, zero.OnlyGroup).SetBlock(true).
@@ -650,7 +657,7 @@ func init() { // 插件主体
 		if rsp.RetCode == 0 {
 			ctx.SendChain(message.Text(option, "成功"))
 		} else {
-			ctx.SendChain(message.Text(option, "失败, 信息: ", rsp.Msg, "解释: ", rsp.Wording))
+			ctx.SendChain(message.Text(option, "失败, 信息: ", rsp.Message, "解释: ", rsp.Wording))
 		}
 	})
 	engine.OnCommand("精华列表", zero.OnlyGroup, zero.AdminPermission).SetBlock(true).Limit(ctxext.LimitByUser).Handle(func(ctx *zero.Ctx) {
@@ -699,7 +706,7 @@ func init() { // 插件主体
 		if rsp.RetCode == 0 {
 			ctx.SendChain(message.Text("取消成功"))
 		} else {
-			ctx.SendChain(message.Text("取消失败, 信息: ", rsp.Msg, "解释: ", rsp.Wording))
+			ctx.SendChain(message.Text("取消失败, 信息: ", rsp.Message, "解释: ", rsp.Wording))
 		}
 	})
 }
