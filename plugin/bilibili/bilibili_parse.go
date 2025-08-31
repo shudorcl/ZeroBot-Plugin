@@ -136,12 +136,12 @@ func handleVideo(ctx *zero.Ctx) {
 		}
 	}
 	ctx.SendChain(msg...)
-	downLoadMsg, err := getVideoDownload(cfg, card, cachePath)
-	if err != nil {
-		ctx.SendChain(message.Text("ERROR: ", err))
-		return
-	}
-	ctx.SendChain(downLoadMsg...)
+	// downLoadMsg, err := getVideoDownload(cfg, card, cachePath)
+	// if err != nil {
+	// 	ctx.SendChain(message.Text("ERROR: ", err))
+	// 	return
+	// }
+	// ctx.SendChain(downLoadMsg...)
 }
 
 func handleDynamic(ctx *zero.Ctx) {
