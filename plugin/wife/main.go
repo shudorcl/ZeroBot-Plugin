@@ -3,7 +3,9 @@ package wife
 
 import (
 	"encoding/json"
+	"fmt"
 	"os"
+	"regexp"
 	"strings"
 
 	fcext "github.com/FloatTech/floatbox/ctxext"
@@ -14,6 +16,16 @@ import (
 	zero "github.com/wdvxdr1123/ZeroBot"
 	"github.com/wdvxdr1123/ZeroBot/message"
 )
+
+var re = regexp.MustCompile(`^\[(.*?)\](.*)\..*$`)
+
+func card2name(card string) (string, string) {
+	match := re.FindStringSubmatch(card)
+	if len(match) >= 3 {
+		return match[1], match[2]
+	}
+	return "", ""
+}
 
 func init() {
 	engine := control.AutoRegister(&ctrl.Options[*zero.Ctx]{
@@ -44,21 +56,28 @@ func init() {
 			card := cards[fcext.RandSenderPerDayN(ctx.Event.UserID, len(cards))]
 			data, err := engine.GetLazyData("wives/"+card, true)
 			card, _, _ = strings.Cut(card, ".")
+			var msgText string
+			work, name := card2name(card)
+			if work != "" && name != "" {
+				msgText = fmt.Sprintf("今天的二次元老婆是~来自【%s】的【%s】哒", work, name)
+			} else {
+				msgText = fmt.Sprintf("今天的二次元老婆是~【%s】哒", card)
+			}
 			if err != nil {
 				ctx.SendChain(
 					message.At(ctx.Event.UserID),
-					message.Text("今天的二次元老婆是~【", card, "】哒\n【图片下载失败: ", err, "】"),
+					message.Text(msgText, "\n【图片下载失败: ", err, "】"),
 				)
 				return
 			}
 			if id := ctx.SendChain(
 				message.At(ctx.Event.UserID),
-				message.Text("今天的二次元老婆是~【", card, "】哒"),
+				message.Text(msgText),
 				message.ImageBytes(data),
 			); id.ID() == 0 {
 				ctx.SendChain(
 					message.At(ctx.Event.UserID),
-					message.Text("今天的二次元老婆是~【", card, "】哒\n【图片发送失败, 请联系维护者】"),
+					message.Text(msgText, "\n【图片发送失败, 多半是被夹了，请联系维护者】"),
 				)
 			}
 		})
