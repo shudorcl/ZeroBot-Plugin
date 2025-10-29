@@ -1443,45 +1443,53 @@ func alwaysDoGif(cc *context, value ...string) (string, error) {
 	var err error
 	var face []*imgfactory.Factory
 	// name := cc.usrdir + "AlwaysDo.gif"
-	face, err = imgfactory.LoadAllTrueFrames(cc.headimgsdir[0], 500, 500)
+	face, err = imgfactory.LoadAllTrueFrames(cc.headimgsdir[0], 0, 0)
 	if err != nil {
 		// 载入失败尝试载入第一帧
 		face = nil
-		first, err := imgfactory.LoadFirstFrame(cc.headimgsdir[0], 500, 500)
+		first, err := imgfactory.LoadFirstFrame(cc.headimgsdir[0], 0, 0)
 		if err != nil {
 			return "", err
 		}
 		face = append(face, imgfactory.NewFactory(first.Image()))
 	}
-	canvas := gg.NewContext(500, 600)
-	canvas.SetColor(color.Black)
+	// 画布
+	xLength := face[0].Image().Bounds().Size().X
+	yLength := face[0].Image().Bounds().Size().Y
+	canvas := gg.NewContext(xLength, yLength+100)
+	// 底色
+	canvas.SetColor(color.White)
+	canvas.DrawRectangle(0, 0, float64(xLength), float64(yLength+100))
+	canvas.Fill()
+	// 加字
 	data, err := file.GetLazyData(text.BoldFontFile, control.Md5File, true)
 	if err != nil {
 		return "", err
 	}
-	err = canvas.ParseFontFace(data, 40)
+	err = canvas.ParseFontFace(data, 60)
 	if err != nil {
 		return "", err
 	}
 	length := len(face)
-	if length > 50 {
-		length = 50
+	if length > 60 {
+		length = 60
 	}
 	arg := "要我一直"
 	l, _ := canvas.MeasureString(arg)
-	if l > 500 {
+	if l > float64(xLength) {
 		return "", errors.New("文字消息太长了")
 	}
+	_ = canvas.ParseFontFace(data, 60)
+	canvas.SetColor(color.Black)
+	canvas.DrawString(arg, float64(xLength)/2+30-l, float64(yLength+80))
+	canvas.DrawString("吗", float64(xLength)/2+120, float64(yLength+80))
+	// 填充gif
 	turn := make([]*image.NRGBA, length)
 	for i, f := range face {
-		canvas := gg.NewContext(500, 600)
-		canvas.DrawImage(f.Image(), 0, 0)
-		canvas.SetColor(color.Black)
-		_ = canvas.ParseFontFace(data, 40)
-		canvas.DrawString(arg, 280-l, 560)
-		canvas.DrawImage(imgfactory.Size(f.Image(), 90, 90).Image(), 280, 505)
-		canvas.DrawString("吗", 370, 560)
-		turn[i] = imgfactory.Size(canvas.Image(), 0, 0).Image()
+		// 插入上部
+		flame := imgfactory.Size(canvas.Image(), 0, 0).InsertUp(f.Image(), 0, 0, 0, 0).Image()
+		flame = imgfactory.Size(flame, 0, 0).InsertUp(f.Image(), 90, 90, xLength/2+30, yLength+5).Image()
+		turn[i] = flame
 	}
 	g := imgfactory.MergeGif(8, turn)
 	return imgfactory.GIF2Base64(g)
