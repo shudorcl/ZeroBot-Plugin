@@ -6,4 +6,4 @@
  go env -w GO111MODULE=auto
  go mod tidy
  go generate main.go
- go build -ldflags "-s -w -checklinkname=0" -o zbp%filename% -trimpath
+ go build -ldflags "-s -w" -o zbp%filename% -trimpath
