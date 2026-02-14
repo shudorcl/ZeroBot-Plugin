@@ -27,7 +27,6 @@ require (
 	github.com/fumiama/go-onebot-agent v0.0.0-20260106161505-f7d25272034c
 	github.com/fumiama/go-registry v0.2.7
 	github.com/fumiama/gotracemoe v0.0.3
-	github.com/fumiama/imgsz v0.0.4
 	github.com/fumiama/jieba v0.0.0-20221203025406-36c17a10b565
 	github.com/fumiama/slowdo v0.0.0-20241001074058-27c4fe5259a4
 	github.com/fumiama/terasu v1.0.2
@@ -52,6 +51,7 @@ require (
 	golang.org/x/image v0.34.0
 	golang.org/x/sys v0.39.0
 	golang.org/x/text v0.32.0
+	gopkg.in/yaml.v3 v3.0.1
 )
 
 require (
@@ -66,6 +66,7 @@ require (
 	github.com/ericpauley/go-quantize v0.0.0-20200331213906-ae555eb2afa4 // indirect
 	github.com/fumiama/go-simple-protobuf v0.2.0 // indirect
 	github.com/fumiama/gofastTEA v0.1.3 // indirect
+	github.com/fumiama/imgsz v0.0.4 // indirect
 	github.com/fumiama/orbyte v0.0.0-20251002065953-3bb358367eb5 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.12 // indirect
 	github.com/go-ole/go-ole v1.2.6 // indirect
@@ -96,7 +97,6 @@ require (
 	github.com/tklauser/numcpus v0.11.0 // indirect
 	github.com/yusufpapurcu/wmi v1.2.4 // indirect
 	golang.org/x/net v0.48.0 // indirect
-	gopkg.in/yaml.v3 v3.0.1 // indirect
 	modernc.org/libc v1.67.1 // indirect
 	modernc.org/mathutil v1.7.1 // indirect
 	modernc.org/memory v1.11.0 // indirect
