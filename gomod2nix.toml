@@ -29,8 +29,8 @@ schema = 3
     version = "v1.7.1"
     hash = "sha256-wkeiaUTpPVbpH7fcXeoLtG+aGIMJbvoc/9sbi2IXK0I="
   [mod."github.com/FloatTech/zbputils"]
-    version = "v1.7.2-0.20260111154504-ebb5c08780dd"
-    hash = "sha256-OMQc8npyAkZ3n58QGv4oeaIHxAKqX7GuZkMHxxcwx6w="
+    version = "v1.7.2-0.20260131170726-494cb1776a47"
+    hash = "sha256-KLhPEHoJiq2qVkK+7OVy7Wc2wpCFEJOqa/0zZGQ8TnM="
   [mod."github.com/PuerkitoBio/goquery"]
     version = "v1.8.0"
     hash = "sha256-I3QaPWATvBOL/F26fIiYWKS13yBUYo+9o3tcsGIu8tY="
@@ -92,8 +92,8 @@ schema = 3
     version = "v1.7.1"
     hash = "sha256-Fd1QaeYx+3q4C3XQXlPFnDmKPsoZH6837fN/7rn8i9s="
   [mod."github.com/fumiama/go-onebot-agent"]
-    version = "v0.0.0-20260106161505-f7d25272034c"
-    hash = "sha256-+bu2VbZVwS7SDgfx53aZjQxSRtrXFi+g0Jn8W9w6QQ8="
+    version = "v0.0.0-20260128132028-05e6b4809f0a"
+    hash = "sha256-ratY7o52v0KuxgZC4wqHNXdgGXzliEecs8egE3SBLeo="
   [mod."github.com/fumiama/go-registry"]
     version = "v0.2.7"
     hash = "sha256-Rjl+z0Hlp2LMi8+pnFe5HrxctyHMi7UPiK33g/OgLdA="
@@ -142,6 +142,9 @@ schema = 3
   [mod."github.com/gopxl/beep/v2"]
     version = "v2.1.1"
     hash = "sha256-JLCUJCG+VvNlVF296JWIOUvvUFHlqEAJvZfw853qwwU="
+  [mod."github.com/guohuiyuan/music-lib"]
+    version = "v1.0.2-0.20260121020416-53f6cb24629d"
+    hash = "sha256-juVJ/nh6zA5Gu5+dRzIx8tElXLscRQYwY9vLvVKh078="
   [mod."github.com/jfreymuth/oggvorbis"]
     version = "v1.0.5"
     hash = "sha256-jphTCaPr34ZT9Id4ZZ6zU9Vnxzy6cTjCwjpQ819eGV0="
@@ -224,8 +227,8 @@ schema = 3
     version = "v4.25.12"
     hash = "sha256-gzk9GW4+tXUWmxAVD3by/k4D/+l++TvajRVTkQJvwmM="
   [mod."github.com/sirupsen/logrus"]
-    version = "v1.9.3"
-    hash = "sha256-EnxsWdEUPYid+aZ9H4/iMTs1XMvCLbXZRDyvj89Ebms="
+    version = "v1.9.4"
+    hash = "sha256-ltRvmtM3XTCAFwY0IesfRqYIivyXPPuvkFjL4ARh1wg="
   [mod."github.com/tetratelabs/wazero"]
     version = "v1.5.0"
     hash = "sha256-fGdJM4LJrZA9jxHuYVo4EUQ3I1k0IVG3QQCBCgZkeZI="
@@ -248,8 +251,8 @@ schema = 3
     version = "v2.1.2"
     hash = "sha256-GXWWea/u6BezTsPPrWhTYiTetPP/YW6P+Sj4YdocPaM="
   [mod."github.com/wdvxdr1123/ZeroBot"]
-    version = "v1.8.3-0.20260108153355-cbf2ab0dd527"
-    hash = "sha256-cD/6S94r0fgp0112TFsddESKwoXGe1L7LSFAkJvh3LQ="
+    version = "v1.8.3-0.20260117102541-393033a35adb"
+    hash = "sha256-Yz2OTU05kDZOHX8J04jX5Jg5ya9rwqsH0TySSBhMOp0="
   [mod."github.com/yusufpapurcu/wmi"]
     version = "v1.2.4"
     hash = "sha256-N+YDBjOW59YOsZ2lRBVtFsEEi48KhNQRb63/0ZSU3bA="

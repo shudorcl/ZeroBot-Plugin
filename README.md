@@ -847,6 +847,16 @@ print("run[CQ:image,file="+j["img"]+"]")
 
 </details>
 <details>
+  <summary>猜成语</summary>
+
+  `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/handou"`
+
+  - [x] 个人猜成语
+
+  - [x] 团队猜成语
+
+</details>
+<details>
   <summary>一言</summary>
 
   `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/hitokoto"`
@@ -1635,7 +1645,9 @@ print("run[CQ:image,file="+j["img"]+"]")
   - [x] 设置AI聊天(不)以AI语音输出
   - [x] 设置AI聊天Agent性格
   - [x] 查看AI聊天Agent性格
-  - [x] 重置AI聊天Agent性格
+  - [x] 设置AI聊天Agent性别
+  - [x] 查看AI聊天Agent性别
+  - [x] 重置AI聊天Agent性格性别
   - [x] 重置AI聊天Agent
   - [x] 查看AI聊天配置 
   - [x] 重置AI聊天
