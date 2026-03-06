@@ -16,7 +16,7 @@ type archiveSource struct {
 
 func newArchiveSource() *archiveSource {
 	return &archiveSource{
-		client: &http.Client{Timeout: 20 * time.Second},
+		client: &http.Client{Timeout: 60 * time.Second},
 	}
 }
 
@@ -35,7 +35,7 @@ func (s *archiveSource) Search(query string, limit int) ([]BookItem, error) {
 	}
 	api := "https://archive.org/advancedsearch.php?" + values.Encode()
 	req, _ := http.NewRequest("GET", api, nil)
-	req.Header.Set("User-Agent", "ZeroBot-Plugin/ebooks")
+	req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36")
 	resp, err := s.client.Do(req)
 	if err != nil {
 		return nil, err
@@ -84,7 +84,7 @@ func (s *archiveSource) Download(arg1, _ string) (*DownloadResult, error) {
 func (s *archiveSource) fetchMeta(identifier string) (BookItem, error) {
 	var r BookItem
 	req, _ := http.NewRequest("GET", "https://archive.org/metadata/"+identifier, nil)
-	req.Header.Set("User-Agent", "ZeroBot-Plugin/ebooks")
+	req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36")
 	resp, err := s.client.Do(req)
 	if err != nil {
 		return r, err
@@ -157,9 +157,9 @@ func trimDesc(s string) string {
 }
 
 func fetchBinary(target string) ([]byte, string, error) {
-	client := &http.Client{Timeout: 60 * time.Second}
+	client := &http.Client{Timeout: 360 * time.Second}
 	req, _ := http.NewRequest("GET", target, nil)
-	req.Header.Set("User-Agent", "ZeroBot-Plugin/ebooks")
+	req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36")
 	resp, err := client.Do(req)
 	if err != nil {
 		return nil, "", err

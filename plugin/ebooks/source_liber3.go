@@ -16,7 +16,7 @@ type liber3Source struct {
 
 func newLiber3Source() *liber3Source {
 	return &liber3Source{
-		client: &http.Client{Timeout: 20 * time.Second},
+		client: &http.Client{Timeout: 60 * time.Second},
 	}
 }
 
@@ -31,7 +31,7 @@ func (s *liber3Source) Search(query string, limit int) ([]BookItem, error) {
 	})
 	req, _ := http.NewRequest("POST", "https://lgate.glitternode.ru/v1/searchV2", bytes.NewReader(body))
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("User-Agent", "ZeroBot-Plugin/ebooks")
+	req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36")
 	resp, err := s.client.Do(req)
 	if err != nil {
 		return nil, err
@@ -128,7 +128,7 @@ func (s *liber3Source) fetchDetails(ids []string) (map[string]liber3Detail, erro
 	body, _ := json.Marshal(map[string][]string{"book_ids": ids})
 	req, _ := http.NewRequest("POST", "https://lgate.glitternode.ru/v1/book", bytes.NewReader(body))
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("User-Agent", "ZeroBot-Plugin/ebooks")
+	req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36")
 	resp, err := s.client.Do(req)
 	if err != nil {
 		return nil, err

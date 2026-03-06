@@ -15,7 +15,7 @@ type annasSource struct {
 
 func newAnnasSource() *annasSource {
 	return &annasSource{
-		client: &http.Client{Timeout: 20 * time.Second},
+		client: &http.Client{Timeout: 60 * time.Second},
 	}
 }
 
@@ -25,7 +25,7 @@ func (s *annasSource) Enabled(c *Config) bool { return c.EnableAnnas }
 
 func (s *annasSource) Search(query string, limit int) ([]BookItem, error) {
 	req, _ := http.NewRequest("GET", "https://annas-archive.org/search?q="+query, nil)
-	req.Header.Set("User-Agent", "Mozilla/5.0")
+	req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36")
 	resp, err := s.client.Do(req)
 	if err != nil {
 		return nil, err

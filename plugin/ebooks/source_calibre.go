@@ -16,7 +16,7 @@ type calibreSource struct {
 
 func newCalibreSource(cfgFn func() Config) *calibreSource {
 	return &calibreSource{
-		client: &http.Client{Timeout: 20 * time.Second},
+		client: &http.Client{Timeout: 60 * time.Second},
 		cfgFn:  cfgFn,
 	}
 }
@@ -32,7 +32,7 @@ func (s *calibreSource) Search(query string, limit int) ([]BookItem, error) {
 	base := strings.TrimRight(cfg.CalibreWebURL, "/")
 	reqURL := base + "/opds/search/" + url.QueryEscape(query)
 	req, _ := http.NewRequest("GET", reqURL, nil)
-	req.Header.Set("User-Agent", "ZeroBot-Plugin/ebooks")
+	req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36")
 	resp, err := s.client.Do(req)
 	if err != nil {
 		return nil, err
