@@ -94,6 +94,7 @@ import (
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/dish"              // 程序员做饭指南
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/drawlots"          // 多功能抽签
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/driftbottle"       // 漂流瓶
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/ebooks"            // 多源搜书
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/emojimix"          // 合成emoji
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/emozi"             // 颜文字抽象转写
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/event"             // 好友申请群聊邀请事件处理
