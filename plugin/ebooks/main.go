@@ -12,6 +12,7 @@ import (
 	"github.com/FloatTech/floatbox/file"
 	ctrl "github.com/FloatTech/zbpctrl"
 	"github.com/FloatTech/zbputils/control"
+	zbpctxext "github.com/FloatTech/zbputils/ctxext"
 	"github.com/sirupsen/logrus"
 	zero "github.com/wdvxdr1123/ZeroBot"
 	"github.com/wdvxdr1123/ZeroBot/message"
@@ -21,15 +22,15 @@ var (
 	helpText = "- 搜书 <关键词> [数量]\n" +
 		"- 下书 <标识> [hash]\n" +
 		"- 搜书帮助\n" +
-		"- 查看搜书配置(私聊超管)\n" +
-		"- 设置搜书配置 <key> <value>(私聊超管)\n" +
-		"- 开启书源 <archive|liber3|calibre|zlib|annas>(私聊超管)\n" +
-		"- 关闭书源 <archive|liber3|calibre|zlib|annas>(私聊超管)"
+		"- 查看搜书配置 (私聊超管)\n" +
+		"- 设置搜书配置 <key> <value> (私聊超管)\n" +
+		"- 开启书源 <archive|liber3|calibre|zlib|annas> (私聊超管)\n" +
+		"- 关闭书源 <archive|liber3|calibre|zlib|annas> (私聊超管)"
 
 	engine = control.AutoRegister(&ctrl.Options[*zero.Ctx]{
 		DisableOnDefault:  false,
 		Extra:             control.ExtraFromString("ebooks"),
-		Brief:             "多书源搜书/下书",
+		Brief:             "多书源搜书和下书",
 		Help:              helpText,
 		PrivateDataFolder: "ebooks",
 	})
@@ -49,6 +50,12 @@ var (
 	})
 )
 
+type searchResult struct {
+	source string
+	items  []BookItem
+	err    error
+}
+
 func init() {
 	engine.OnFullMatch("搜书帮助").SetBlock(true).Handle(func(ctx *zero.Ctx) {
 		ctx.SendChain(message.Text(helpText))
@@ -60,6 +67,7 @@ func init() {
 			ctx.SendChain(message.Text("用法: 搜书 <关键词> [数量]"))
 			return
 		}
+
 		parts := strings.Fields(arg)
 		limitText := ""
 		query := arg
@@ -70,6 +78,7 @@ func init() {
 				query = strings.TrimSpace(strings.TrimSuffix(arg, last))
 			}
 		}
+
 		c := getCfg()
 		limit, err := normalizeLimit(limitText, c.MaxResults, 1, 50, true)
 		if err != nil {
@@ -78,11 +87,6 @@ func init() {
 		}
 
 		srcs := []Source{calibreS, liber3S, archiveS, zlibS, annasS}
-		type searchResult struct {
-			source string
-			items  []BookItem
-			err    error
-		}
 		out := make(chan searchResult, len(srcs))
 		var wg sync.WaitGroup
 		for _, s := range srcs {
@@ -92,37 +96,39 @@ func init() {
 			wg.Add(1)
 			go func(src Source) {
 				defer wg.Done()
-				items, e := src.Search(query, limit)
-				out <- searchResult{source: src.Name(), items: items, err: e}
+				items, searchErr := src.Search(query, limit)
+				out <- searchResult{
+					source: src.Name(),
+					items:  items,
+					err:    searchErr,
+				}
 			}(s)
 		}
 		wg.Wait()
 		close(out)
 
-		blocks := make([]string, 0, 8)
+		resultsBySource := make(map[string]searchResult, len(srcs))
 		for res := range out {
-			if res.err != nil {
-				blocks = append(blocks, fmt.Sprintf("[%s] 失败: %v", res.source, res.err))
-				continue
-			}
-			if len(res.items) == 0 {
-				blocks = append(blocks, fmt.Sprintf("[%s] 无结果", res.source))
-				continue
-			}
-			b := strings.Builder{}
-			b.WriteString("[" + res.source + "]\n")
-			for i, item := range res.items {
-				b.WriteString(formatBookLine(i+1, item))
-				b.WriteString("\n\n")
-			}
-			blocks = append(blocks, strings.TrimSpace(b.String()))
+			resultsBySource[res.source] = res
 		}
-		if len(blocks) == 0 {
-			ctx.SendChain(message.Text("无可用书源，请联系管理员开启书源配置"))
+
+		results := make([]searchResult, 0, len(resultsBySource))
+		for _, src := range srcs {
+			if !src.Enabled(&c) {
+				continue
+			}
+			if res, ok := resultsBySource[src.Name()]; ok {
+				results = append(results, res)
+			}
+		}
+		if len(results) == 0 {
+			ctx.SendChain(message.Text("无可用书源，请联系管理员检查插件配置"))
 			return
 		}
-		for _, blk := range blocks {
-			ctx.SendChain(message.Text(blk))
+
+		msg := buildSearchForwardMessage(ctx, query, limit, results)
+		if id := ctx.Send(msg).ID(); id == 0 {
+			ctx.SendChain(message.Text(buildSearchFallbackSummary(query, results)))
 		}
 	})
 
@@ -152,14 +158,16 @@ func init() {
 		case RouteAnnasID:
 			src = annasS
 		default:
-			ctx.SendChain(message.Text("无法识别下载标识。支持: Calibre/Archive URL、L开头Liber3ID、A开头AnnasID、Zlib的 ID+Hash"))
+			ctx.SendChain(message.Text("无法识别下载标识。支持 Calibre/Archive URL、Liber3 ID、Annas ID、Zlib ID+Hash"))
 			return
 		}
+
 		c := getCfg()
 		if !src.Enabled(&c) {
 			ctx.SendChain(message.Text("[", src.Name(), "] 未启用"))
 			return
 		}
+
 		res, err := src.Download(arg1, arg2)
 		if err != nil {
 			ctx.SendChain(message.Text("[", src.Name(), "] ", err))
@@ -171,9 +179,17 @@ func init() {
 	engine.OnFullMatch("查看搜书配置", zero.OnlyPrivate, zero.SuperUserPermission, ensureCfg).SetBlock(true).
 		Handle(func(ctx *zero.Ctx) {
 			c := getCfg()
-			ctx.SendChain(message.Text(fmt.Sprintf("calibre=%v\nliber3=%v\narchive=%v\nzlib=%v\nannas=%v\ncalibre_web_url=%s\nmax_results=%d\ndownload_mode=%s",
-				c.EnableCalibre, c.EnableLiber3, c.EnableArchive, c.EnableZlib, c.EnableAnnas,
-				c.CalibreWebURL, c.MaxResults, c.DownloadMode)))
+			ctx.SendChain(message.Text(fmt.Sprintf(
+				"calibre=%v\nliber3=%v\narchive=%v\nzlib=%v\nannas=%v\ncalibre_web_url=%s\nmax_results=%d\ndownload_mode=%s",
+				c.EnableCalibre,
+				c.EnableLiber3,
+				c.EnableArchive,
+				c.EnableZlib,
+				c.EnableAnnas,
+				c.CalibreWebURL,
+				c.MaxResults,
+				c.DownloadMode,
+			)))
 		})
 
 	engine.OnRegex(`^设置搜书配置\s+([a-zA-Z_]+)\s+(.+)$`, zero.OnlyPrivate, zero.SuperUserPermission, ensureCfg).SetBlock(true).
@@ -183,6 +199,7 @@ func init() {
 			r := ctx.State["regex_matched"].([]string)
 			key := strings.ToLower(strings.TrimSpace(r[1]))
 			val := strings.TrimSpace(r[2])
+
 			switch key {
 			case "calibre_web_url":
 				c.CalibreWebURL = val
@@ -204,6 +221,7 @@ func init() {
 				ctx.SendChain(message.Text("不支持的配置项"))
 				return
 			}
+
 			sanitizeConfig(&c)
 			if err := setCfg(m, c); err != nil {
 				ctx.SendChain(message.Text("保存配置失败: ", err))
@@ -218,6 +236,7 @@ func init() {
 			c := getCfg()
 			r := ctx.State["regex_matched"].([]string)
 			on := r[1] == "开启"
+
 			switch r[2] {
 			case "archive":
 				c.EnableArchive = on
@@ -230,6 +249,7 @@ func init() {
 			case "annas":
 				c.EnableAnnas = on
 			}
+
 			sanitizeConfig(&c)
 			if err := setCfg(m, c); err != nil {
 				ctx.SendChain(message.Text("保存失败: ", err))
@@ -279,13 +299,14 @@ func sendDownloadResult(ctx *zero.Ctx, c *Config, res *DownloadResult) {
 		return
 	}
 	if res.URL == "" {
-		ctx.SendChain(message.Text("[", res.Source, "] 当前无可上传的链接"))
+		ctx.SendChain(message.Text("[", res.Source, "] 当前无可上传链接"))
 		return
 	}
 	if ctx.Event.GroupID == 0 {
-		ctx.SendChain(message.Text("[", res.Source, "] 私聊场景暂不支持直传文件，请使用下载链接"))
+		ctx.SendChain(message.Text("[", res.Source, "] 私聊暂不支持直传文件，请使用下载链接"))
 		return
 	}
+
 	data, cd, err := fetchBinary(res.URL)
 	if err != nil {
 		ctx.SendChain(message.Text("[", res.Source, "] 文件下载失败: ", err))
@@ -333,4 +354,36 @@ func allDigits(s string) bool {
 		}
 	}
 	return true
+}
+
+func buildSearchForwardMessage(ctx *zero.Ctx, query string, limit int, results []searchResult) message.Message {
+	msg := make(message.Message, 0, len(results)+1)
+	msg = append(msg, zbpctxext.FakeSenderForwardNode(ctx, message.Text(
+		fmt.Sprintf("搜书结果\n关键词: %s\n请求数量: %d\n书源数: %d", query, limit, len(results)),
+	)))
+	for _, res := range results {
+		for _, block := range buildSearchBlockTexts(res.source, res.items, res.err, 3000) {
+			msg = append(msg, zbpctxext.FakeSenderForwardNode(ctx, message.Text(block)))
+		}
+	}
+	return msg
+}
+
+func buildSearchFallbackSummary(query string, results []searchResult) string {
+	var b strings.Builder
+	b.WriteString("搜书结果发送失败，以下为摘要\n")
+	b.WriteString("关键词: ")
+	b.WriteString(query)
+	for _, res := range results {
+		b.WriteString("\n[")
+		b.WriteString(res.source)
+		b.WriteString("] ")
+		if res.err != nil {
+			b.WriteString("失败: ")
+			b.WriteString(res.err.Error())
+		} else {
+			b.WriteString(fmt.Sprintf("%d 条结果", len(res.items)))
+		}
+	}
+	return b.String()
 }

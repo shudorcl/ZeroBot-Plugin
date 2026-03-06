@@ -1,6 +1,9 @@
 package ebooks
 
-import "testing"
+import (
+	"strconv"
+	"testing"
+)
 
 func TestNormalizeLimit(t *testing.T) {
 	v, err := normalizeLimit("", 20, 1, 50, true)
@@ -43,5 +46,39 @@ func TestDetectDownloadRoute(t *testing.T) {
 		if got != c.want {
 			t.Fatalf("route(%q,%q)=%v want %v", c.arg1, c.arg2, got, c.want)
 		}
+	}
+}
+
+func TestBuildSearchBlockTextsPagination(t *testing.T) {
+	items := make([]BookItem, 0, 8)
+	for i := 0; i < 8; i++ {
+		items = append(items, BookItem{
+			Source:      "archive.org",
+			Title:       "A Very Long Book Title " + string(rune('A'+i)),
+			Authors:     "Author Name",
+			Format:      "epub",
+			ID:          "book-id",
+			DownloadURL: "https://archive.org/download/id/file.epub",
+		})
+	}
+	blocks := buildSearchBlockTexts("archive.org", items, nil, 220)
+	if len(blocks) < 2 {
+		t.Fatalf("expected pagination, got %d block(s)", len(blocks))
+	}
+	for _, block := range blocks {
+		if len(block) > 260 {
+			t.Fatalf("block too long: %d", len(block))
+		}
+	}
+}
+
+func TestBuildSearchBlockTextsErrorAndEmpty(t *testing.T) {
+	errBlocks := buildSearchBlockTexts("Liber3", nil, strconv.ErrSyntax, 3000)
+	if len(errBlocks) != 1 || errBlocks[0] == "" {
+		t.Fatal("expected one error block")
+	}
+	emptyBlocks := buildSearchBlockTexts("Calibre-Web", nil, nil, 3000)
+	if len(emptyBlocks) != 1 || emptyBlocks[0] == "" {
+		t.Fatal("expected one empty block")
 	}
 }
