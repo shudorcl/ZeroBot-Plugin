@@ -1,6 +1,7 @@
 package ebooks
 
 import (
+	"fmt"
 	"net/url"
 	"regexp"
 	"strconv"
@@ -154,4 +155,93 @@ func joinURL(base, rel string) string {
 		return ""
 	}
 	return b.ResolveReference(r).String()
+}
+
+func buildSearchBlockTexts(source string, items []BookItem, err error, maxLen int) []string {
+	if maxLen <= 0 {
+		maxLen = 3000
+	}
+	if err != nil {
+		return []string{fmt.Sprintf("[%s] 查询失败: %v", source, err)}
+	}
+	if len(items) == 0 {
+		return []string{fmt.Sprintf("[%s] 无结果", source)}
+	}
+
+	entries := make([]string, 0, len(items))
+	for i, item := range items {
+		entries = append(entries, formatBookLine(i+1, item))
+	}
+	return paginateSourceEntries(source, entries, maxLen)
+}
+
+func paginateSourceEntries(source string, entries []string, maxLen int) []string {
+	if len(entries) == 0 {
+		return []string{fmt.Sprintf("[%s] 无结果", source)}
+	}
+
+	bodyLimit := maxLen - len(source) - 16
+	if bodyLimit < 200 {
+		bodyLimit = 200
+	}
+
+	pages := make([]string, 0, 4)
+	var current strings.Builder
+	flush := func() {
+		if current.Len() > 0 {
+			pages = append(pages, current.String())
+			current.Reset()
+		}
+	}
+
+	for _, entry := range entries {
+		chunks := splitLongText(entry, bodyLimit)
+		for i, chunk := range chunks {
+			segment := chunk
+			if i < len(chunks)-1 {
+				segment += "\n(continued)"
+			}
+			if current.Len() == 0 {
+				current.WriteString(segment)
+				continue
+			}
+			if current.Len()+2+len(segment) > bodyLimit {
+				flush()
+				current.WriteString(segment)
+				continue
+			}
+			current.WriteString("\n\n")
+			current.WriteString(segment)
+		}
+	}
+	flush()
+
+	if len(pages) == 1 {
+		return []string{fmt.Sprintf("[%s]\n%s", source, pages[0])}
+	}
+
+	result := make([]string, 0, len(pages))
+	for i, page := range pages {
+		result = append(result, fmt.Sprintf("[%s %d/%d]\n%s", source, i+1, len(pages), page))
+	}
+	return result
+}
+
+func splitLongText(s string, maxLen int) []string {
+	if maxLen <= 0 || len(s) <= maxLen {
+		return []string{s}
+	}
+	runes := []rune(s)
+	if len(runes) <= maxLen {
+		return []string{s}
+	}
+	out := make([]string, 0, (len(runes)/maxLen)+1)
+	for start := 0; start < len(runes); start += maxLen {
+		end := start + maxLen
+		if end > len(runes) {
+			end = len(runes)
+		}
+		out = append(out, string(runes[start:end]))
+	}
+	return out
 }
