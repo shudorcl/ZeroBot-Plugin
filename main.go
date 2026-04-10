@@ -82,6 +82,7 @@ import (
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/choose"        // 选择困难症帮手
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/chouxianghua"  // 说抽象话
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/chrev"         // 英文字符翻转
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/coc"           // coc跑团
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/cpstory"       // cp短打
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/crypter"       // 奇怪语言加解密
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/dailynews"     // 今日早报
@@ -127,7 +128,6 @@ import (
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/tarot"         // 抽塔罗牌
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/tracemoe"      // 搜番
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/wallet"        // 钱包
-	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/what2eat"      // 吃什么
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/wife"          // 抽老婆
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/wordcount"     // 聊天热词
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/xhstext"       // 小红书文案
