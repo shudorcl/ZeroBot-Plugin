@@ -1444,13 +1444,11 @@ func alwaysDoGif(cc *context, value ...string) (string, error) {
 	var err error
 	var face []*factory.Factory
 	// name := cc.usrdir + "AlwaysDo.gif"
-	face, err = factory.LoadAllTrueFrames(cc.headimgsdir[0], 500, 500)
-	face, err = imgfactory.LoadAllTrueFrames(cc.headimgsdir[0], 0, 0)
+	face, err = factory.LoadAllTrueFrames(cc.headimgsdir[0], 0, 0)
 	if err != nil {
 		// 载入失败尝试载入第一帧
 		face = nil
-		first, err := factory.LoadFirstFrame(cc.headimgsdir[0], 500, 500)
-		first, err := imgfactory.LoadFirstFrame(cc.headimgsdir[0], 0, 0)
+		first, err := factory.LoadFirstFrame(cc.headimgsdir[0], 0, 0)
 		if err != nil {
 			return "", err
 		}
@@ -1498,8 +1496,8 @@ func alwaysDoGif(cc *context, value ...string) (string, error) {
 		canvas.DrawString("吗", 370, 560)
 		turn[i] = factory.Size(canvas.Image(), 0, 0).Image()
 		// 插入上部
-		flame := imgfactory.Size(canvas.Image(), 0, 0).InsertUp(f.Image(), 0, 0, 0, 0).Image()
-		flame = imgfactory.Size(flame, 0, 0).InsertUp(f.Image(), 90, 90, xLength/2+30, yLength+5).Image()
+		flame := factory.Size(canvas.Image(), 0, 0).InsertUp(f.Image(), 0, 0, 0, 0).Image()
+		flame = factory.Size(flame, 0, 0).InsertUp(f.Image(), 90, 90, xLength/2+30, yLength+5).Image()
 		turn[i] = flame
 	}
 	g := factory.MergeGif(8, turn)
@@ -1521,7 +1519,7 @@ func jerk(cc *context, value ...string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	face, err := imgfactory.LoadFirstFrame(cc.headimgsdir[0], 520, 520)
+	face, err := factory.LoadFirstFrame(cc.headimgsdir[0], 520, 520)
 	if err != nil {
 		return "", err
 	}
@@ -1539,6 +1537,6 @@ func jerk(cc *context, value ...string) (string, error) {
 		imgs[6].InsertBottom(face.Image(), 0, 0, 0, 0).Image(),
 		imgs[7].InsertBottom(face.Image(), 0, 0, 0, 0).Image(),
 	}
-	g := imgfactory.MergeGif(7, worship)
-	return imgfactory.GIF2Base64(g)
+	g := factory.MergeGif(7, worship)
+	return factory.GIF2Base64(g)
 }

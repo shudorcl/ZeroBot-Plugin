@@ -337,40 +337,40 @@ func init() {
 		}
 		ctx.SendChain(message.Reply(ctx.Event.MessageID), message.Text("成功"))
 	})
-	engine.OnRegex(`^(\.|。)(show|SHOW)\s*(\[CQ:at,qq=)?(\d+)(\])?`, getsetting, func(ctx *zero.Ctx) bool {
-		mu.Lock()
-		cocSetting := settingGoup[ctx.Event.GroupID]
-		mu.Unlock()
-		if cocSetting.CocPC == 0 {
-			return zero.AdminPermission(ctx)
-		} else if cocSetting.CocPC != 0 && ctx.Event.UserID != cocSetting.CocPC {
-			ctx.SendChain(message.Text("[ERROR]:已指定PC,无权操作"))
-			return false
-		}
-		return true
-	}).SetBlock(true).Handle(func(ctx *zero.Ctx) {
-		gid := ctx.Event.GroupID
-		uid, err := strconv.ParseInt(ctx.State["regex_matched"].([]string)[4], 10, 64)
-		if err != nil {
-			ctx.SendChain(message.Text("[ERROR]:", err))
-			return
-		}
-		if file.IsNotExist(engine.DataFolder() + strconv.FormatInt(gid, 10) + "/" + strconv.FormatInt(uid, 10) + ".yml") {
-			ctx.SendChain(message.Reply(ctx.Event.MessageID), message.Text("对方还没有创建角色"))
-			return
-		}
-		cocInfo, err := loadPanel(gid, uid)
-		if err != nil {
-			ctx.SendChain(message.Text("[ERROR]:", err))
-			return
-		}
-		pic, err := drawImage(cocInfo)
-		if err != nil {
-			ctx.SendChain(message.Text("[ERROR]:", err))
-			return
-		}
-		ctx.SendChain(message.Reply(ctx.Event.MessageID), message.ImageBytes(pic))
-	})
+	// engine.OnRegex(`^(\.|。)(show|SHOW)\s*(\[CQ:at,qq=)?(\d+)(\])?`, getsetting, func(ctx *zero.Ctx) bool {
+	// 	mu.Lock()
+	// 	cocSetting := settingGoup[ctx.Event.GroupID]
+	// 	mu.Unlock()
+	// 	if cocSetting.CocPC == 0 {
+	// 		return zero.AdminPermission(ctx)
+	// 	} else if cocSetting.CocPC != 0 && ctx.Event.UserID != cocSetting.CocPC {
+	// 		ctx.SendChain(message.Text("[ERROR]:已指定PC,无权操作"))
+	// 		return false
+	// 	}
+	// 	return true
+	// }).SetBlock(true).Handle(func(ctx *zero.Ctx) {
+	// 	gid := ctx.Event.GroupID
+	// 	uid, err := strconv.ParseInt(ctx.State["regex_matched"].([]string)[4], 10, 64)
+	// 	if err != nil {
+	// 		ctx.SendChain(message.Text("[ERROR]:", err))
+	// 		return
+	// 	}
+	// 	if file.IsNotExist(engine.DataFolder() + strconv.FormatInt(gid, 10) + "/" + strconv.FormatInt(uid, 10) + ".yml") {
+	// 		ctx.SendChain(message.Reply(ctx.Event.MessageID), message.Text("对方还没有创建角色"))
+	// 		return
+	// 	}
+	// 	cocInfo, err := loadPanel(gid, uid)
+	// 	if err != nil {
+	// 		ctx.SendChain(message.Text("[ERROR]:", err))
+	// 		return
+	// 	}
+	// 	pic, err := drawImage(cocInfo)
+	// 	if err != nil {
+	// 		ctx.SendChain(message.Text("[ERROR]:", err))
+	// 		return
+	// 	}
+	// 	ctx.SendChain(message.Reply(ctx.Event.MessageID), message.ImageBytes(pic))
+	// })
 	engine.OnRegex(`^(\.|。)(kill|KILL)(\[CQ:at,qq=)?(\d+)?(\])?`, getsetting, func(ctx *zero.Ctx) bool {
 		mu.Lock()
 		cocSetting := settingGoup[ctx.Event.GroupID]

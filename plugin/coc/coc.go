@@ -2,22 +2,17 @@
 package coc
 
 import (
-	"bytes"
 	"fmt"
 	"image"
 	"image/color"
 	"io"
-	"math/rand"
 	"os"
 	"strconv"
 	"strings"
-	"sync"
 	"time"
 
 	"github.com/FloatTech/floatbox/file"
-	"github.com/FloatTech/floatbox/web"
 	"github.com/FloatTech/gg"
-	"github.com/FloatTech/imgfactory"
 	"github.com/FloatTech/rendercard"
 	"github.com/FloatTech/zbputils/control"
 	"github.com/FloatTech/zbputils/img/text"
@@ -114,75 +109,75 @@ func init() {
 		}
 		ctx.SendChain(message.Text("成功！"))
 	})
-	engine.OnPrefixGroup([]string{".coc", "。coc", ".COC"}).SetBlock(true).Handle(func(ctx *zero.Ctx) {
-		gid := ctx.Event.GroupID
-		uid := ctx.Event.UserID
-		infoFile := engine.DataFolder() + strconv.FormatInt(gid, 10) + "/" + DefaultYamlFile
-		if file.IsNotExist(infoFile) {
-			ctx.SendChain(message.Text("你群还没有布置coc,请相关人员后台布局coc.(详情看用法)"))
-			return
-		}
-		var (
-			cocInfo cocYaml
-			err     error
-		)
-		if file.IsNotExist(engine.DataFolder() + strconv.FormatInt(gid, 10) + "/" + strconv.FormatInt(uid, 10) + ".yml") {
-			cocInfo, err = loadPanel(gid)
-			if err != nil {
-				ctx.SendChain(message.Text("[ERROR]:", err))
-				return
-			}
-			cocInfo.ID = uid
-			baseMsg := strings.Split(ctx.State["args"].(string), "/")
-			for _, msgInfo := range baseMsg {
-				msgValue := strings.Split(msgInfo, "#")
-				if msgValue[0] == "描述" {
-					cocInfo.Other = append(cocInfo.Other, msgValue[1])
-					continue
-				}
-				for i, info := range cocInfo.BaseInfo {
-					if msgValue[0] == info.Name {
-						munberValue, err := strconv.Atoi(msgValue[1])
-						if err != nil {
-							cocInfo.BaseInfo[i].Value = msgValue[1]
-						} else {
-							cocInfo.BaseInfo[i].Value = munberValue
-						}
-					}
-				}
-			}
-			for i, info := range cocInfo.Attribute {
-				attributeMax := info.MaxValue - info.MinValue
-				negative := -1
-				if info.MinValue < 0 {
-					negative = 1
-				}
-				value := 0
-				for i := 0; i < 3; i++ {
-					value += rand.Intn(6) + 1
-				}
-				value = attributeMax*value*5/100 + negative*info.MinValue
-				cocInfo.Attribute[i].Value = value
-			}
-			err = savePanel(cocInfo, gid, uid)
-			if err != nil {
-				ctx.SendChain(message.Text("[ERROR]:", err))
-				return
-			}
-		} else {
-			cocInfo, err = loadPanel(gid, uid)
-			if err != nil {
-				ctx.SendChain(message.Text("[ERROR]:", err))
-				return
-			}
-		}
-		pic, err := drawImage(cocInfo)
-		if err != nil {
-			ctx.SendChain(message.Text("[ERROR]:", err))
-			return
-		}
-		ctx.SendChain(message.ImageBytes(pic))
-	})
+	// engine.OnPrefixGroup([]string{".coc", "。coc", ".COC"}).SetBlock(true).Handle(func(ctx *zero.Ctx) {
+	// 	gid := ctx.Event.GroupID
+	// 	uid := ctx.Event.UserID
+	// 	infoFile := engine.DataFolder() + strconv.FormatInt(gid, 10) + "/" + DefaultYamlFile
+	// 	if file.IsNotExist(infoFile) {
+	// 		ctx.SendChain(message.Text("你群还没有布置coc,请相关人员后台布局coc.(详情看用法)"))
+	// 		return
+	// 	}
+	// 	var (
+	// 		cocInfo cocYaml
+	// 		err     error
+	// 	)
+	// 	if file.IsNotExist(engine.DataFolder() + strconv.FormatInt(gid, 10) + "/" + strconv.FormatInt(uid, 10) + ".yml") {
+	// 		cocInfo, err = loadPanel(gid)
+	// 		if err != nil {
+	// 			ctx.SendChain(message.Text("[ERROR]:", err))
+	// 			return
+	// 		}
+	// 		cocInfo.ID = uid
+	// 		baseMsg := strings.Split(ctx.State["args"].(string), "/")
+	// 		for _, msgInfo := range baseMsg {
+	// 			msgValue := strings.Split(msgInfo, "#")
+	// 			if msgValue[0] == "描述" {
+	// 				cocInfo.Other = append(cocInfo.Other, msgValue[1])
+	// 				continue
+	// 			}
+	// 			for i, info := range cocInfo.BaseInfo {
+	// 				if msgValue[0] == info.Name {
+	// 					munberValue, err := strconv.Atoi(msgValue[1])
+	// 					if err != nil {
+	// 						cocInfo.BaseInfo[i].Value = msgValue[1]
+	// 					} else {
+	// 						cocInfo.BaseInfo[i].Value = munberValue
+	// 					}
+	// 				}
+	// 			}
+	// 		}
+	// 		for i, info := range cocInfo.Attribute {
+	// 			attributeMax := info.MaxValue - info.MinValue
+	// 			negative := -1
+	// 			if info.MinValue < 0 {
+	// 				negative = 1
+	// 			}
+	// 			value := 0
+	// 			for i := 0; i < 3; i++ {
+	// 				value += rand.Intn(6) + 1
+	// 			}
+	// 			value = attributeMax*value*5/100 + negative*info.MinValue
+	// 			cocInfo.Attribute[i].Value = value
+	// 		}
+	// 		err = savePanel(cocInfo, gid, uid)
+	// 		if err != nil {
+	// 			ctx.SendChain(message.Text("[ERROR]:", err))
+	// 			return
+	// 		}
+	// 	} else {
+	// 		cocInfo, err = loadPanel(gid, uid)
+	// 		if err != nil {
+	// 			ctx.SendChain(message.Text("[ERROR]:", err))
+	// 			return
+	// 		}
+	// 	}
+	// 	pic, err := drawImage(cocInfo)
+	// 	if err != nil {
+	// 		ctx.SendChain(message.Text("[ERROR]:", err))
+	// 		return
+	// 	}
+	// 	ctx.SendChain(message.ImageBytes(pic))
+	// })
 }
 
 // 遍历群文件
@@ -239,99 +234,99 @@ func getFileURLbyfolderID(ctx *zero.Ctx, fileName, folderid string) (fileSearchN
 	return
 }
 
-func drawImage(userInfo cocYaml) (imagePicByte []byte, err error) {
-	var (
-		wg          sync.WaitGroup
-		userIDBlock image.Image // 编号
-		infoBlock   image.Image // 基本信息
-		atrrBlock   image.Image // 属性信息
-		otherBlock  image.Image // 其他信息
-	)
-	wg.Add(1)
-	// 绘制ID
-	go func() {
-		defer wg.Done()
-		userIDBlock, err = userInfo.drawIDBlock()
-		if err != nil {
-			return
-		}
-	}()
-	wg.Add(1)
-	// 绘制基本信息
-	go func() {
-		defer wg.Done()
-		infoBlock, err = userInfo.drawInfoBlock()
-		if err != nil {
-			return
-		}
-	}()
-	wg.Add(1)
-	// 绘制属性框
-	go func() {
-		defer wg.Done()
-		atrrBlock, err = userInfo.drawAttrBlock()
-		if err != nil {
-			return
-		}
-	}()
-	wg.Add(1)
-	// 绘制技能框
-	go func() {
-		defer wg.Done()
-		otherBlock, err = userInfo.drawOtherBlock()
-		if err != nil {
-			return
-		}
-	}()
-	wg.Wait()
-	if userIDBlock == nil || infoBlock == nil || atrrBlock == nil || otherBlock == nil {
-		return
-	}
-	// 计算图片高度
-	backDX := 1020
-	backDY := 15 + userIDBlock.Bounds().Dy() + 5 + infoBlock.Bounds().Dy() + 10 + atrrBlock.Bounds().Dy() + 20 + otherBlock.Bounds().Dy() + 10 + 10
-	canvas := gg.NewContext(backDX, backDY)
+// func drawImage(userInfo cocYaml) (imagePicByte []byte, err error) {
+// 	var (
+// 		wg          sync.WaitGroup
+// 		userIDBlock image.Image // 编号
+// 		infoBlock   image.Image // 基本信息
+// 		atrrBlock   image.Image // 属性信息
+// 		otherBlock  image.Image // 其他信息
+// 	)
+// 	wg.Add(1)
+// 	// 绘制ID
+// 	go func() {
+// 		defer wg.Done()
+// 		userIDBlock, err = userInfo.drawIDBlock()
+// 		if err != nil {
+// 			return
+// 		}
+// 	}()
+// 	wg.Add(1)
+// 	// 绘制基本信息
+// 	go func() {
+// 		defer wg.Done()
+// 		infoBlock, err = userInfo.drawInfoBlock()
+// 		if err != nil {
+// 			return
+// 		}
+// 	}()
+// 	wg.Add(1)
+// 	// 绘制属性框
+// 	go func() {
+// 		defer wg.Done()
+// 		atrrBlock, err = userInfo.drawAttrBlock()
+// 		if err != nil {
+// 			return
+// 		}
+// 	}()
+// 	wg.Add(1)
+// 	// 绘制技能框
+// 	go func() {
+// 		defer wg.Done()
+// 		otherBlock, err = userInfo.drawOtherBlock()
+// 		if err != nil {
+// 			return
+// 		}
+// 	}()
+// 	wg.Wait()
+// 	if userIDBlock == nil || infoBlock == nil || atrrBlock == nil || otherBlock == nil {
+// 		return
+// 	}
+// 	// 计算图片高度
+// 	backDX := 1020
+// 	backDY := 15 + userIDBlock.Bounds().Dy() + 5 + infoBlock.Bounds().Dy() + 10 + atrrBlock.Bounds().Dy() + 20 + otherBlock.Bounds().Dy() + 10 + 10
+// 	canvas := gg.NewContext(backDX, backDY)
 
-	// 画底色
-	canvas.DrawRectangle(0, 0, float64(backDX), float64(backDY))
-	canvas.SetRGBA255(150, 150, 150, 255)
-	canvas.Fill()
-	canvas.DrawRectangle(10, 10, float64(backDX-20), float64(backDY-20))
-	canvas.SetRGBA255(255, 255, 255, 255)
-	canvas.Fill()
+// 	// 画底色
+// 	canvas.DrawRectangle(0, 0, float64(backDX), float64(backDY))
+// 	canvas.SetRGBA255(150, 150, 150, 255)
+// 	canvas.Fill()
+// 	canvas.DrawRectangle(10, 10, float64(backDX-20), float64(backDY-20))
+// 	canvas.SetRGBA255(255, 255, 255, 255)
+// 	canvas.Fill()
 
-	// 放置头像
-	getAvatar, err := web.GetData("http://q4.qlogo.cn/g?b=qq&nk=" + strconv.FormatInt(userInfo.ID, 10) + "&s=640")
-	if err != nil {
-		return
-	}
-	avatar, _, err := image.Decode(bytes.NewReader(getAvatar))
-	if err != nil {
-		return
-	}
-	avatarf := imgfactory.Size(avatar, 500, 500).Image()
-	canvas.DrawImage(avatarf, 20, 30)
-	// 头像框
-	canvas.DrawRectangle(20, 30, 500, 500)
-	canvas.SetLineWidth(3)
-	canvas.SetRGBA255(0, 0, 0, 255)
-	canvas.Stroke()
+// 	// 放置头像
+// 	getAvatar, err := web.GetData("http://q4.qlogo.cn/g?b=qq&nk=" + strconv.FormatInt(userInfo.ID, 10) + "&s=640")
+// 	if err != nil {
+// 		return
+// 	}
+// 	avatar, _, err := image.Decode(bytes.NewReader(getAvatar))
+// 	if err != nil {
+// 		return
+// 	}
+// 	avatarf := imgfactory.Size(avatar, 500, 500).Image()
+// 	canvas.DrawImage(avatarf, 20, 30)
+// 	// 头像框
+// 	canvas.DrawRectangle(20, 30, 500, 500)
+// 	canvas.SetLineWidth(3)
+// 	canvas.SetRGBA255(0, 0, 0, 255)
+// 	canvas.Stroke()
 
-	// 编号
-	tempDY := 15
-	canvas.DrawImageAnchored(userIDBlock, backDX-10-20-userIDBlock.Bounds().Dx()/2, tempDY+userIDBlock.Bounds().Dy()/2, 0.5, 0.5)
-	// 放入基本信息
-	tempDY += +userIDBlock.Bounds().Dy() + 5
-	canvas.DrawImage(infoBlock, 20+500+10, tempDY)
-	// 放入属性信息
-	tempDY += infoBlock.Bounds().Dy() + 10
-	canvas.DrawImage(atrrBlock, 20, tempDY)
-	// 放入其他信息
-	tempDY += atrrBlock.Bounds().Dy() + 20
-	canvas.DrawImage(otherBlock, 20, tempDY)
+// 	// 编号
+// 	tempDY := 15
+// 	canvas.DrawImageAnchored(userIDBlock, backDX-10-20-userIDBlock.Bounds().Dx()/2, tempDY+userIDBlock.Bounds().Dy()/2, 0.5, 0.5)
+// 	// 放入基本信息
+// 	tempDY += +userIDBlock.Bounds().Dy() + 5
+// 	canvas.DrawImage(infoBlock, 20+500+10, tempDY)
+// 	// 放入属性信息
+// 	tempDY += infoBlock.Bounds().Dy() + 10
+// 	canvas.DrawImage(atrrBlock, 20, tempDY)
+// 	// 放入其他信息
+// 	tempDY += atrrBlock.Bounds().Dy() + 20
+// 	canvas.DrawImage(otherBlock, 20, tempDY)
 
-	return imgfactory.ToBytes(canvas.Image())
-}
+// 	return imgfactory.ToBytes(canvas.Image())
+// }
 
 // 绘制ID区域
 func (userInfo *cocYaml) drawIDBlock() (image.Image, error) {
