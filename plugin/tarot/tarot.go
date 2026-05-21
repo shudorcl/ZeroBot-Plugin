@@ -416,11 +416,7 @@ func sendTarotAnalysis(ctx *zero.Ctx, question, formationName string, draws []dr
 		ctx.SendChain(message.Text("塔罗解析失败: 大模型返回为空"))
 		return
 	}
-	chunks := splitTextChunks("塔罗解析:\n"+reply, 1000)
-	if len(chunks) == 1 {
-		ctx.SendChain(message.Text(chunks[0]))
-		return
-	}
+	chunks := buildTarotAnalysisChunks(reply, 1000)
 	msg := make(message.Message, 0, len(chunks))
 	for _, chunk := range chunks {
 		msg = append(msg, ctxext.FakeSenderForwardNode(ctx, message.Text(chunk)))
@@ -456,6 +452,10 @@ func requestTarotAnalysis(ctx *zero.Ctx, prompt string) (string, error) {
 		return "", errors.Wrap(err, "请求 AI 模型失败")
 	}
 	return strings.TrimSpace(data), nil
+}
+
+func buildTarotAnalysisChunks(reply string, maxRunes int) []string {
+	return splitTextChunks("塔罗解析:\n"+reply, maxRunes)
 }
 
 func splitTextChunks(txt string, maxRunes int) []string {
