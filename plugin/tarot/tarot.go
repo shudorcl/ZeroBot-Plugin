@@ -47,6 +47,8 @@ type drawResult struct {
 	Represent   string
 }
 
+type drawResults []drawResult
+
 type cardSet = map[string]card
 
 var (
@@ -167,24 +169,45 @@ func init() {
 			if err != nil {
 				// ctx.SendChain(message.Text("ERROR: ", err))
 				logrus.Infof("[tarot]获取图片失败: %v", err)
-				ctx.SendChain(message.Text(reasons[rand.Intn(len(reasons))], position[p], "的『", name, "』\n其释义为: ", description))
-				if withQuestion {
-					sendTarotAnalysis(ctx, question, "", []drawResult{{
-						Name:        name,
-						Position:    position[p],
-						Description: description,
-					}})
-				}
-				return
+			} else {
+				ctx.SendChain(message.ImageBytes(data))
 			}
-			ctx.SendChain(message.ImageBytes(data))
 			ctx.SendChain(message.Text(reasons[rand.Intn(len(reasons))], position[p], "的『", name, "』\n其释义为: ", description))
 			if withQuestion {
-				sendTarotAnalysis(ctx, question, "", []drawResult{{
+				if !chat.EnsureConfig(ctx) {
+					ctx.SendChain(message.Text("塔罗解析失败: 无法读取 AI 聊天配置"))
+					return
+				}
+				gid := ctx.Event.GroupID
+				if gid == 0 {
+					gid = -ctx.Event.UserID
+				}
+				stor, err := chat.NewStorage(ctx, gid)
+				if err != nil {
+					ctx.SendChain(message.Text("塔罗解析失败: ", errors.Wrap(err, "读取 AI 聊天温度配置失败")))
+					return
+				}
+				reply, err := requestTarotAnalysis(drawResults{{
 					Name:        name,
 					Position:    position[p],
 					Description: description,
-				}})
+				}}.prompt(question, ""), stor.Temp())
+				if err != nil {
+					logrus.Warnln("[tarot]大模型解析失败:", err)
+					ctx.SendChain(message.Text("塔罗解析失败: ", err))
+					return
+				}
+				if reply == "" {
+					ctx.SendChain(message.Text("塔罗解析失败: 大模型返回为空"))
+					return
+				}
+				if id := ctx.Send(buildMessage(
+					reply,
+					ctx.CardOrNickName(ctx.Event.UserID),
+					ctx.Event.UserID,
+				)).ID(); id == 0 {
+					ctx.SendChain(message.Text("ERROR: 可能被风控了"))
+				}
 			}
 			return
 		}
@@ -286,7 +309,7 @@ func init() {
 			build.WriteString(match)
 			build.WriteString("\n")
 			msg := make(message.Message, info.CardsNum+1)
-			results := make([]drawResult, 0, info.CardsNum)
+			results := make(drawResults, 0, info.CardsNum)
 			randomIntMap := make(map[int]int, 30)
 			for i := 0; i < info.CardsNum; i++ {
 				j := rand.Intn(length)
@@ -343,7 +366,36 @@ func init() {
 				ctx.SendChain(message.Text("ERROR: 可能被风控了"))
 			}
 			if question != "" {
-				sendTarotAnalysis(ctx, question, match, results)
+				if !chat.EnsureConfig(ctx) {
+					ctx.SendChain(message.Text("塔罗解析失败: 无法读取 AI 聊天配置"))
+					return
+				}
+				gid := ctx.Event.GroupID
+				if gid == 0 {
+					gid = -ctx.Event.UserID
+				}
+				stor, err := chat.NewStorage(ctx, gid)
+				if err != nil {
+					ctx.SendChain(message.Text("塔罗解析失败: ", errors.Wrap(err, "读取 AI 聊天温度配置失败")))
+					return
+				}
+				reply, err := requestTarotAnalysis(results.prompt(question, match), stor.Temp())
+				if err != nil {
+					logrus.Warnln("[tarot]大模型解析失败:", err)
+					ctx.SendChain(message.Text("塔罗解析失败: ", err))
+					return
+				}
+				if reply == "" {
+					ctx.SendChain(message.Text("塔罗解析失败: 大模型返回为空"))
+					return
+				}
+				if id := ctx.Send(buildMessage(
+					reply,
+					ctx.CardOrNickName(ctx.Event.UserID),
+					ctx.Event.UserID,
+				)).ID(); id == 0 {
+					ctx.SendChain(message.Text("ERROR: 可能被风控了"))
+				}
 			}
 		} else {
 			ctx.SendChain(message.Text("没有找到", rawMatch, "噢~\n现有牌阵列表: \n", strings.Join(formationName, "\n")))
@@ -373,7 +425,7 @@ func splitFormationQuestion(raw string, formations map[string]formation) (string
 	return match, strings.TrimSpace(strings.TrimPrefix(raw, match)), true
 }
 
-func buildTarotPrompt(question, formationName string, draws []drawResult) string {
+func (draws drawResults) prompt(question, formationName string) string {
 	var build strings.Builder
 	build.WriteString("你是一位谨慎的塔罗牌解读者。请围绕用户的问题和本次牌面解读，先说明牌面，再给出综合建议，字数控制在300-500字。")
 	build.WriteString("不要把占卜结果表述为确定事实。\n")
@@ -405,43 +457,9 @@ func buildTarotPrompt(question, formationName string, draws []drawResult) string
 	return build.String()
 }
 
-func sendTarotAnalysis(ctx *zero.Ctx, question, formationName string, draws []drawResult) {
-	reply, err := requestTarotAnalysis(ctx, buildTarotPrompt(question, formationName, draws))
-	if err != nil {
-		logrus.Warnln("[tarot]大模型解析失败:", err)
-		ctx.SendChain(message.Text("塔罗解析失败: ", err))
-		return
-	}
-	if reply == "" {
-		ctx.SendChain(message.Text("塔罗解析失败: 大模型返回为空"))
-		return
-	}
-	chunks := buildTarotAnalysisChunks(reply, 1000)
-	msg := make(message.Message, 0, len(chunks))
-	for _, chunk := range chunks {
-		msg = append(msg, ctxext.FakeSenderForwardNode(ctx, message.Text(chunk)))
-	}
-	if id := ctx.Send(msg).ID(); id == 0 {
-		ctx.SendChain(message.Text("ERROR: 可能被风控了"))
-	}
-}
-
-func requestTarotAnalysis(ctx *zero.Ctx, prompt string) (string, error) {
-	if !chat.EnsureConfig(ctx) {
-		return "", errors.New("无法读取 AI 聊天配置")
-	}
-
-	gid := ctx.Event.GroupID
-	if gid == 0 {
-		gid = -ctx.Event.UserID
-	}
-	stor, err := chat.NewStorage(ctx, gid)
-	if err != nil {
-		return "", errors.Wrap(err, "读取 AI 聊天温度配置失败")
-	}
-
+func requestTarotAnalysis(prompt string, temperature float32) (string, error) {
 	topp, maxn := chat.AC.MParams()
-	mod, err := chat.AC.Type.Protocol(chat.AC.ModelName, stor.Temp(), topp, maxn, chat.AC.ReasoningEffort)
+	mod, err := chat.AC.Type.Protocol(chat.AC.ModelName, temperature, topp, maxn, chat.AC.ReasoningEffort)
 	if err != nil {
 		return "", errors.Wrap(err, "创建 AI 模型协议失败")
 	}
@@ -454,8 +472,13 @@ func requestTarotAnalysis(ctx *zero.Ctx, prompt string) (string, error) {
 	return strings.TrimSpace(data), nil
 }
 
-func buildTarotAnalysisChunks(reply string, maxRunes int) []string {
-	return splitTextChunks("塔罗解析:\n"+reply, maxRunes)
+func buildMessage(reply, nickname string, userID int64) message.Message {
+	chunks := splitTextChunks("塔罗解析:\n"+reply, 1000)
+	msg := make(message.Message, 0, len(chunks))
+	for _, chunk := range chunks {
+		msg = append(msg, message.CustomNode(nickname, userID, message.Message{message.Text(chunk)}))
+	}
+	return msg
 }
 
 func splitTextChunks(txt string, maxRunes int) []string {

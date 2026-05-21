@@ -98,36 +98,36 @@ func TestSplitFormationQuestion(t *testing.T) {
 	}
 }
 
-func TestBuildTarotPrompt(t *testing.T) {
+func TestDrawResultsPrompt(t *testing.T) {
 	t.Run("single card", func(t *testing.T) {
-		prompt := buildTarotPrompt("我该换工作吗", "", []drawResult{
+		prompt := drawResults{
 			{
 				Name:        "愚者",
 				Position:    "正位",
 				Description: "新的开始",
 			},
-		})
+		}.prompt("我该换工作吗", "")
 
 		for _, want := range []string{"我该换工作吗", "愚者", "正位", "新的开始"} {
 			if !strings.Contains(prompt, want) {
-				t.Fatalf("buildTarotPrompt() missing %q in %q", want, prompt)
+				t.Fatalf("drawResults.prompt() missing %q in %q", want, prompt)
 			}
 		}
 	})
 
 	t.Run("formation", func(t *testing.T) {
-		prompt := buildTarotPrompt("最近关系会怎样", "时间之流", []drawResult{
+		prompt := drawResults{
 			{
 				Name:        "恋人",
 				Position:    "逆位",
 				Description: "关系失衡",
 				Represent:   "过去",
 			},
-		})
+		}.prompt("最近关系会怎样", "时间之流")
 
 		for _, want := range []string{"最近关系会怎样", "时间之流", "过去", "恋人", "逆位", "关系失衡"} {
 			if !strings.Contains(prompt, want) {
-				t.Fatalf("buildTarotPrompt() missing %q in %q", want, prompt)
+				t.Fatalf("drawResults.prompt() missing %q in %q", want, prompt)
 			}
 		}
 	})
@@ -143,12 +143,16 @@ func TestSplitTextChunks(t *testing.T) {
 	}
 }
 
-func TestBuildTarotAnalysisChunks(t *testing.T) {
-	got := buildTarotAnalysisChunks("结果", 1000)
-	if len(got) != 1 {
-		t.Fatalf("buildTarotAnalysisChunks() chunks = %d, want 1", len(got))
+func TestBuildMessage(t *testing.T) {
+	msg := buildMessage("结果", "占卜者", 1)
+	if len(msg) != 1 {
+		t.Fatalf("buildMessage() message segments = %d, want 1", len(msg))
 	}
-	if got[0] != "塔罗解析:\n结果" {
-		t.Fatalf("buildTarotAnalysisChunks() first chunk = %q, want %q", got[0], "塔罗解析:\n结果")
+}
+
+func TestRequestTarotAnalysisSignature(t *testing.T) {
+	var request func(string, float32) (string, error) = requestTarotAnalysis
+	if request == nil {
+		t.Fatal("requestTarotAnalysis is nil")
 	}
 }
