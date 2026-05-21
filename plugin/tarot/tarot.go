@@ -375,7 +375,7 @@ func splitFormationQuestion(raw string, formations map[string]formation) (string
 
 func buildTarotPrompt(question, formationName string, draws []drawResult) string {
 	var build strings.Builder
-	build.WriteString("你是一位谨慎的塔罗牌解读者。请围绕用户的问题和本次牌面解读，先说明牌面，再给出综合建议。")
+	build.WriteString("你是一位谨慎的塔罗牌解读者。请围绕用户的问题和本次牌面解读，先说明牌面，再给出综合建议，字数控制在300-500字。")
 	build.WriteString("不要把占卜结果表述为确定事实。\n")
 	build.WriteString("用户问题: ")
 	build.WriteString(question)
@@ -416,11 +416,7 @@ func sendTarotAnalysis(ctx *zero.Ctx, question, formationName string, draws []dr
 		ctx.SendChain(message.Text("塔罗解析失败: 大模型返回为空"))
 		return
 	}
-	chunks := splitTextChunks("塔罗解析:\n"+reply, 1000)
-	if len(chunks) == 1 {
-		ctx.SendChain(message.Text(chunks[0]))
-		return
-	}
+	chunks := buildTarotAnalysisChunks(reply, 1000)
 	msg := make(message.Message, 0, len(chunks))
 	for _, chunk := range chunks {
 		msg = append(msg, ctxext.FakeSenderForwardNode(ctx, message.Text(chunk)))
@@ -433,9 +429,6 @@ func sendTarotAnalysis(ctx *zero.Ctx, question, formationName string, draws []dr
 func requestTarotAnalysis(ctx *zero.Ctx, prompt string) (string, error) {
 	if !chat.EnsureConfig(ctx) {
 		return "", errors.New("无法读取 AI 聊天配置")
-	}
-	if chat.AC.Key == "" {
-		return "", errors.New("未设置 AI 聊天密钥")
 	}
 
 	gid := ctx.Event.GroupID
@@ -459,6 +452,10 @@ func requestTarotAnalysis(ctx *zero.Ctx, prompt string) (string, error) {
 		return "", errors.Wrap(err, "请求 AI 模型失败")
 	}
 	return strings.TrimSpace(data), nil
+}
+
+func buildTarotAnalysisChunks(reply string, maxRunes int) []string {
+	return splitTextChunks("塔罗解析:\n"+reply, maxRunes)
 }
 
 func splitTextChunks(txt string, maxRunes int) []string {

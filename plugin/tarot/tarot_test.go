@@ -142,3 +142,13 @@ func TestSplitTextChunks(t *testing.T) {
 		t.Fatalf("splitTextChunks() = %#v, want []string{\"甲乙丙\", \"丁\"}", got)
 	}
 }
+
+func TestBuildTarotAnalysisChunks(t *testing.T) {
+	got := buildTarotAnalysisChunks("结果", 1000)
+	if len(got) != 1 {
+		t.Fatalf("buildTarotAnalysisChunks() chunks = %d, want 1", len(got))
+	}
+	if got[0] != "塔罗解析:\n结果" {
+		t.Fatalf("buildTarotAnalysisChunks() first chunk = %q, want %q", got[0], "塔罗解析:\n结果")
+	}
+}
