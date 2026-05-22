@@ -129,7 +129,8 @@ func init() {
 	engine.OnRegex(`^抽(\d{1,2}张)?((塔罗牌|大阿(尔)?卡纳)|小阿(尔)?卡纳)\s?(.*)$`, getTarot).SetBlock(true).Limit(ctxext.LimitByGroup).Handle(func(ctx *zero.Ctx) {
 		match := ctx.State["regex_matched"].([]string)[1]
 		cardType := ctx.State["regex_matched"].([]string)[2]
-		question, withQuestion := splitSingleCardQuestion(match, ctx.State["regex_matched"].([]string)[6])
+		question := strings.TrimSpace(ctx.State["regex_matched"].([]string)[6])
+		withQuestion := match == "" && question != ""
 		n := 1
 		reasons := [...]string{"您抽到的是~\n", "锵锵锵，塔罗牌的预言是~\n", "诶，让我看看您抽到了~\n"}
 		position := [...]string{"『正位』", "『逆位』"}
@@ -173,41 +174,42 @@ func init() {
 				ctx.SendChain(message.ImageBytes(data))
 			}
 			ctx.SendChain(message.Text(reasons[rand.Intn(len(reasons))], position[p], "的『", name, "』\n其释义为: ", description))
-			if withQuestion {
-				if !chat.EnsureConfig(ctx) {
-					ctx.SendChain(message.Text("塔罗解析失败: 无法读取 AI 聊天配置"))
-					return
-				}
-				gid := ctx.Event.GroupID
-				if gid == 0 {
-					gid = -ctx.Event.UserID
-				}
-				stor, err := chat.NewStorage(ctx, gid)
-				if err != nil {
-					ctx.SendChain(message.Text("塔罗解析失败: ", errors.Wrap(err, "读取 AI 聊天温度配置失败")))
-					return
-				}
-				reply, err := requestTarotAnalysis(drawResults{{
-					Name:        name,
-					Position:    position[p],
-					Description: description,
-				}}.prompt(question, ""), stor.Temp())
-				if err != nil {
-					logrus.Warnln("[tarot]大模型解析失败:", err)
-					ctx.SendChain(message.Text("塔罗解析失败: ", err))
-					return
-				}
-				if reply == "" {
-					ctx.SendChain(message.Text("塔罗解析失败: 大模型返回为空"))
-					return
-				}
-				if id := ctx.Send(buildMessage(
-					reply,
-					ctx.CardOrNickName(ctx.Event.UserID),
-					ctx.Event.UserID,
-				)).ID(); id == 0 {
-					ctx.SendChain(message.Text("ERROR: 可能被风控了"))
-				}
+			if !withQuestion {
+				return
+			}
+			if !chat.EnsureConfig(ctx) {
+				ctx.SendChain(message.Text("塔罗解析失败: 无法读取 AI 聊天配置"))
+				return
+			}
+			gid := ctx.Event.GroupID
+			if gid == 0 {
+				gid = -ctx.Event.UserID
+			}
+			stor, err := chat.NewStorage(ctx, gid)
+			if err != nil {
+				ctx.SendChain(message.Text("塔罗解析失败: ", errors.Wrap(err, "读取 AI 聊天温度配置失败")))
+				return
+			}
+			reply, err := drawResults{{
+				Name:        name,
+				Position:    position[p],
+				Description: description,
+			}}.analyze(question, "", stor.Temp())
+			if err != nil {
+				logrus.Warnln("[tarot]大模型解析失败:", err)
+				ctx.SendChain(message.Text("塔罗解析失败: ", err))
+				return
+			}
+			if reply == "" {
+				ctx.SendChain(message.Text("塔罗解析失败: 大模型返回为空"))
+				return
+			}
+			if id := ctx.Send(makeNodeMessage(
+				reply,
+				ctx.CardOrNickName(ctx.Event.UserID),
+				ctx.Event.UserID,
+			)).ID(); id == 0 {
+				ctx.SendChain(message.Text("ERROR: 可能被风控了"))
 			}
 			return
 		}
@@ -288,8 +290,15 @@ func init() {
 	})
 	engine.OnRegex(`^((塔罗|大阿(尔)?卡纳)|小阿(尔)?卡纳|混合)牌阵\s?(.*)`, getTarot).SetBlock(true).Limit(ctxext.LimitByGroup).Handle(func(ctx *zero.Ctx) {
 		cardType := ctx.State["regex_matched"].([]string)[1]
-		rawMatch := ctx.State["regex_matched"].([]string)[5]
-		match, question, ok := splitFormationQuestion(rawMatch, formationMap)
+		rawMatch := strings.TrimSpace(ctx.State["regex_matched"].([]string)[5])
+		var match string
+		for name := range formationMap {
+			if strings.HasPrefix(rawMatch, name) && len(name) > len(match) {
+				match = name
+			}
+		}
+		question := strings.TrimSpace(strings.TrimPrefix(rawMatch, match))
+		_, ok := formationMap[match]
 		info := formationMap[match]
 		position := [...]string{"『正位』", "『逆位』"}
 		reverse := [...]string{"", "Reverse/"}
@@ -365,37 +374,39 @@ func init() {
 			if id := ctx.Send(msg).ID(); id == 0 {
 				ctx.SendChain(message.Text("ERROR: 可能被风控了"))
 			}
-			if question != "" {
-				if !chat.EnsureConfig(ctx) {
-					ctx.SendChain(message.Text("塔罗解析失败: 无法读取 AI 聊天配置"))
-					return
-				}
-				gid := ctx.Event.GroupID
-				if gid == 0 {
-					gid = -ctx.Event.UserID
-				}
-				stor, err := chat.NewStorage(ctx, gid)
-				if err != nil {
-					ctx.SendChain(message.Text("塔罗解析失败: ", errors.Wrap(err, "读取 AI 聊天温度配置失败")))
-					return
-				}
-				reply, err := requestTarotAnalysis(results.prompt(question, match), stor.Temp())
-				if err != nil {
-					logrus.Warnln("[tarot]大模型解析失败:", err)
-					ctx.SendChain(message.Text("塔罗解析失败: ", err))
-					return
-				}
-				if reply == "" {
-					ctx.SendChain(message.Text("塔罗解析失败: 大模型返回为空"))
-					return
-				}
-				if id := ctx.Send(buildMessage(
-					reply,
-					ctx.CardOrNickName(ctx.Event.UserID),
-					ctx.Event.UserID,
-				)).ID(); id == 0 {
-					ctx.SendChain(message.Text("ERROR: 可能被风控了"))
-				}
+			if question == "" {
+				return
+			}
+
+			if !chat.EnsureConfig(ctx) {
+				ctx.SendChain(message.Text("塔罗解析失败: 无法读取 AI 聊天配置"))
+				return
+			}
+			gid := ctx.Event.GroupID
+			if gid == 0 {
+				gid = -ctx.Event.UserID
+			}
+			stor, err := chat.NewStorage(ctx, gid)
+			if err != nil {
+				ctx.SendChain(message.Text("塔罗解析失败: ", errors.Wrap(err, "读取 AI 聊天温度配置失败")))
+				return
+			}
+			reply, err := results.analyze(question, match, stor.Temp())
+			if err != nil {
+				logrus.Warnln("[tarot]大模型解析失败:", err)
+				ctx.SendChain(message.Text("塔罗解析失败: ", err))
+				return
+			}
+			if reply == "" {
+				ctx.SendChain(message.Text("塔罗解析失败: 大模型返回为空"))
+				return
+			}
+			if id := ctx.Send(makeNodeMessage(
+				reply,
+				ctx.CardOrNickName(ctx.Event.UserID),
+				ctx.Event.UserID,
+			)).ID(); id == 0 {
+				ctx.SendChain(message.Text("ERROR: 可能被风控了"))
 			}
 		} else {
 			ctx.SendChain(message.Text("没有找到", rawMatch, "噢~\n现有牌阵列表: \n", strings.Join(formationName, "\n")))
@@ -403,29 +414,7 @@ func init() {
 	})
 }
 
-func splitSingleCardQuestion(drawCount, question string) (string, bool) {
-	if drawCount != "" {
-		return "", false
-	}
-	question = strings.TrimSpace(question)
-	return question, question != ""
-}
-
-func splitFormationQuestion(raw string, formations map[string]formation) (string, string, bool) {
-	raw = strings.TrimSpace(raw)
-	var match string
-	for name := range formations {
-		if strings.HasPrefix(raw, name) && len(name) > len(match) {
-			match = name
-		}
-	}
-	if match == "" {
-		return "", "", false
-	}
-	return match, strings.TrimSpace(strings.TrimPrefix(raw, match)), true
-}
-
-func (draws drawResults) prompt(question, formationName string) string {
+func (draws drawResults) analyze(question, formationName string, temperature float32) (string, error) {
 	var build strings.Builder
 	build.WriteString("你是一位谨慎的塔罗牌解读者。请围绕用户的问题和本次牌面解读，先说明牌面，再给出综合建议，字数控制在300-500字。")
 	build.WriteString("不要把占卜结果表述为确定事实。\n")
@@ -454,10 +443,6 @@ func (draws drawResults) prompt(question, formationName string) string {
 		build.WriteString(draw.Description)
 		build.WriteByte('\n')
 	}
-	return build.String()
-}
-
-func requestTarotAnalysis(prompt string, temperature float32) (string, error) {
 	topp, maxn := chat.AC.MParams()
 	mod, err := chat.AC.Type.Protocol(chat.AC.ModelName, temperature, topp, maxn, chat.AC.ReasoningEffort)
 	if err != nil {
@@ -465,14 +450,14 @@ func requestTarotAnalysis(prompt string, temperature float32) (string, error) {
 	}
 
 	api := deepinfra.NewAPI(chat.AC.API, string(chat.AC.Key))
-	data, err := api.Request(mod.User(model.NewContentText(prompt)))
+	data, err := api.Request(mod.User(model.NewContentText(build.String())))
 	if err != nil {
 		return "", errors.Wrap(err, "请求 AI 模型失败")
 	}
 	return strings.TrimSpace(data), nil
 }
 
-func buildMessage(reply, nickname string, userID int64) message.Message {
+func makeNodeMessage(reply, nickname string, userID int64) message.Message {
 	chunks := splitTextChunks("塔罗解析:\n"+reply, 1000)
 	msg := make(message.Message, 0, len(chunks))
 	for _, chunk := range chunks {
