@@ -59,6 +59,36 @@ func TestMovingLineNames(t *testing.T) {
 	}
 }
 
+func TestFormatYaoValuesIncludesCharacterArt(t *testing.T) {
+	got := yaoValues{oldYin, youngYang, youngYin, oldYang, youngYin, oldYang}.format()
+	for _, want := range []string{
+		"上九 ━━━━━ 阳爻 动",
+		"六五 ━  ━ 阴爻",
+		"九四 ━━━━━ 阳爻 动",
+		"六三 ━  ━ 阴爻",
+		"九二 ━━━━━ 阳爻",
+		"初六 ━  ━ 阴爻 动",
+	} {
+		if !strings.Contains(got, want) {
+			t.Fatalf("format() missing %q in:\n%s", want, got)
+		}
+	}
+}
+
+func TestSummaryIncludesHexagramCharacterArt(t *testing.T) {
+	result := divinationResult{
+		Original: hexagram{Number: 1, Name: "乾"},
+		Changed:  hexagram{Number: 2, Name: "坤"},
+		Yao:      yaoValues{oldYin, youngYang, youngYin, oldYang, youngYin, oldYang},
+	}
+
+	got := result.summary()
+	want := "卦象:\n上九 ━━━━━ 阳爻 动"
+	if !strings.Contains(got, want) {
+		t.Fatalf("summary() missing %q in:\n%s", want, got)
+	}
+}
+
 func TestBuildDivinationPrompt(t *testing.T) {
 	result := divinationResult{
 		Question: "事业该不该换方向",
