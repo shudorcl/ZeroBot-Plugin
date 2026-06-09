@@ -1415,6 +1415,17 @@ print("run[CQ:image,file="+j["img"]+"]")
 
 </details>
 <details>
+  <summary>周易卜卦</summary>
+
+  `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/bugua"`
+
+  - [x] 卜卦
+  - [x] 起卦
+  - [x] 卜卦 [询问的事情]（追加大模型解析）
+  - [x] 起卦 [询问的事情]（追加大模型解析）
+
+</details>
+<details>
   <summary>抽塔罗牌</summary>
 
   `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/tarot"`
