@@ -243,12 +243,21 @@ func (yao yaoValues) format() string {
 	for i := len(yao) - 1; i >= 0; i-- {
 		build.WriteString(movingLineName(i, yaoLineNameValue(yao[i])))
 		build.WriteString(" ")
+		build.WriteString(yaoLineArt(yao[i]))
+		build.WriteString(" ")
 		build.WriteString(yaoLineText(yao[i]))
 		if i > 0 {
 			build.WriteByte('\n')
 		}
 	}
 	return build.String()
+}
+
+func yaoLineArt(value int) string {
+	if value == youngYang || value == oldYang {
+		return "━━━━━"
+	}
+	return "━  ━"
 }
 
 func yaoLineNameValue(value int) int {
