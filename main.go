@@ -79,6 +79,7 @@ import (
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/bilibili"      // b站相关
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/bilibiliparse" // b站相关
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/bilibilipush"  // b站相关
+	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/bugua"         // 周易卜卦
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/choose"        // 选择困难症帮手
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/chouxianghua"  // 说抽象话
 	_ "github.com/FloatTech/ZeroBot-Plugin/plugin/chrev"         // 英文字符翻转
